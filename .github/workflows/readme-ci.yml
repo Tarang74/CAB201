@@ -1,0 +1,20 @@
+name: README Continuous Integration Workflow
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  README-CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+        
+      - name: Setup Node.js environment
+        uses: actions/setup-node@main
+        
+      - name: Tarang74/README-CI
+        uses: Tarang74/README-CI@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
