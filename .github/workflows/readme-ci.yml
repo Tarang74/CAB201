@@ -2,7 +2,7 @@ name: README Continuous Integration Workflow
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   README-CI:
