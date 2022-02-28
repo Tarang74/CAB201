@@ -1,0 +1,52 @@
+%!TEX program = xelatex
+\documentclass{article}
+\usepackage{LaTeX-Submodule/template}
+
+% Additional packages & macros
+
+% Header and footer
+% ! Unit name
+\newcommand{\unitName}{Unit name}
+% ! Unit semester 
+\newcommand{\unitTime}{Semester #, 20xx}
+% ! Unit coordinator name
+\newcommand{\unitCoordinator}{Unit coordinator name}
+% ! Document authors
+\newcommand{\documentAuthors}{Authors}
+
+\fancyhead[L]{\unitName}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+% Copyright
+\usepackage[
+    type={CC},
+    modifier={by-nc-sa},
+    version={4.0},
+    imagewidth={5em},
+    hyphenation={raggedright}
+]{doclicense}
+
+\date{}
+
+\begin{document}
+%
+\begin{titlepage}
+    \vspace*{\fill}
+    \begin{center}
+        \LARGE{\textbf{\unitName}} \\[0.1in]
+        \normalsize{\unitTime} \\[0.2in]
+        \normalsize\textit{\unitCoordinator} \\[0.2in]
+        \documentAuthors
+    \end{center}
+    \vspace*{\fill}
+    \doclicenseThis
+    \thispagestyle{empty}
+\end{titlepage}
+\newpage
+%
+\tableofcontents
+\newpage
+%
+\section{Section 1}
+\end{document}
