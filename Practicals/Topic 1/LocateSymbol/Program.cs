@@ -11,7 +11,7 @@ namespace LocateSymbol
 
             // Insert your solution here.
             Console.WriteLine("Please enter a line of text:");
-            string input = Console.ReadLine();
+            string input = Console.ReadLine()!;
 
             int index1 = input.IndexOf('$');
             int index2 = input.LastIndexOf('$');
