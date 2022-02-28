@@ -1,0 +1,61 @@
+%!TEX program = xelatex
+\documentclass{article}
+\usepackage{LaTeX-Submodule/template}
+
+% Additional packages & macros
+
+% Header and footer
+\newcommand{\unitName}{Programming Principals}
+\newcommand{\unitTime}{Semester 1, 2022}
+\newcommand{\unitCoordinator}{Dr Alan Woodley}
+\newcommand{\documentAuthors}{\textsc{Tarang Janawalkar}}
+
+\fancyhead[L]{\unitName}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+% Copyright
+\usepackage[
+    type={CC},
+    modifier={by-nc-sa},
+    version={4.0},
+    imagewidth={5em},
+    hyphenation={raggedright}
+]{doclicense}
+
+\date{}
+
+\begin{document}
+%
+\begin{titlepage}
+    \vspace*{\fill}
+    \begin{center}
+        \LARGE{\textbf{\unitName}} \\[0.1in]
+        \normalsize{\unitTime} \\[0.2in]
+        \normalsize\textit{\unitCoordinator} \\[0.2in]
+        \documentAuthors
+    \end{center}
+    \vspace*{\fill}
+    \doclicenseThis
+    \thispagestyle{empty}
+\end{titlepage}
+\newpage
+%
+\tableofcontents
+\newpage
+%
+% Programming
+% Statically typed language
+% C# is a statically typed, object oriented language
+\section{Types and Expressions}
+\begin{definition}[Type]
+    The type of an expression is ``what kind of data'' the expression carries.
+\end{definition}
+\begin{definition}[Variables]
+    Variables are a kind of expression which have an \textbf{identity} and a \textbf{value}.
+    
+    The \textbf{value} of a variable may change as a program runs, however in 
+    a statically typed language, the \textbf{type} of each variable is 
+    specified before it can be used, and \underline{never changes}.
+\end{definition}
+\end{document}

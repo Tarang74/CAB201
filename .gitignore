@@ -1,0 +1,39 @@
+# General Editor dotfiles 
+*.vscode
+
+# Complete diagnostics reported by LaTeX
+*.log
+
+# BibTeX
+## Data used by BibTeX
+*.bbl
+## Log file for BibTeX
+*.blg
+
+# Font definitions
+*.fdb_latexmk
+
+# Reference lists
+## List of figures
+*.lof
+## List of tables
+*.lot
+## Table of contents
+*.toc
+
+# Referencing
+## Auxiliary information for cross referencing
+*.aux
+## Outlines - Used by hyperref to store a list of PDF bookmarks
+*.out
+
+# SyncTeX
+# Store correspondence between the output PDF and .tex source
+*.synctex(busy)
+*.synctex.gz
+
+# Intermediary output for PDF files
+*.xdv
+
+# Miscellaneous 
+*.fls
