@@ -14,7 +14,7 @@ namespace EchoName
             Console.WriteLine("Hello there, what is your name?");
 
             //  Read name
-            string name = Console.ReadLine();
+            string name = Console.ReadLine()!;
 
             //  Display message involving name
             Console.WriteLine($"Nice to meet you {name}, welcome to CAB201.");
