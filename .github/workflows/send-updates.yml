@@ -7,7 +7,7 @@ on:
       - completed
 
 jobs:
-  notify:
+  Update:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,10 +17,11 @@ jobs:
           repository: Tarang74/QUT-Notes
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Pull & update submodules recursively
+      - name: Pull & update submodules
         run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
+          git submodule update --init ${{ github.event.repository.name }}
+          git submodule update --remote ${{ github.event.repository.name }}
+      
       - name: Commit
         run: |
           git config user.email "actions@github.com"
