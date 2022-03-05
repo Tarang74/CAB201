@@ -1,4 +1,4 @@
-name: README Continuous Integration Workflow
+name: README Continuous Integration
 
 on:
   push:
