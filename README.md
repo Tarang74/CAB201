@@ -14,7 +14,8 @@ This repository provides **lecture notes** for **CAB201 - Programming Principals
 
 ## Contents
 
-1. Types and Expressions
+1. Programming
+2. Types and Expressions
 
 ---
 
