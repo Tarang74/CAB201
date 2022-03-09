@@ -6,16 +6,6 @@
 
 ---
 
-<div>
-    <object data="CAB201 Lecture Notes.pdf" width="100%" height="850" type="application/pdf">
-        <embed src="CAB201 Lecture Notes.pdf">
-        <h2>Link to files</h2>
-        <a target="_blank" href="CAB201 Lecture Notes.pdf">Lecture Notes</a>
-    </object>
-</div>
-
----
-
 This repository provides **lecture notes** for **CAB201 - Programming Principals**.
 
 *The contents of the lecture notes are described below.*
