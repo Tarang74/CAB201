@@ -46,7 +46,8 @@ Hence division between two integers truncates any floating-point precision.
 
 Caution should be used when dividing two numbers to avoid loss of precision.
 
-The size of the resulting value should also be considered in the event that the result 
+When converting between types, the number of bits required to represent the 
+resulting value should be considered in the event that the result 
 requires more bits than is specified (resulting in an overflow), or if the result is 
 negative but stored as an unsigned numeric type (resulting in an underflow).");
         }

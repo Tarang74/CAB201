@@ -44,6 +44,8 @@
 \tableofcontents
 \newpage
 %
+\lstset{language=[Sharp]C}
+\lstset{morekeywords={with,is,as}}
 \section{Programming}
 \begin{definition}
     Programming is the process of designing and building an executable
@@ -75,12 +77,22 @@ Programming involves:
 \end{itemize}
 \subsection{Implementation}
 \begin{itemize}
-    \item 
+    \item Create working software to "do" each part of the design
+    \item Select suitable algorithms and data structures to do each required item of functionality
+    \item Write code to implement the algorithms and data structures
 \end{itemize}
-% Programming
-% Statically typed language
-% C# is a statically typed, object oriented language
+\subsection{Testing}
+\begin{itemize}
+    \item Before we write any code we should have a very clear idea how the program can be validated; usually that is done by testing
+\end{itemize}
 \section{Types and Expressions}
+\subsection{Expressions}
+\begin{definition}[Expressions]
+    An expression is a combination of values, variables and operators.
+    In interactive mode, an interpreter evaluates expressions and displays the result.
+    However, in a script, we must first compile the program to an executable in order
+    to perform any tasks.
+\end{definition}
 \begin{definition}[Type]
     The type of an expression is ``what kind of data'' the expression carries.
 \end{definition}
@@ -90,5 +102,133 @@ Programming involves:
     The \textbf{value} of a variable may change as a program runs, however in
     a statically typed language, the \textbf{type} of each variable is
     specified before it can be used, and \underline{never changes}.
+
+    Variables can be declared as follows
+    \begin{lstlisting}
+TYPE_SPECIFIER IDENTIFIER;
+TYPE_SPECIFIER IDENTIFIER = EXPRESSION;
+    \end{lstlisting}
+    In the first instance, we declare the type of the variable without initialising it.
+    In the second case we declare and initialise the variable.
 \end{definition}
+\begin{definition}[Literal]
+    The term \textit{literal} refers to the literal representation of a value.
+    For example, when disambiguating between the variable \lstinline!dog!
+    and the string \lstinline!"dog"! we would say the \emph{``variable dog''} % chktex 18
+    vs.\ the \emph{``string literal dog''}.
+\end{definition}
+\subsection{Types}
+There are 9 integer and 3 floating-point types in C\#, each with a different size and range. The minimum and maximum
+values of any type can be determined using \lstinline!TYPE.MinValue! and \linebreak \lstinline!TYPE.MaxValue!.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c c}
+        \toprule
+        \textbf{C\# type}  & \textbf{Size} & \textbf{Range}                \\
+        \midrule
+        \lstinline!sbyte!  & 8 bit         & \(-2^7\) to \(2^7 - 1\)       \\
+        \lstinline!byte!   & 8 bit         & \(0\) to \(2^8 - 1\)          \\
+        \lstinline!short!  & 16 bit        & \(-2^{15}\) to \(2^{15} - 1\) \\
+        \lstinline!ushort! & 16 bit        & \(0\) to \(2^{16} - 1\)       \\
+        \lstinline!char!   & 16 bit        & ---                           \\
+        \lstinline!int!    & 32 bit        & \(-2^{31}\) to \(2^{31} - 1\) \\
+        \lstinline!uint!   & 32 bit        & \(0\) to \(2^{32} - 1\)       \\
+        \lstinline!long!   & 64 bit        & \(-2^{63}\) to \(2^{63} - 1\) \\
+        \lstinline!ulong!  & 64 bit        & \(0\) to \(2^{64} - 1\)       \\
+        \bottomrule
+    \end{tabular}
+    \caption{Integer types in C\#.}
+    % \label{}
+\end{table}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c c c}
+        \toprule
+        \textbf{C\# type}   & \textbf{Size} & \textbf{Range}                                              & \textbf{Precision}   \\
+        \midrule
+        \lstinline!float!   & 32 bit        & \(\pm 1.5 \times 10^{-45}\) to \(\pm 3.4 \times 10^{38}\)   & \sim 6 to 9 digits   \\
+        \lstinline!double!  & 64 bit        & \(\pm 5.0 \times 10^{-324}\) to \(\pm 1.7 \times 10^{308}\) & \sim 15 to 17 digits \\
+        \lstinline!decimal! & 128 bit       & \(\pm 1.0 \times 10^{-28}\) to \(7.9228 \times 10^{28}\)    & \sim 28 to 29 digits \\
+        \bottomrule
+    \end{tabular}
+    \caption{Floating-point types in C\#.}
+    % \label{}
+\end{table}
+By default, C\# implicitly converts whole numbers to \lstinline!int! and floating-point numbers to \lstinline!double!.
+\subsection{Operators}
+The following table lists the C\texttt{\#} operators starting with the highest precedence to the lowest.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{>{\centering}p{0.45\linewidth} c}
+        \toprule
+        \textbf{Operators}                                                                                           & \textbf{Category}                 \\
+        \midrule
+        \lstinline!x.y!, \lstinline!f(x)!, \lstinline!a[i]!, \lstinline!x++!,
+        \lstinline!x--!, \lstinline?x!?, \lstinline!x->y! and other keywords                                         & Primary                           \\
+        \lstinline!+x!, \lstinline!-x!, \lstinline+!x+, \lstinline!~x!,
+        \lstinline!++x!, \lstinline!--x!, \lstinline!^x!, \lstinline!(T)x!, \lstinline!await!,
+        \lstinline!&x!, \lstinline!*x!, \lstinline!true!, \lstinline!false!                                          & Unary                             \\
+        \lstinline!x..y!                                                                                             & Range                             \\
+        \lstinline!switch!, \lstinline!with!                                                                         & ---                               \\
+        \lstinline!x * y!, \lstinline!x / y!, \lstinline!x % y!                                                      & Multiplicative                    \\
+        \lstinline!x + y!, \lstinline!x - y!                                                                         & Additive                          \\ % chktex 8
+        \lstinline!x << y!, \lstinline!x >> y!                                                                       & Shift                             \\
+        \lstinline!x < y!, \lstinline!x > y!, \lstinline!x <= y!, \lstinline!x >= y!, \lstinline!is!, \lstinline!as! & Relational and type-testing       \\
+        \lstinline!x == y!, \lstinline?x != y?                                                                       & Equality                          \\ % chktex 26
+        \lstinline!x & y!                                                                                            & Logical {\ttfamily{AND}}          \\
+        \lstinline!x ^ y!                                                                                            & Logical {\ttfamily{XOR}}          \\
+        \lstinline!x | y!                                                                                            & Logical {\ttfamily{OR}}           \\
+        \lstinline!x && y!                                                                                           & Conditional {\ttfamily{AND}}      \\
+        \lstinline!x || y!                                                                                           & Conditional {\ttfamily{OR}}       \\
+        \lstinline!x ?? y!                                                                                           & Null-coalescing operator          \\ % chktex 26
+        \lstinline!c ? t : f!                                                                                        & Conditional operator              \\ % chktex 26
+        \lstinline!x = y!, \lstinline!=>! and shorthand assignments                                                  & Assignment and lambda declaration \\
+        \bottomrule
+    \end{tabular}
+    \caption{Precedence of various operators in C\texttt{\#}.}
+    % \label{}
+\end{table}
+In C\texttt{\#}, arithmetic operations behave as expected.
+\begin{lstlisting}
+$ 123 + 12
+135 // System.Int32
+$ 123 - 12
+111 // System.Int32
+$ 123 * 12
+1476 // System.Int32
+$ 123 / 12
+10 // System.Int32
+$ 123 % 12
+3 // System.Int32
+\end{lstlisting}
+Binary operators always convert the resulting data type to the data type of the
+argument with the largest size in memory
+(with a few exceptions when converting between floating-point types).
+Hence division between two integers truncates any floating-point precision.
+\begin{lstlisting}
+$ 123 / 12
+10 // System.Int32
+$ 123.0 / 12
+10.25 // System.Double
+$ 123 / 12.0
+10.25 // System.Double
+$ 123.0 / 12.0
+10.25 // System.Double
+\end{lstlisting}
+Caution should be used when dividing two numbers to avoid loss of precision.
+\subsection{Type Conversion}
+By default C\texttt{\#} automatically assigns the \lstinline!int! type to any whole number
+and \lstinline!double! to any floating-point number.
+\begin{lstlisting}
+$ (100).GetType()
+System.Int32
+$ (100.0).GetType()
+System.Double
+\end{lstlisting}
+\subsubsection{Implicit Conversion}
+
+When converting between types, the number of bits required to represent the
+resulting value should be considered in the event that the result
+requires more bits than is specified (resulting in an overflow), or if the result is
+negative but stored as an unsigned numeric type (resulting in an underflow).
 \end{document}
