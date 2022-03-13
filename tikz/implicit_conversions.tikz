@@ -1,0 +1,84 @@
+\documentclass{standalone}
+
+\usepackage{unicode-math}
+\setmathfont{Latin Modern Math}
+\setmathfont{TeX Gyre Pagella Math}[range={bb,bbit}, Scale=MatchUppercase]
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+
+\usetikzlibrary{arrows.meta}
+
+\definecolor{greenborder}{HTML}{328b58}
+\definecolor{greenfill}{HTML}{4ec681}
+\definecolor{blueborder}{HTML}{3c7eab}
+\definecolor{bluefill}{HTML}{81b8dd}
+\definecolor{orangeborder}{HTML}{d96306}
+\definecolor{orangefill}{HTML}{ff945d}
+\definecolor{redborder}{HTML}{b41313}
+\definecolor{redfill}{HTML}{ec4446}
+\definecolor{purpleborder}{HTML}{6b0578}
+\definecolor{purplefill}{HTML}{da48ec}
+
+\begin{document}
+\begin{tikzpicture}[
+        inner sep=2mm,
+        type/.style={rectangle,draw=black!50,fill=black!20,thick,minimum width=1.5cm,minimum height=0.7cm,rounded corners=0.1cm},
+        %
+        groupa/.style={rectangle,draw=greenborder,fill=greenfill,thick,minimum width=4cm,minimum height=1.55cm,rounded corners=0.2cm},
+        groupb/.style={rectangle,draw=blueborder,fill=bluefill,thick,minimum width=4cm,minimum height=1.55cm,rounded corners=0.2cm},
+        %
+        groupc/.style={rectangle,draw=orangeborder,fill=orangefill,thick,minimum width=6cm,minimum height=1.55cm,rounded corners=0.2cm},
+        groupd/.style={rectangle,draw=redborder,fill=redfill,thick,minimum width=6cm,minimum height=1.55cm,rounded corners=0.2cm},
+        %
+        groupe/.style={rectangle,draw=purpleborder,fill=purplefill,thick,minimum width=2cm,minimum height=1.55cm,rounded corners=0.2cm},
+        >=Triangle
+    ]
+    % Sizes integer
+    \node[groupa] at (1, -.175) {};
+    \node[groupb] at (1, -2.175) {};
+    \node[groupc] at (2, -4.175) {};
+    \node[groupd] at (2, -6.175) {};
+    \node[groupe] at (6.5, -4.175) {};
+    % Types
+    \node[type] (sbyte) at (0, 0) {sbyte};
+    \node[type] (byte) at (2, 0) {byte};
+    \node[type] (short) at (0, -2) {short};
+    \node[type] (ushort) at (2, -2) {ushort};
+    \node[type] (int) at (0, -4) {int};
+    \node[type] (uint) at (2, -4) {uint};
+    \node[type] (long) at (0, -6) {long};
+    \node[type] (ulong) at (2, -6) {ulong};
+    \node[type] (float) at (4, -4) {float};
+    \node[type] (double) at (4, -6) {double};
+    \node[type] (decimal) at (6.5, -4) {decimal};
+    \node[type] (integers) at (5.25, -2) {integers};
+    % byte arrows
+    \draw[black!69, very thick, ->] (sbyte.south) -- (short.north);
+    \draw[black!69, very thick, ->] (byte.south) -- (short.north east);
+    \draw[black!69, very thick, ->] (byte.south) -- (ushort.north);
+    % short arrows
+    \draw[black!69, very thick, ->] (short.south) -- (int.north);
+    \draw[black!69, very thick, ->] (ushort.south) -- (int.north east);
+    \draw[black!69, very thick, ->] (ushort.south) -- (uint.north);
+    % int arrows
+    \draw[black!69, very thick, ->] (int.south) -- (long.north);
+    \draw[black!69, very thick, ->] (uint.south) -- (long.north east);
+    \draw[black!69, very thick, ->] (uint.south) -- (ulong.north);
+    % integer arrows
+    \draw[black!69, very thick, ->] (integers.south) -- (float.north);
+    \draw[black!69, very thick, ->] (integers.south) -- (decimal.north);
+    % float arrow
+    \draw[black!69, very thick, ->] (float.south) -- (double.north);
+    % divider line
+    \draw[thick, dashed, orangeborder] (3, -3.4) -- ++(0, -1.55);
+    \draw[thick, dashed, redborder] (3, -5.4) -- ++(0, -1.55);
+    % text
+    \node[text=white] at (1, -0.65) {8 bit};
+    \node[text=white] at (1, -2.65) {16 bit};
+    \node[text=white] at (1, -4.65) {32 bit};
+    \node[text=white] at (1, -6.65) {64 bit};
+    \node[text=white] at (6.5, -4.65) {128 bit};
+\end{tikzpicture}
+\end{document}

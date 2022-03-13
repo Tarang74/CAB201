@@ -130,7 +130,6 @@ values of any type can be determined using \lstinline!TYPE.MinValue! and \linebr
         \lstinline!byte!   & 8 bit         & \(0\) to \(2^8 - 1\)          \\
         \lstinline!short!  & 16 bit        & \(-2^{15}\) to \(2^{15} - 1\) \\
         \lstinline!ushort! & 16 bit        & \(0\) to \(2^{16} - 1\)       \\
-        \lstinline!char!   & 16 bit        & ---                           \\
         \lstinline!int!    & 32 bit        & \(-2^{31}\) to \(2^{31} - 1\) \\
         \lstinline!uint!   & 32 bit        & \(0\) to \(2^{32} - 1\)       \\
         \lstinline!long!   & 64 bit        & \(-2^{63}\) to \(2^{63} - 1\) \\
@@ -154,7 +153,92 @@ values of any type can be determined using \lstinline!TYPE.MinValue! and \linebr
     \caption{Floating-point types in C\#.}
     % \label{}
 \end{table}
-By default, C\# implicitly converts whole numbers to \lstinline!int! and floating-point numbers to \lstinline!double!.
+\subsection{Type Conversion}
+By default, C\texttt{\#} automatically assigns the \lstinline!int!, \lstinline!uint!,
+\lstinline!long!, or \lstinline!ulong! type to any integer depending the size and sign
+of the provided number. Any floating-point number is instantiated as a \lstinline!double!.
+\begin{lstlisting}
+$ (100).GetType()
+System.Int32
+$ (4294967295).GetType()    
+System.UInt32
+$ (-4294967295).GetType()
+System.Int64
+$ (100.0).GetType()
+System.Double
+\end{lstlisting}
+To override this behaviour we can add a suffix to the number.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c}
+        \toprule
+        \textbf{Type}       & \textbf{Suffix}                                \\
+        \midrule
+        \lstinline!uint!    & \lstinline!u!                                  \\
+        \lstinline!long!    & \lstinline!l!                                  \\
+        \lstinline!ulong!   & \lstinline!u!, \lstinline!l! or \lstinline!ul! \\
+        \midrule
+        \lstinline!float!   & \lstinline!f!                                  \\
+        \lstinline!double!  & \lstinline!d!                                  \\
+        \lstinline!decimal! & \lstinline!m!                                  \\
+        \bottomrule
+    \end{tabular}
+    \caption{Type suffixes for numeric types.}
+    % \label{}
+\end{table}
+If a literal is prefixed with \lstinline!u!, its type is the first
+of the following types in which its value can be represented:
+\lstinline!uint!, \lstinline!ulong!.
+
+Similarly, if a literal is prefixed with \lstinline!l!, its type is the first
+of the following types in which its value can be represented:
+\lstinline!long!, \lstinline!ulong!.
+
+If the value of an integer is within the range of the destination type, 
+the value can be implicitly converted to the remaining integer types.
+\subsubsection{Implicit Conversion}
+Implicit conversions do not require any special syntax as the conversion
+always succeeds and no data is lost.
+The following diagram illustrates implicit conversions for numeric types.
+The direction of the arrows indicate possible implicit conversions where
+intermediate types can be skipped.
+Note that all integer types can be converted to floating-point types.
+\begin{figure}[H]
+    \centering
+    \includegraphics[height = 8cm, keepaspectratio = true]{figures/implicit_conversions.pdf}
+    \caption{Numeric type implicit conversions in C\#.}
+    % \label{}
+\end{figure}
+For example
+\begin{lstlisting}
+$ // 8 bit unsigned integer to 64 bit signed integer 
+$ byte b = 32; Console.WriteLine($"{b} -- {b.GetType()}")
+32 -- System.Byte
+$ long l = b; Console.WriteLine($"{l} -- {l.GetType()}")
+32 -- System.Int64
+$ // 16 bit signed integer to double precision floating-point number
+$ short s = 30000; Console.WriteLine($"{s} -- {s.GetType()}")
+30000 -- System.Int16
+$ double d = s; Console.WriteLine($"{d} -- {d.GetType()}")
+30000 -- System.Double
+\end{lstlisting}
+\subsubsection{Explicit Conversion}
+When a conversion cannot be made without risking losing information,
+the compiler requires that we perform an explicit conversion using a \textbf{type cast}.
+The syntax for a type cast is as follows
+\begin{lstlisting}
+(NEW_TYPE) EXPRESSION
+\end{lstlisting}
+For example
+\begin{lstlisting}
+$ // Decimal precision floating-point number to single precision floating-point number
+$ decimal pi = 3.14159265358979323846; Console.WriteLine($"{pi} -- {pi.GetType()}")
+\end{lstlisting}
+the value of the resulting
+When converting between types, the number of bits required to represent the
+resulting value should be considered in the event that the result
+requires more bits than is specified (resulting in an overflow), or if the result is
+negative but stored as an unsigned numeric type (resulting in an underflow).
 \subsection{Operators}
 The following table lists the C\texttt{\#} operators starting with the highest precedence to the lowest.
 \begin{table}[H]
@@ -216,19 +300,4 @@ $ 123.0 / 12.0
 10.25 // System.Double
 \end{lstlisting}
 Caution should be used when dividing two numbers to avoid loss of precision.
-\subsection{Type Conversion}
-By default C\texttt{\#} automatically assigns the \lstinline!int! type to any whole number
-and \lstinline!double! to any floating-point number.
-\begin{lstlisting}
-$ (100).GetType()
-System.Int32
-$ (100.0).GetType()
-System.Double
-\end{lstlisting}
-\subsubsection{Implicit Conversion}
-
-When converting between types, the number of bits required to represent the
-resulting value should be considered in the event that the result
-requires more bits than is specified (resulting in an overflow), or if the result is
-negative but stored as an unsigned numeric type (resulting in an underflow).
 \end{document}
