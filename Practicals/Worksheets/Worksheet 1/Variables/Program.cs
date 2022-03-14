@@ -44,12 +44,7 @@ argument with the largest size in memory
 (with a few exceptions when converting between floating-point types).
 Hence division between two integers truncates any floating-point precision.
 
-Caution should be used when dividing two numbers to avoid loss of precision.
-
-When converting between types, the number of bits required to represent the 
-resulting value should be considered in the event that the result 
-requires more bits than is specified (resulting in an overflow), or if the result is 
-negative but stored as an unsigned numeric type (resulting in an underflow).");
+Caution should be used when dividing two numbers to avoid loss of precision.");
         }
         public static void Question3()
         {
