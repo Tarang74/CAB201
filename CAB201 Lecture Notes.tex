@@ -117,6 +117,14 @@ TYPE_SPECIFIER IDENTIFIER = EXPRESSION;
     and the string \lstinline!"dog"! we would say the \emph{``variable dog''} % chktex 18
     vs.\ the \emph{``string literal dog''}.
 \end{definition}
+C\# identifiers must take the following into account
+\begin{itemize}
+    \item Identifiers can contain letters, digits and the underscore character (\lstinline!_!)
+    \item Identifiers must begin with a letter
+    \item Identifiers cannot contain whitespaces
+    \item Identifiers are case sensitive (``\lstinline!Foo!'' and ``\lstinline!foo!'' are different variables)
+    \item Reserved words such as C\# keywords cannot be used as identifiers
+\end{itemize}
 \subsection{Types}
 There are 9 integer and 3 floating-point types in C\#, each with a different size and range. The minimum and maximum
 values of any type can be determined using \lstinline!TYPE.MinValue! and \linebreak \lstinline!TYPE.MaxValue!.
@@ -216,6 +224,7 @@ $ byte b = 32; Console.WriteLine($"{b} -- {b.GetType()}")
 32 -- System.Byte
 $ long l = b; Console.WriteLine($"{l} -- {l.GetType()}")
 32 -- System.Int64
+
 $ // 16 bit signed integer to double precision floating-point number
 $ short s = 30000; Console.WriteLine($"{s} -- {s.GetType()}")
 30000 -- System.Int16
@@ -231,14 +240,28 @@ The syntax for a type cast is as follows
 \end{lstlisting}
 For example
 \begin{lstlisting}
-$ // Decimal precision floating-point number to single precision floating-point number
-$ decimal pi = 3.14159265358979323846; Console.WriteLine($"{pi} -- {pi.GetType()}")
+$ // Decimal to single precision floating-point number
+$ decimal pi = 3.14159265358979323m; Console.WriteLine($"{pi} -- {pi.GetType()}")
+3.14159265358979323 -- System.Decimal
+$ float fPi = (float) pi; Console.WriteLine($"{fPi} -- {fPi.GetType()}")
+3.141593 -- System.Single
+
+$ // 32 bit unsigned integer to 8 bit signed integer
+$ uint u = 9876; Console.WriteLine($"{u} -- {u.GetType()}")
+9876 -- System.UInt32
+$ byte b = (byte) u; Console.WriteLine($"{b} -- {b.GetType()}")
+148 -- System.Byte
 \end{lstlisting}
-the value of the resulting
-When converting between types, the number of bits required to represent the
-resulting value should be considered in the event that the result
-requires more bits than is specified (resulting in an overflow), or if the result is
-negative but stored as an unsigned numeric type (resulting in an underflow).
+In the final example, to understand what is happening in the explicit conversion,
+we must look at the binary representation of the two integers.
+\begin{lstlisting}
+$ uint u = 9876; Console.WriteLine(Convert.ToString(u, 2).PadLeft(32, '0'))
+00000000000000000010011010010100
+$ byte b = (byte) u; Console.WriteLine(Convert.ToString(b, 2).PadLeft(8, '0'))
+10010100
+\end{lstlisting}
+Notice that the value is determined by copying the 8 least significant bits
+from the 32 bit unsigned integer.
 \subsection{Operators}
 The following table lists the C\texttt{\#} operators starting with the highest precedence to the lowest.
 \begin{table}[H]
