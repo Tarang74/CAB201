@@ -77,7 +77,7 @@ Programming involves:
 \end{itemize}
 \subsection{Implementation}
 \begin{itemize}
-    \item Create working software to "do" each part of the design
+    \item Create working software to ``do'' each part of the design
     \item Select suitable algorithms and data structures to do each required item of functionality
     \item Write code to implement the algorithms and data structures
 \end{itemize}
@@ -122,7 +122,7 @@ C\# identifiers must take the following into account
     \item Identifiers can contain letters, digits and the underscore character (\lstinline!_!)
     \item Identifiers must begin with a letter
     \item Identifiers cannot contain whitespaces
-    \item Identifiers are case sensitive (``\lstinline!Foo!'' and ``\lstinline!foo!'' are different variables)
+    \item Identifiers are case sensitive (``\lstinline!Foo!'' and ``\lstinline!foo!'' are different variables) % chktex 38
     \item Reserved words such as C\# keywords cannot be used as identifiers
 \end{itemize}
 \subsection{Types}
@@ -167,13 +167,13 @@ By default, C\texttt{\#} automatically assigns the \lstinline!int!, \lstinline!u
 of the provided number. Any floating-point number is instantiated as a \lstinline!double!.
 \begin{lstlisting}
 $ (100).GetType()
-System.Int32
+[System.Int32]
 $ (4294967295).GetType()    
-System.UInt32
+[System.UInt32]
 $ (-4294967295).GetType()
-System.Int64
+[System.Int64]
 $ (100.0).GetType()
-System.Double
+[System.Double]
 \end{lstlisting}
 To override this behaviour we can add a suffix to the number.
 \begin{table}[H]
@@ -220,16 +220,16 @@ Note that all integer types can be converted to floating-point types.
 For example
 \begin{lstlisting}
 $ // 8 bit unsigned integer to 64 bit signed integer 
-$ byte b = 32; Console.WriteLine($"{b} -- {b.GetType()}")
-32 -- System.Byte
-$ long l = b; Console.WriteLine($"{l} -- {l.GetType()}")
-32 -- System.Int64
-
+$ byte b = 32; Console.WriteLine($"{b} {b.GetType()}")
+32 System.Byte
+$ long l = b; Console.WriteLine($"{l} {l.GetType()}")
+32 System.Int64
+$ 
 $ // 16 bit signed integer to double precision floating-point number
-$ short s = 30000; Console.WriteLine($"{s} -- {s.GetType()}")
-30000 -- System.Int16
-$ double d = s; Console.WriteLine($"{d} -- {d.GetType()}")
-30000 -- System.Double
+$ short s = 30000; Console.WriteLine($"{s} {s.GetType()}")
+30000 System.Int16
+$ double d = s; Console.WriteLine($"{d} {d.GetType()}")
+30000 System.Double
 \end{lstlisting}
 \subsubsection{Explicit Conversion}
 When a conversion cannot be made without risking losing information,
@@ -241,16 +241,16 @@ The syntax for a type cast is as follows
 For example
 \begin{lstlisting}
 $ // Decimal to single precision floating-point number
-$ decimal pi = 3.14159265358979323m; Console.WriteLine($"{pi} -- {pi.GetType()}")
-3.14159265358979323 -- System.Decimal
-$ float fPi = (float) pi; Console.WriteLine($"{fPi} -- {fPi.GetType()}")
-3.141593 -- System.Single
+$ decimal pi = 3.14159265358979323m; Console.WriteLine($"{pi} {pi.GetType()}")
+3.14159265358979323 System.Decimal
+$ float fPi = (float) pi; Console.WriteLine($"{fPi} {fPi.GetType()}")
+3.141593 System.Single
 
 $ // 32 bit unsigned integer to 8 bit signed integer
-$ uint u = 9876; Console.WriteLine($"{u} -- {u.GetType()}")
-9876 -- System.UInt32
-$ byte b = (byte) u; Console.WriteLine($"{b} -- {b.GetType()}")
-148 -- System.Byte
+$ uint u = 9876; Console.WriteLine($"{u} {u.GetType()}")
+9876 System.UInt32
+$ byte b = (byte) u; Console.WriteLine($"{b} {b.GetType()}")
+148 System.Byte
 \end{lstlisting}
 In the final example, to understand what is happening in the explicit conversion,
 we must look at the binary representation of the two integers.
@@ -298,29 +298,168 @@ The following table lists the C\texttt{\#} operators starting with the highest p
 In C\texttt{\#}, arithmetic operations behave as expected.
 \begin{lstlisting}
 $ 123 + 12
-135 // System.Int32
+135
 $ 123 - 12
-111 // System.Int32
+111
 $ 123 * 12
-1476 // System.Int32
+1476
 $ 123 / 12
-10 // System.Int32
+10
 $ 123 % 12
-3 // System.Int32
+3
 \end{lstlisting}
 Binary operators always convert the resulting data type to the data type of the
 argument with the largest size in memory
 (with a few exceptions when converting between floating-point types).
-Hence division between two integers truncates any floating-point precision.
+Each result in the above examples have the type \lstinline!System.Int32!.
+
+Hence division between two 32 bit integers truncates any floating-point precision.
 \begin{lstlisting}
 $ 123 / 12
-10 // System.Int32
+10
 $ 123.0 / 12
-10.25 // System.Double
+10.25
 $ 123 / 12.0
-10.25 // System.Double
+10.25
 $ 123.0 / 12.0
-10.25 // System.Double
+10.25
 \end{lstlisting}
-Caution should be used when dividing two numbers to avoid loss of precision.
-\end{document}
+Here the final three results are converted to the type \lstinline!System.Double! 
+using the reasoning given above.
+\subsection{Characters}
+A character type represents a \textbf{single} Unicode UTF-16 character. 
+Character objects can be implicitly converted to 16 bit unsigned integers and
+support the comparison, equality, increment and \linebreak decrement operators.
+
+A character is initialised using single quotation marks (\lstinline!'!). % chktex 38
+\begin{lstlisting}
+$ char c = 'A'; c
+'A'
+$ c.GetType()
+[System.Char]
+$ c++
+'B'
+$ (ushort) c
+69
+$ c == 69
+true
+\end{lstlisting}
+\subsection{Strings}
+A string is a sequential read-only collection of character objects. 
+A string is initialised using double quotation marks (\lstinline!"!). % chktex 18
+\begin{lstlisting}
+$ string s = "Hello, World!"; s
+"Hello, World!"
+$ s.GetType()
+[System.String]
+\end{lstlisting}
+\subsubsection{String Indexing}
+The characters in a string can be accessed by position (starting at 0).
+\begin{lstlisting}
+$ s[0]
+'H'
+$ s[s.Length - 1]
+'!'
+\end{lstlisting}
+\subsubsection{Immutability}
+In C\#, string objects are immutable meaning that the string cannot be modified in memory. If a new string is assigned 
+to this object, it will simply point to a new location in memory. 
+\begin{lstlisting}
+$ string s = "String with tyop."; s
+"String with tyop."
+$ s[14] = 'p';
+(1,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned 
+to -- it is read only
+$ s = "String without typo."
+"String without typo."
+\end{lstlisting}
+\subsubsection{Escape Sequences}
+To use special characters such as newlines, tabs, backslashes, or double quotation marks, we must 
+use an escape sequence.
+\begin{lstlisting}
+$ string s = "This is a quotation mark \".\nThis line appears on a new line."; s
+"This is a quotation mark \".\nThis line appears on a new line."
+\end{lstlisting}
+Note that the string is evaluated as a string literal. To view this string verbatim, we must use 
+\lstinline!Console.WriteLine!.
+\begin{lstlisting}
+$ Console.WriteLine(s) 
+This is a quotation mark ".
+This line appears on a new line.
+\end{lstlisting}
+\subsubsection{Verbatim String Literals}
+If a string contains many escape sequences we can use verbatim strings for convenience.
+\begin{lstlisting}
+$ string s = @"String with multiple escape sequences ""This is a quote"".
+This line appears on a new line.";
+$ Console.WriteLine(s)
+String with multiple escape sequences "This is a quote".
+This line appears on a new line.
+\end{lstlisting}
+\subsubsection{Format Strings}
+To dynamically determine a string at runtime, we can use format strings.
+There are two methods to create format strings: string interpolation and composite formatting.
+
+String interpolation allows us to reference variable names directly inside a string.
+Interpolated strings are identified by the dollar sign.
+\begin{lstlisting}
+$ int a = 40; int b = 13;
+$ $"Given a = {a} and b = {b}, a + b = {a + b}"
+"Given a = 40 and b = 13, a + b = 53"
+\end{lstlisting}
+Composite formatting uses placeholders for variables which must be provided in order of reference.
+Here the same variable can be referenced many times in a string.
+\begin{lstlisting}
+$ int a = 40; int b = 13;
+$ string.Format("Given a = {0} and b = {1}, a + b = {2}", a, b, a + b)
+"Given a = 40 and b = 13, a + b = 53"
+$ string.Format("a + b = {2} where a = {0} and b = {1}", a, b, a + b)
+"a + b = 53 where a = 40 and b = 13"
+$ string.Format("We can reference `a` twice, here {0} and here {0}", a)
+"We can reference `a` twice, here 40 and here 40"
+\end{lstlisting}
+\subsubsection{Numeric to String Conversion}
+Strings can be concatenated with numeric variables
+\begin{lstlisting}
+$ int a = 25;
+$ "The temperature is " + a + " degrees."
+"The temperature is 25 degrees."
+\end{lstlisting}
+As the \lstinline!+! operator is evaluated from left to right, the following string concatenation 
+will not evaluate the sum of 1, 2, and 3.
+\begin{lstlisting}
+$ "sum = " + 1 + 2 + 3
+"sum = 123"
+\end{lstlisting}
+The \lstinline!ToString()! method can be accessed from all numeric types, with a 
+format specifier which indicates the number of precision to display.
+\begin{lstlisting}
+$ (1498).ToString("G3")
+"1.5E+03"
+$ (1498).ToString("F3")
+"1498.000"
+$ (1498).ToString("C2")
+"$1,498.00"
+\end{lstlisting}
+These format specifiers can be applied directly in interpolated strings.
+\begin{lstlisting}
+$ int i = 1498;
+$ $"{i:G3}, {i:F3}, {i:C2}"
+"1.5E+03, 1498.000, $1,498.00"
+\end{lstlisting}
+We can also add specify padding in interpolated strings.
+\begin{lstlisting}
+$ decimal pi = 3.14159265358979323m;
+$ $"Pi with left padding {pi, 10:F6}"
+\end{lstlisting}
+For more information see: \href{https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings}{\textit{Custom numeric format strings}}.
+\subsubsection{String to Numeric Conversion}
+We can convert a string to a number by calling the \lstinline!Parse! method found on numeric types,
+or by using methods in the \lstinline!System.Convert! class.
+\begin{lstlisting}
+$ double.Parse("2.718281")
+2.718281
+$ Convert.ToDouble("2.718281")
+2.718281
+\end{lstlisting}
+\end{document}  
