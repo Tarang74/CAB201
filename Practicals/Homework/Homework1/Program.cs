@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Variables
+namespace Homework1
 {
     class Program
     {
