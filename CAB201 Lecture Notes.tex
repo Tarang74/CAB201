@@ -202,7 +202,7 @@ Similarly, if a literal is prefixed with \lstinline!l!, its type is the first
 of the following types in which its value can be represented:
 \lstinline!long!, \lstinline!ulong!.
 
-If the value of an integer is within the range of the destination type, 
+If the value of an integer is within the range of the destination type,
 the value can be implicitly converted to the remaining integer types.
 \subsubsection{Implicit Conversion}
 Implicit conversions do not require any special syntax as the conversion
@@ -324,10 +324,10 @@ $ 123 / 12.0
 $ 123.0 / 12.0
 10.25
 \end{lstlisting}
-Here the final three results are converted to the type \lstinline!System.Double! 
+Here the final three results are converted to the type \lstinline!System.Double!
 using the reasoning given above.
 \subsection{Characters}
-A character type represents a \textbf{single} Unicode UTF-16 character. 
+A character type represents a \textbf{single} Unicode UTF-16 character.
 Character objects can be implicitly converted to 16 bit unsigned integers and
 support the comparison, equality, increment and \linebreak decrement operators.
 
@@ -345,7 +345,7 @@ $ c == 69
 true
 \end{lstlisting}
 \subsection{Strings}
-A string is a sequential read-only collection of character objects. 
+A string is a sequential read-only collection of character objects.
 A string is initialised using double quotation marks (\lstinline!"!). % chktex 18
 \begin{lstlisting}
 $ string s = "Hello, World!"; s
@@ -362,8 +362,8 @@ $ s[s.Length - 1]
 '!'
 \end{lstlisting}
 \subsubsection{Immutability}
-In C\#, string objects are immutable meaning that the string cannot be modified in memory. If a new string is assigned 
-to this object, it will simply point to a new location in memory. 
+In C\#, string objects are immutable meaning that the string cannot be modified in memory. If a new string is assigned
+to this object, it will simply point to a new location in memory.
 \begin{lstlisting}
 $ string s = "String with tyop."; s
 "String with tyop."
@@ -374,13 +374,13 @@ $ s = "String without typo."
 "String without typo."
 \end{lstlisting}
 \subsubsection{Escape Sequences}
-To use special characters such as newlines, tabs, backslashes, or double quotation marks, we must 
+To use special characters such as newlines, tabs, backslashes, or double quotation marks, we must
 use an escape sequence.
 \begin{lstlisting}
 $ string s = "This is a quotation mark \".\nThis line appears on a new line."; s
 "This is a quotation mark \".\nThis line appears on a new line."
 \end{lstlisting}
-Note that the string is evaluated as a string literal. To view this string verbatim, we must use 
+Note that the string is evaluated as a string literal. To view this string verbatim, we must use
 \lstinline!Console.WriteLine!.
 \begin{lstlisting}
 $ Console.WriteLine(s) 
@@ -425,13 +425,13 @@ $ int a = 25;
 $ "The temperature is " + a + " degrees."
 "The temperature is 25 degrees."
 \end{lstlisting}
-As the \lstinline!+! operator is evaluated from left to right, the following string concatenation 
+As the \lstinline!+! operator is evaluated from left to right, the following string concatenation
 will not evaluate the sum of 1, 2, and 3.
 \begin{lstlisting}
 $ "sum = " + 1 + 2 + 3
 "sum = 123"
 \end{lstlisting}
-The \lstinline!ToString()! method can be accessed from all numeric types, with a 
+The \lstinline!ToString()! method can be accessed from all numeric types, with a
 format specifier which indicates the number of precision to display.
 \begin{lstlisting}
 $ (1498).ToString("G3")
@@ -462,4 +462,4 @@ $ double.Parse("2.718281")
 $ Convert.ToDouble("2.718281")
 2.718281
 \end{lstlisting}
-\end{document}  
+\end{document}
