@@ -15,9 +15,9 @@ namespace Multiplication
             info("Question 10:");
 
             Console.Write("Enter a number: ");
-            int a = Convert.ToInt32(Console.Read());
+            int a = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter another number: ");
-            int b = Convert.ToInt32(Console.Read());
+            int b = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine($"The product of {a} and {b} is {a * b}");
         }
