@@ -15,7 +15,7 @@ namespace DailyDownloads
             info("Question 4:");
 
             Console.Write("Enter the number of downloads: ");
-            int downloads = int.Parse(Console.ReadLine());
+            int downloads = int.Parse(Console.ReadLine()!);
 
             if (downloads < 100)
             {

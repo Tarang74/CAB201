@@ -15,7 +15,7 @@ namespace MicroBlog
             info("Question 3:");
 
             Console.Write("Enter your age: ");
-            int age = Convert.ToInt32(Console.ReadLine());
+            int age = Convert.ToInt32(Console.ReadLine()!);
 
             if (age >= 65)
             {

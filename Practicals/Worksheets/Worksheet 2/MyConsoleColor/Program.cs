@@ -15,7 +15,7 @@ namespace MyConsoleColor
             info("Question 5:");
 
             Console.Write("Enter a background color [1 (red) | 2 (green) | 3 (yellow)]: ");
-            string color = Console.ReadLine();
+            string color = Console.ReadLine()!;
 
             switch (color) {
                 case "1":

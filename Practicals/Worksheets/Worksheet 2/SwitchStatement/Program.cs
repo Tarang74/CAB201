@@ -20,7 +20,7 @@ namespace SwitchStatement
             info("Question 6:");
 
             Console.Write("Enter a day number (starting at 0): ");
-            int dayNumber = Int32.Parse(Console.ReadLine());
+            int dayNumber = Int32.Parse(Console.ReadLine()!);
 
             switch (dayNumber)
             {
@@ -55,7 +55,7 @@ namespace SwitchStatement
             info("Question 7:");
 
             Console.Write("Enter a month number (starting at 1): ");
-            int monthNumber = Int32.Parse(Console.ReadLine());
+            int monthNumber = Int32.Parse(Console.ReadLine()!);
 
             switch (monthNumber)
             {

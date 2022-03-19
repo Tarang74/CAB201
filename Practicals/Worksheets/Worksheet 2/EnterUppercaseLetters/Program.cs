@@ -19,7 +19,7 @@ namespace EnterUppercaseLetters
             while (true)
             {
                 Console.Write("Enter a single lowercase or uppercase letter (! to exit): ");
-                c = Char.Parse(Console.ReadLine());
+                c = Char.Parse(Console.ReadLine()!);
                 if (c == '!')
                 {
                     break;

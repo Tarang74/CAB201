@@ -15,9 +15,9 @@ namespace Sum
             info("Question 9:");
 
             Console.Write("Enter a number: ");
-            int a = Convert.ToInt32(Console.ReadLine());
+            int a = Convert.ToInt32(Console.ReadLine()!);
             Console.Write("Enter another number: ");
-            int b = Convert.ToInt32(Console.ReadLine());
+            int b = Convert.ToInt32(Console.ReadLine()!);
 
             Console.WriteLine($"The sum of {a} and {b} is {a + b}");
         }

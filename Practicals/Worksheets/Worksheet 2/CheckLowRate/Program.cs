@@ -15,7 +15,7 @@ namespace CheckLowRate
             info("Question 2:");
 
             Console.Write("Enter an hourly rate: ");
-            double hourlyRate = Convert.ToDouble(Console.ReadLine());
+            double hourlyRate = Convert.ToDouble(Console.ReadLine()!);
 
             if (hourlyRate >= 19.84)
             {

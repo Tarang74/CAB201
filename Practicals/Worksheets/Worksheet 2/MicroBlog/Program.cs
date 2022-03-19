@@ -15,7 +15,7 @@ namespace MicroBlog
             info("Question 1:");
 
             Console.Write("Enter some text: ");
-            string input = Console.ReadLine();
+            string input = Console.ReadLine()!;
             int inputLen = input.Length;
 
             if (inputLen < 140)

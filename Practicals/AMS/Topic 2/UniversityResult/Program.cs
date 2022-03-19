@@ -13,7 +13,7 @@ namespace UniversityResult
             const string OUT_FORMAT = "Result code {0} is classified as '{1}'.";
 
             Console.WriteLine(PROMPT);
-            string userInput = Console.ReadLine();
+            string userInput = Console.ReadLine()!;
             int resultCode = int.Parse(userInput);
 
             string description = "";

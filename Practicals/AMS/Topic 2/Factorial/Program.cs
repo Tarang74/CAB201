@@ -13,7 +13,7 @@ namespace Factorial
             const string OUT_FORMAT = "{0} factorial is {1}.";
 
             Console.WriteLine(PROMPT);
-            string userInput = Console.ReadLine();
+            string userInput = Console.ReadLine()!;
             decimal limit = decimal.Parse(userInput);
 
             decimal factorial = 1;

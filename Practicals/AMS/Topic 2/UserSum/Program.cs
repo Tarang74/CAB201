@@ -21,7 +21,7 @@ namespace UserSum
             do {
                 runningTotal += i;
                 Console.WriteLine(PROMPT);
-                i = Convert.ToInt32(Console.ReadLine());
+                i = Convert.ToInt32(Console.ReadLine()!);
             } while (i != SENTINEL);
 
             // Keep the following lines intact

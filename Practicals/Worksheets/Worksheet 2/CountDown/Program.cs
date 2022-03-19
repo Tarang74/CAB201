@@ -19,7 +19,7 @@ namespace CountDown
             do
             {
                 Console.Write($"Enter a number to subtract from {i}: ");
-                i -= Int32.Parse(Console.ReadLine());
+                i -= Int32.Parse(Console.ReadLine()!);
             } while (i >= 0);
         }
     }

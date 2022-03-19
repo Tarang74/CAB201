@@ -14,7 +14,7 @@ namespace MilesToKilometres
             Console.WriteLine("Please supply the distance in miles:");
 
             //  Read number of miles
-            double distanceInMi = Convert.ToDouble(Console.ReadLine());
+            double distanceInMi = Convert.ToDouble(Console.ReadLine()!);
 
             //  Compute equivalent number of kilometres
             const double factor = 1.609344D;

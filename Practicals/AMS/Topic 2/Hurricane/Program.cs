@@ -13,7 +13,7 @@ namespace Hurricane
             const string OUT_FORMAT = "If the wind speed is {0} then {1}.";
 
             Console.WriteLine(PROMPT);
-            string userInput = Console.ReadLine();
+            string userInput = Console.ReadLine()!;
             int windSpeed = int.Parse(userInput);
 
             string message = "";
