@@ -16,6 +16,7 @@ This repository provides **lecture notes** for **CAB201 - Programming Principals
 
 1. Programming
 2. Types and Expressions
+3. Structured Programming
 
 ---
 
