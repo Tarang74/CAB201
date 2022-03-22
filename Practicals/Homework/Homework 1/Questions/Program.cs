@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Homework1
+namespace Questions
 {
     class Program
     {
