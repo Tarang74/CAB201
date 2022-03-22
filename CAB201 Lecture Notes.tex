@@ -462,4 +462,171 @@ $ double.Parse("2.718281")
 $ Convert.ToDouble("2.718281")
 2.718281
 \end{lstlisting}
+\section{Structured Programming}
+Structured programming relies on three constructs: sequence, selection and iteration. 
+These help us control the flow of our programs.
+\subsection{Sequence}
+In C\# we can group statements together inside a scope by using braces \lstinline!{ }!.
+The statements inside this block are executed in order as a single instruction.
+\begin{lstlisting}
+$ int i = 5;
+. {
+.     i = 10;
+.     Console.WriteLine(i);
+. }
+10
+$ Console.WriteLine(i);
+10
+\end{lstlisting}
+Here \lstinline!i! is accessed as an enclosing locally scoped variable.
+\emph{This behaviour is akin to blocks defined in selection and iteration structures.}
+
+Here is another example that utilises nested blocks and demonstrates access.
+\begin{lstlisting}
+$ // Global scope    
+$ {
+.     // Block 1     
+.     int i = 5;  
+.     Console.WriteLine(i);
+.     {
+.         // Block 2
+.         i += 5;
+.         Console.WriteLine(i);
+.     }
+.     // i = 10
+. }
+. Console.WriteLine(i);
+5
+10
+(1,19): error CS0103: The name 'i' does not exist in the current context
+\end{lstlisting}
+In this example we see that the variable \lstinline!i! is local to block 1 and therefore accessible to block 2.
+
+However, the converse is not true. \lstinline!i! cannot be accessed by its enclosing scope 
+as local variables are destroyed when a block ends.
+
+We also cannot declare a variable in a block that shares its name 
+with another variable in its enclosing local scope.
+\begin{lstlisting}
+$ {
+.     int i = 5;
+.     {
+.         int i = 5;
+.     }   
+. }
+(4,13): error CS0136: A local or parameter named 'i' cannot be declared
+in this scope because that name is used in an enclosing local scope to 
+define a local or parameter
+\end{lstlisting}
+\subsection{Selection}
+Selection allows us to choose from a range of different options.
+\subsubsection{If Statements}
+If statements have the following syntax.
+\begin{lstlisting}
+// Single statement
+if (CONDITION) STATEMENT;
+// Multiple statements
+if (CONDITION)
+{
+    STATEMENTS
+}
+\end{lstlisting}
+In both cases, \lstinline!CONDITION! is an expression that returns a Boolean value % chktex 13
+when evaluated. If this value is \lstinline!true!, the subsequent statement(s) will 
+be executed. Conversely, if the expression yields \lstinline!false!, the subsequent 
+statement(s) will be ignored and control passes to the next statement after the \lstinline!if!
+statement.
+
+We can add an alternative statement if \lstinline!CONDITION! is \lstinline!false! using an \lstinline{else}
+\lstinline!else! clause.
+\begin{lstlisting}
+// Single statement
+if (CONDITION) STATEMENT_1 else STATEMENT_2;
+// Multiple statements
+if (CONDITION) 
+{
+    STATEMENTS_1
+} else
+{
+    STATEMENTS_2;
+}
+\end{lstlisting}
+This structure differs to the previous example slightly as either \lstinline!STATEMENT_1! or \lstinline!STATEMENT_2! 
+will be executed. Again the decision depends on the Boolean value returned by the condition. 
+
+The blocks in an \lstinline!if! statement can also allow us to nest any number of 
+\lstinline!if! statements to create a more complex flow of control.
+\begin{lstlisting}
+if (CONDITION_1) if (CONDITION_2) STATEMENT_2 else STATEMENT_1;
+// Written using braces
+if (CONDITION_1) 
+{
+    if (CONDITION_2) 
+    {
+        STATEMENT_2
+    }
+} else 
+{
+    STATEMENT_1
+}
+\end{lstlisting}
+Generally nested \lstinline!if! statements are difficult to read and should be avoided if possible.
+An alternative to nested \lstinline!if! statements are cascading \lstinline!if! statements.
+These statements allow us to provide controlled alternatives to an \lstinline!if-else! statement if the 
+first condition returns \lstinline!false!.
+\begin{lstlisting}
+if (CONDITION_1) 
+{
+    STATEMENTS_1
+} else if (CONDITION_2)
+{
+    STATEMENTS_2
+} else if (CONDITION_3)
+{
+    STATEMENTS_3
+} 
+...
+else {
+    STATEMENTS_N
+}
+\end{lstlisting}
+In this structure, any statement \(1<i<n\) will be executed if 
+and only if all conditions before \(i\) yield \lstinline!false! and
+\lstinline!CONDITION_I! yields \lstinline!true!. % chktex 13
+
+The final statement \(n\) after the \lstinline!else! clause is executed
+if all preceding conditions return \lstinline!false!.
+
+Note that the \lstinline!else! clause may be omitted.
+\subsubsection{Switch Statements}
+A \lstinline!switch! statement is an alternative to cascading \lstinline!if!
+statements and are another kind of multi-way branch.
+\begin{lstlisting}
+switch (EXPRESSION) 
+{
+    case CONSTANT_1:
+        STATEMENTS_1;
+        break;
+    case CONSTANT_2:
+        STATEMENTS_2;
+        break;
+    ...
+    default:
+        STATEMENTS_N;
+        break;
+}
+\end{lstlisting}
+In this structure, \lstinline!EXPRESSION! is any numeric or string expression, % chktex 13
+and \lstinline!CONSTANT! is a literal of matching type. % chktex 13
+This means that \lstinline!STATEMENTS_I! is executed if \lstinline!EXPRESSION == CONSTANT_I!. % chktex 13
+
+The default branch behaves similarly to an \lstinline!else! clause and is executed if all 
+none of the cases are satisfied.
+
+Each branch must end with one of the following keywords depending on where the 
+switch statement is defined: \lstinline!break!, \lstinline!return!, 
+\lstinline!goto!, \lstinline!throw!, or \lstinline!continue!.
+\subsection{Iteration}
+Iterative constructs allow us to repeat statements zero, one, or many times,
+without making multiple copies of the statement.
 \end{document}
