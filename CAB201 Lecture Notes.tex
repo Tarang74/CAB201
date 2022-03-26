@@ -3,6 +3,27 @@
 \usepackage{LaTeX-Submodule/template}
 
 % Additional packages & macros
+\usepackage{accsupp} % PDF accessibility options
+
+%% Prevent user from selecting numbers when selecting code
+\newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+
+%% Custom prompt for listings environment
+%%% https://tex.stackexchange.com/a/42056/224487
+
+%%% Save the original way of printing the number
+\let\othelstnumber=\thelstnumber
+\def\createlinenumber#1#2{
+    \edef\thelstnumber{%
+        \unexpanded{%
+            \ifnum#1=\value{lstnumber}\relax
+              #2%
+            \fi}%
+        \ifx\thelstnumber\relax\else
+        \expandafter\unexpanded\expandafter{\thelstnumber}%
+        \fi
+    }
+}
 
 % Header and footer
 \newcommand{\unitName}{Programming Principals}
@@ -46,6 +67,7 @@
 %
 \lstset{language=[Sharp]C}
 \lstset{morekeywords={with,is,as}}
+\lstset{numbers=left, firstnumber=1, numberstyle=\ttfamily\emptyaccsupp}
 \section{Programming}
 \begin{definition}
     Programming is the process of designing and building an executable
@@ -104,10 +126,9 @@ Programming involves:
     specified before it can be used, and \underline{never changes}.
 
     Variables can be declared as follows
-    \begin{lstlisting}
+    \begin{lstlisting}[numbers=none]
 TYPE_SPECIFIER IDENTIFIER;
-TYPE_SPECIFIER IDENTIFIER = EXPRESSION;
-    \end{lstlisting}
+TYPE_SPECIFIER IDENTIFIER = EXPRESSION;\end{lstlisting}
     In the first instance, we declare the type of the variable without initialising it.
     In the second case we declare and initialise the variable.
 \end{definition}
@@ -162,19 +183,26 @@ values of any type can be determined using \lstinline!TYPE.MinValue! and \linebr
     % \label{}
 \end{table}
 \subsection{Type Conversion}
-By default, C\texttt{\#} automatically assigns the \lstinline!int!, \lstinline!uint!,
+By default, C\# automatically assigns the \lstinline!int!, \lstinline!uint!,
 \lstinline!long!, or \lstinline!ulong! type to any integer depending the size and sign
 of the provided number. Any floating-point number is instantiated as a \lstinline!double!.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
+\createlinenumber{5}{\$}
+\createlinenumber{7}{\$}
 \begin{lstlisting}
-$ (100).GetType()
+(100).GetType()
 [System.Int32]
-$ (4294967295).GetType()    
+(4294967295).GetType()    
 [System.UInt32]
-$ (-4294967295).GetType()
+(-4294967295).GetType()
 [System.Int64]
-$ (100.0).GetType()
+(100.0).GetType()
 [System.Double]
 \end{lstlisting}
+\endgroup
 To override this behaviour we can add a suffix to the number.
 \begin{table}[H]
     \centering
@@ -218,52 +246,75 @@ Note that all integer types can be converted to floating-point types.
     % \label{}
 \end{figure}
 For example
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{\$}
+\createlinenumber{4}{\$}
+\createlinenumber{7}{\$}
+\createlinenumber{8}{\$}
+\createlinenumber{10}{\$}
 \begin{lstlisting}
-$ // 8 bit unsigned integer to 64 bit signed integer 
-$ byte b = 32; Console.WriteLine($"{b} {b.GetType()}")
+// 8 bit unsigned integer to 64 bit signed integer 
+byte b = 32; Console.WriteLine($"{b} {b.GetType()}")
 32 System.Byte
-$ long l = b; Console.WriteLine($"{l} {l.GetType()}")
+long l = b; Console.WriteLine($"{l} {l.GetType()}")
 32 System.Int64
-$ 
-$ // 16 bit signed integer to double precision floating-point number
-$ short s = 30000; Console.WriteLine($"{s} {s.GetType()}")
+
+// 16 bit signed integer to double precision floating-point number
+short s = 30000; Console.WriteLine($"{s} {s.GetType()}")
 30000 System.Int16
-$ double d = s; Console.WriteLine($"{d} {d.GetType()}")
+double d = s; Console.WriteLine($"{d} {d.GetType()}")
 30000 System.Double
 \end{lstlisting}
+\endgroup
 \subsubsection{Explicit Conversion}
 When a conversion cannot be made without risking losing information,
 the compiler requires that we perform an explicit conversion using a \textbf{type cast}.
 The syntax for a type cast is as follows
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 (NEW_TYPE) EXPRESSION
 \end{lstlisting}
 For example
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{\$}
+\createlinenumber{4}{\$}
+\createlinenumber{7}{\$}
+\createlinenumber{8}{\$}
+\createlinenumber{10}{\$}
 \begin{lstlisting}
-$ // Decimal to single precision floating-point number
-$ decimal pi = 3.14159265358979323m; Console.WriteLine($"{pi} {pi.GetType()}")
+// Decimal to single precision floating-point number
+decimal pi = 3.14159265358979323m; Console.WriteLine($"{pi} {pi.GetType()}")
 3.14159265358979323 System.Decimal
-$ float fPi = (float) pi; Console.WriteLine($"{fPi} {fPi.GetType()}")
+float fPi = (float) pi; Console.WriteLine($"{fPi} {fPi.GetType()}")
 3.141593 System.Single
 
-$ // 32 bit unsigned integer to 8 bit signed integer
-$ uint u = 9876; Console.WriteLine($"{u} {u.GetType()}")
+// 32 bit unsigned integer to 8 bit signed integer
+uint u = 9876; Console.WriteLine($"{u} {u.GetType()}")
 9876 System.UInt32
-$ byte b = (byte) u; Console.WriteLine($"{b} {b.GetType()}")
+byte b = (byte) u; Console.WriteLine($"{b} {b.GetType()}")
 148 System.Byte
 \end{lstlisting}
+\endgroup
 In the final example, to understand what is happening in the explicit conversion,
 we must look at the binary representation of the two integers.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
 \begin{lstlisting}
-$ uint u = 9876; Console.WriteLine(Convert.ToString(u, 2).PadLeft(32, '0'))
+uint u = 9876; Console.WriteLine(Convert.ToString(u, 2).PadLeft(32, '0'))
 00000000000000000010011010010100
-$ byte b = (byte) u; Console.WriteLine(Convert.ToString(b, 2).PadLeft(8, '0'))
+byte b = (byte) u; Console.WriteLine(Convert.ToString(b, 2).PadLeft(8, '0'))
 10010100
 \end{lstlisting}
+\endgroup
 Notice that the value is determined by copying the 8 least significant bits
 from the 32 bit unsigned integer.
 \subsection{Operators}
-The following table lists the C\texttt{\#} operators starting with the highest precedence to the lowest.
+The following table lists the C\# operators starting with the highest precedence to the lowest.
 \begin{table}[H]
     \centering
     \begin{tabular}{>{\centering}p{0.45\linewidth} c}
@@ -292,38 +343,53 @@ The following table lists the C\texttt{\#} operators starting with the highest p
         \lstinline!x = y!, \lstinline!=>! and shorthand assignments                                                  & Assignment and lambda declaration \\
         \bottomrule
     \end{tabular}
-    \caption{Precedence of various operators in C\texttt{\#}.}
+    \caption{Precedence of various operators in C\#.}
     % \label{}
 \end{table}
-In C\texttt{\#}, arithmetic operations behave as expected.
+In C\#, arithmetic operations behave as expected.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
+\createlinenumber{5}{\$}
+\createlinenumber{7}{\$}
+\createlinenumber{9}{\$}
 \begin{lstlisting}
-$ 123 + 12
+123 + 12
 135
-$ 123 - 12
+123 - 12
 111
-$ 123 * 12
+123 * 12
 1476
-$ 123 / 12
+123 / 12
 10
-$ 123 % 12
+123 % 12
 3
 \end{lstlisting}
+\endgroup
 Binary operators always convert the resulting data type to the data type of the
 argument with the largest size in memory
 (with a few exceptions when converting between floating-point types).
 Each result in the above examples have the type \lstinline!System.Int32!.
 
 Hence division between two 32 bit integers truncates any floating-point precision.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
+\createlinenumber{5}{\$}
+\createlinenumber{7}{\$}
 \begin{lstlisting}
-$ 123 / 12
+123 / 12
 10
-$ 123.0 / 12
+123.0 / 12
 10.25
-$ 123 / 12.0
+123 / 12.0
 10.25
-$ 123.0 / 12.0
+123.0 / 12.0
 10.25
 \end{lstlisting}
+\endgroup
 Here the final three results are converted to the type \lstinline!System.Double!
 using the reasoning given above.
 \subsection{Characters}
@@ -332,197 +398,312 @@ Character objects can be implicitly converted to 16 bit unsigned integers and
 support the comparison, equality, increment and \linebreak decrement operators.
 
 A character is initialised using single quotation marks (\lstinline!'!). % chktex 38
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
+\createlinenumber{5}{\$}
+\createlinenumber{7}{\$}
+\createlinenumber{9}{\$}
 \begin{lstlisting}
-$ char c = 'A'; c
+char c = 'A'; c
 'A'
-$ c.GetType()
+c.GetType()
 [System.Char]
-$ c++
+c++
 'B'
-$ (ushort) c
+(ushort) c
 69
-$ c == 69
+c == 69
 true
 \end{lstlisting}
+\endgroup
 \subsection{Strings}
 A string is a sequential read-only collection of character objects.
 A string is initialised using double quotation marks (\lstinline!"!). % chktex 18
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
 \begin{lstlisting}
-$ string s = "Hello, World!"; s
+string s = "Hello, World!"; s
 "Hello, World!"
-$ s.GetType()
+s.GetType()
 [System.String]
 \end{lstlisting}
+\endgroup
 \subsubsection{String Indexing}
 The characters in a string can be accessed by position (starting at 0).
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
 \begin{lstlisting}
-$ s[0]
+s[0]
 'H'
-$ s[s.Length - 1]
+s[s.Length - 1]
 '!'
 \end{lstlisting}
+\endgroup
 \subsubsection{Immutability}
 In C\#, string objects are immutable meaning that the string cannot be modified in memory. If a new string is assigned
 to this object, it will simply point to a new location in memory.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
+\createlinenumber{6}{\$}
 \begin{lstlisting}
-$ string s = "String with tyop."; s
+string s = "String with tyop."; s
 "String with tyop."
-$ s[14] = 'p';
+s[14] = 'p';
 (1,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned 
 to -- it is read only
-$ s = "String without typo."
+s = "String without typo."
 "String without typo."
 \end{lstlisting}
+\endgroup
 \subsubsection{Escape Sequences}
 To use special characters such as newlines, tabs, backslashes, or double quotation marks, we must
 use an escape sequence.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
 \begin{lstlisting}
-$ string s = "This is a quotation mark \".\nThis line appears on a new line."; s
+string s = "This is a quotation mark \".\nThis line appears on a new line."; s
 "This is a quotation mark \".\nThis line appears on a new line."
 \end{lstlisting}
+\endgroup
 Note that the string is evaluated as a string literal. To view this string verbatim, we must use
 \lstinline!Console.WriteLine!.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
 \begin{lstlisting}
-$ Console.WriteLine(s) 
+Console.WriteLine(s) 
 This is a quotation mark ".
 This line appears on a new line.
 \end{lstlisting}
+\endgroup
 \subsubsection{Verbatim String Literals}
 If a string contains many escape sequences we can use verbatim strings for convenience.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
 \begin{lstlisting}
-$ string s = @"String with multiple escape sequences ""This is a quote"".
+string s = @"String with multiple escape sequences ""This is a quote"".
 This line appears on a new line.";
-$ Console.WriteLine(s)
+Console.WriteLine(s)
 String with multiple escape sequences "This is a quote".
 This line appears on a new line.
 \end{lstlisting}
+\endgroup
 \subsubsection{Format Strings}
 To dynamically determine a string at runtime, we can use format strings.
 There are two methods to create format strings: string interpolation and composite formatting.
 
 String interpolation allows us to reference variable names directly inside a string.
 Interpolated strings are identified by the dollar sign.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{\$}
 \begin{lstlisting}
-$ int a = 40; int b = 13;
-$ $"Given a = {a} and b = {b}, a + b = {a + b}"
+int a = 40; int b = 13;
+$"Given a = {a} and b = {b}, a + b = {a + b}"
 "Given a = 40 and b = 13, a + b = 53"
 \end{lstlisting}
+\endgroup
 Composite formatting uses placeholders for variables which must be provided in order of reference.
 Here the same variable can be referenced many times in a string.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{\$}
+\createlinenumber{4}{\$}
+\createlinenumber{6}{\$}
 \begin{lstlisting}
-$ int a = 40; int b = 13;
-$ string.Format("Given a = {0} and b = {1}, a + b = {2}", a, b, a + b)
+int a = 40; int b = 13;
+string.Format("Given a = {0} and b = {1}, a + b = {2}", a, b, a + b)
 "Given a = 40 and b = 13, a + b = 53"
-$ string.Format("a + b = {2} where a = {0} and b = {1}", a, b, a + b)
+string.Format("a + b = {2} where a = {0} and b = {1}", a, b, a + b)
 "a + b = 53 where a = 40 and b = 13"
-$ string.Format("We can reference `a` twice, here {0} and here {0}", a)
+string.Format("We can reference `a` twice, here {0} and here {0}", a)
 "We can reference `a` twice, here 40 and here 40"
 \end{lstlisting}
+\endgroup
 \subsubsection{Numeric to String Conversion}
 Strings can be concatenated with numeric variables
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{\$}
 \begin{lstlisting}
-$ int a = 25;
-$ "The temperature is " + a + " degrees."
+int a = 25;
+"The temperature is " + a + " degrees."
 "The temperature is 25 degrees."
 \end{lstlisting}
+\endgroup
 As the \lstinline!+! operator is evaluated from left to right, the following string concatenation
 will not evaluate the sum of 1, 2, and 3.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
 \begin{lstlisting}
-$ "sum = " + 1 + 2 + 3
+"sum = " + 1 + 2 + 3
 "sum = 123"
 \end{lstlisting}
+\endgroup
 The \lstinline!ToString()! method can be accessed from all numeric types, with a
 format specifier which indicates the number of precision to display.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
+\createlinenumber{5}{\$}
 \begin{lstlisting}
-$ (1498).ToString("G3")
+(1498).ToString("G3")
 "1.5E+03"
-$ (1498).ToString("F3")
+(1498).ToString("F3")
 "1498.000"
-$ (1498).ToString("C2")
+(1498).ToString("C2")
 "$1,498.00"
 \end{lstlisting}
+\endgroup
 These format specifiers can be applied directly in interpolated strings.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{\$}
 \begin{lstlisting}
-$ int i = 1498;
-$ $"{i:G3}, {i:F3}, {i:C2}"
+int i = 1498;
+$"{i:G3}, {i:F3}, {i:C2}"
 "1.5E+03, 1498.000, $1,498.00"
 \end{lstlisting}
+\endgroup
 We can also add specify padding in interpolated strings.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{\$}
 \begin{lstlisting}
-$ decimal pi = 3.14159265358979323m;
-$ $"Pi with left padding {pi, 10:F6}"
+decimal pi = 3.14159265358979323m;
+$"Pi with left padding {pi, 10:F6}"
+"Pi with left padding   3.141593"
 \end{lstlisting}
+\endgroup
 For more information see: \href{https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings}{\textit{Custom numeric format strings}}.
 \subsubsection{String to Numeric Conversion}
 We can convert a string to a number by calling the \lstinline!Parse! method found on numeric types,
 or by using methods in the \lstinline!System.Convert! class.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{3}{\$}
 \begin{lstlisting}
-$ double.Parse("2.718281")
+double.Parse("2.718281")
 2.718281
-$ Convert.ToDouble("2.718281")
+Convert.ToDouble("2.718281")
 2.718281
 \end{lstlisting}
+\endgroup
 \section{Structured Programming}
-Structured programming relies on three constructs: sequence, selection and iteration. 
+Structured programming relies on three constructs: sequence, selection and iteration.
 These help us control the flow of our programs.
 \subsection{Sequence}
+\subsubsection{Blocks}
 In C\# we can group statements together inside a scope by using braces \lstinline!{ }!.
 The statements inside this block are executed in order as a single instruction.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{.}
+\createlinenumber{3}{.}
+\createlinenumber{4}{.}
+\createlinenumber{5}{.}
+\createlinenumber{7}{\$}
 \begin{lstlisting}
-$ int i = 5;
-. {
-.     i = 10;
-.     Console.WriteLine(i);
-. }
+int i = 5;
+{
+    i = 10;
+    Console.WriteLine(i);
+}
 10
-$ Console.WriteLine(i);
+Console.WriteLine(i);
 10
 \end{lstlisting}
+\endgroup
 Here \lstinline!i! is accessed as an enclosing locally scoped variable.
 \emph{This behaviour is akin to blocks defined in selection and iteration structures.}
-
+\subsubsection{Nested Blocks}
 Here is another example that utilises nested blocks and demonstrates access.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{\$}
+\createlinenumber{3}{.}
+\createlinenumber{4}{.}
+\createlinenumber{5}{.}
+\createlinenumber{6}{.}
+\createlinenumber{7}{.}
+\createlinenumber{8}{.}
+\createlinenumber{9}{.}
+\createlinenumber{10}{.}
+\createlinenumber{11}{.}
+\createlinenumber{12}{.}
+\createlinenumber{13}{\$}
 \begin{lstlisting}
-$ // Global scope    
-$ {
-.     // Block 1     
-.     int i = 5;  
-.     Console.WriteLine(i);
-.     {
-.         // Block 2
-.         i += 5;
-.         Console.WriteLine(i);
-.     }
-.     // i = 10
-. }
-. Console.WriteLine(i);
+// Global scope    
+{
+    // Block 1     
+    int i = 5;  
+    Console.WriteLine(i);
+    {
+        // Block 2
+        i += 5;
+        Console.WriteLine(i);
+    }
+    // i = 10
+}
+Console.WriteLine(i);
 5
 10
 (1,19): error CS0103: The name 'i' does not exist in the current context
 \end{lstlisting}
+\endgroup
 In this example we see that the variable \lstinline!i! is local to block 1 and therefore accessible to block 2.
 
-However, the converse is not true. \lstinline!i! cannot be accessed by its enclosing scope 
+However, the converse is not true. \lstinline!i! cannot be accessed by its enclosing scope
 as local variables are destroyed when a block ends.
 
-We also cannot declare a variable in a block that shares its name 
+We also cannot declare a variable in a block that shares its name
 with another variable in its enclosing local scope.
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{.}
+\createlinenumber{3}{.}
+\createlinenumber{4}{.}
+\createlinenumber{5}{.}
+\createlinenumber{6}{.}
 \begin{lstlisting}
-$ {
-.     int i = 5;
-.     {
-.         int i = 5;
-.     }   
-. }
+{
+    int i = 5;
+    {
+        int i = 5;
+    }   
+}
 (4,13): error CS0136: A local or parameter named 'i' cannot be declared
 in this scope because that name is used in an enclosing local scope to 
 define a local or parameter
 \end{lstlisting}
+\endgroup
 \subsection{Selection}
 Selection allows us to choose from a range of different options.
 \subsubsection{If Statements}
 If statements have the following syntax.
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 // Single statement
 if (CONDITION) STATEMENT;
 // Multiple statements
@@ -532,14 +713,14 @@ if (CONDITION)
 }
 \end{lstlisting}
 In both cases, \lstinline!CONDITION! is an expression that returns a Boolean value % chktex 13
-when evaluated. If this value is \lstinline!true!, the subsequent statement(s) will 
-be executed. Conversely, if the expression yields \lstinline!false!, the subsequent 
+when evaluated. If this value is \lstinline!true!, the subsequent statement(s) will
+be executed. Conversely, if the expression yields \lstinline!false!, the subsequent
 statement(s) will be ignored and control passes to the next statement after the \lstinline!if!
 statement.
-
+\subsubsection{If-else Statements}
 We can add an alternative statement if \lstinline!CONDITION! is \lstinline!false! using an \lstinline{else}
 \lstinline!else! clause.
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 // Single statement
 if (CONDITION) STATEMENT_1 else STATEMENT_2;
 // Multiple statements
@@ -551,12 +732,12 @@ if (CONDITION)
     STATEMENTS_2;
 }
 \end{lstlisting}
-This structure differs to the previous example slightly as either \lstinline!STATEMENT_1! or \lstinline!STATEMENT_2! 
-will be executed. Again the decision depends on the Boolean value returned by the condition. 
-
-The blocks in an \lstinline!if! statement can also allow us to nest any number of 
+This structure differs to the previous example slightly as either \lstinline!STATEMENT_1! or \lstinline!STATEMENT_2!
+will be executed. Again the decision depends on the Boolean value returned by the condition.
+\subsubsection{Nested if Statements}
+The blocks in an \lstinline!if! statement can also allow us to nest any number of
 \lstinline!if! statements to create a more complex flow of control.
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 if (CONDITION_1) if (CONDITION_2) STATEMENT_2 else STATEMENT_1;
 // Written using braces
 if (CONDITION_1) 
@@ -571,10 +752,11 @@ if (CONDITION_1)
 }
 \end{lstlisting}
 Generally nested \lstinline!if! statements are difficult to read and should be avoided if possible.
+\subsubsection{Cascading if Statements}
 An alternative to nested \lstinline!if! statements are cascading \lstinline!if! statements.
-These statements allow us to provide controlled alternatives to an \lstinline!if-else! statement if the 
+These statements allow us to provide controlled alternatives to an \lstinline!if-else! statement if the
 first condition returns \lstinline!false!.
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 if (CONDITION_1) 
 {
     STATEMENTS_1
@@ -590,7 +772,7 @@ else {
     STATEMENTS_N
 }
 \end{lstlisting}
-In this structure, any statement \(1<i<n\) will be executed if 
+In this structure, any statement \(1<i<n\) will be executed if
 and only if all conditions before \(i\) yield \lstinline!false! and
 \lstinline!CONDITION_I! yields \lstinline!true!. % chktex 13
 
@@ -601,7 +783,7 @@ Note that the \lstinline!else! clause may be omitted.
 \subsubsection{Switch Statements}
 A \lstinline!switch! statement is an alternative to cascading \lstinline!if!
 statements and are another kind of multi-way branch.
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 switch (EXPRESSION) 
 {
     case CONSTANT_1:
@@ -620,13 +802,194 @@ In this structure, \lstinline!EXPRESSION! is any numeric or string expression, %
 and \lstinline!CONSTANT! is a literal of matching type. % chktex 13
 This means that \lstinline!STATEMENTS_I! is executed if \lstinline!EXPRESSION == CONSTANT_I!. % chktex 13
 
-The default branch behaves similarly to an \lstinline!else! clause and is executed if all 
+The default branch behaves similarly to an \lstinline!else! clause and is executed if all
 none of the cases are satisfied.
 
-Each branch must end with one of the following keywords depending on where the 
-switch statement is defined: \lstinline!break!, \lstinline!return!, 
+Each branch must end with one of the following keywords depending on where the
+switch statement is defined: \lstinline!break!, \lstinline!return!,
 \lstinline!goto!, \lstinline!throw!, or \lstinline!continue!.
 \subsection{Iteration}
 Iterative constructs allow us to repeat statements zero, one, or many times,
 without making multiple copies of the statement.
+\subsubsection{While Statements}[numbers=none]
+\begin{lstlisting}
+while (CONDITION) 
+{
+    STATEMENTS
+}
+\end{lstlisting}
+Fundamental semantics:
+\begin{enumerate}
+    \item Execute \lstinline!STATEMENTS! if \lstinline!CONDITION == true!. % chktex 13
+    \item Goto Step 1.
+\end{enumerate}
+\subsubsection{Do-while Statements}
+\begin{lstlisting}[numbers=none]
+do 
+{
+    STATEMENTS
+}
+while (CONDITION) 
+\end{lstlisting}
+Fundamental semantics:
+\begin{enumerate}
+    \item Execute \lstinline!STATEMENTS!. % chktex 13
+    \item Goto Step 1 if \lstinline!CONDITION == true!.
+\end{enumerate}
+\subsubsection{For Statements}
+\begin{lstlisting}[numbers=none]
+for (INIT; CONDITION; UPDATE) 
+{
+    STATEMENTS
+}
+\end{lstlisting}
+Fundamental semantics:
+\begin{enumerate}
+    \item Execute \lstinline!INIT!. % chktex 13
+    \item Execute \lstinline!STATEMENTS! if \lstinline!CONDITION == true!. % chktex 13
+    \item Execute \lstinline!UPDATE!.
+    \item Goto Step 2.
+\end{enumerate}
+Generally a \lstinline!while! statement is used when the number of iterations is unknown and
+\lstinline!for! statements are used otherwise. Both of these structures can execute
+statements either zero, one or many times.
+
+While uncommon, \lstinline!do-while! statements are used if we want to execute
+the loop body at least once.
+\subsection{Jump Statements}
+The following statements unconditionally transfer control:
+\begin{itemize}
+    \item \lstinline!break! terminates the closest enclosing iteration or switch statement
+    \item \lstinline!continue! starts a new iteration of the closest enclosing iteration statement
+\end{itemize}
+Note that jump statements can be placed anywhere inside the loop body and that any succeeding
+statements or the \lstinline!UPDATE! statement (in the \lstinline!for! structure) % chktex 13
+will not be executed.
+\subsection{Boolean}
+A Boolean (\lstinline!bool!) is a type that has two values,
+\lstinline!true! and \lstinline!false!.
+Boolean expressions are expressions that when evaluated, yield a Boolean value.
+\subsubsection{Comparison Operators}
+Comparison operators are a common Boolean expression:
+\begin{itemize}
+    \item \lstinline!x == y!
+    \item \lstinline+x != y+ % chktex 26
+    \item \lstinline!x < y!
+    \item \lstinline!x > y!
+    \item \lstinline!x <= y!
+    \item \lstinline!x >= y!
+\end{itemize}
+\subsubsection{Logical Operators}
+Logical operators are also Boolean expressions:
+\begin{itemize}
+    \item \lstinline+!a+ (not)
+    \item \lstinline!a && b! (and)
+    \item \lstinline!a || b! (or)
+\end{itemize}
+In C\#, logical operators use short-circuit evaluation, meaning that
+if the left-expression guarantees the resulting Boolean value,
+the right-expression is not evaluated.
+
+For example
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{.}
+\createlinenumber{3}{.}
+\createlinenumber{4}{.}
+\createlinenumber{5}{.}
+\createlinenumber{6}{\$}
+\createlinenumber{7}{.}
+\createlinenumber{8}{.}
+\createlinenumber{9}{.}
+\createlinenumber{10}{.}
+\createlinenumber{11}{\$}
+\begin{lstlisting}
+bool a() 
+{ 
+    Console.WriteLine("a was executed."); 
+    return false;
+}
+bool b() 
+{ 
+    Console.WriteLine("b was executed."); 
+    return true;
+}
+a() && b()
+a was executed.
+False
+\end{lstlisting}
+\endgroup
+Here we see that the second function \lstinline!b()! was not executed
+as the {\ttfamily AND} operator requires both expressions to be true,
+so regardless of the value of \lstinline!b()!, the result will be
+\lstinline!false!.
+
+Similarly for {\ttfamily OR}:
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{.}
+\createlinenumber{3}{.}
+\createlinenumber{4}{.}
+\createlinenumber{5}{.}
+\createlinenumber{6}{\$}
+\createlinenumber{7}{.}
+\createlinenumber{8}{.}
+\createlinenumber{9}{.}
+\createlinenumber{10}{.}
+\createlinenumber{11}{\$}
+\begin{lstlisting}
+bool a() 
+{ 
+    Console.WriteLine("a was executed."); 
+    return false;
+}
+bool b() 
+{ 
+    Console.WriteLine("b was executed."); 
+    return true;
+}
+b() || a()
+b was executed.
+True
+\end{lstlisting}
+\endgroup
+Here only one of the two expressions need to be \lstinline!true!
+for the result to be true. However, if we reversed the order of
+the expressions:
+\begingroup
+\let\thelstnumber\relax
+\createlinenumber{1}{\$}
+\createlinenumber{2}{.}
+\createlinenumber{3}{.}
+\createlinenumber{4}{.}
+\createlinenumber{5}{.}
+\createlinenumber{6}{\$}
+\createlinenumber{7}{.}
+\createlinenumber{8}{.}
+\createlinenumber{9}{.}
+\createlinenumber{10}{.}
+\createlinenumber{11}{\$}
+\begin{lstlisting}
+bool a() 
+{ 
+    Console.WriteLine("a was executed."); 
+    return false;
+}
+bool b() 
+{ 
+    Console.WriteLine("b was executed."); 
+    return true;
+}
+a() || b()
+a was executed.
+b was executed.
+True
+\end{lstlisting}
+\endgroup
+we can see that since \lstinline!a()! does not guarantee
+the resulting value, we must also evaluate \lstinline!b()!.
+
+The {\ttfamily NOT} operator simply negates the value of the Boolean expression.
 \end{document}
