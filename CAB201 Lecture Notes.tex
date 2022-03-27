@@ -13,7 +13,7 @@
 
 %%% Save the original way of printing the number
 \let\othelstnumber=\thelstnumber
-\def\createlinenumber#1#2{
+\def\customlinemarker#1#2{
     \edef\thelstnumber{%
         \unexpanded{%
             \ifnum#1=\value{lstnumber}\relax
@@ -127,8 +127,8 @@ Programming involves:
 
     Variables can be declared as follows
     \begin{lstlisting}[numbers=none]
-TYPE_SPECIFIER IDENTIFIER;
-TYPE_SPECIFIER IDENTIFIER = EXPRESSION;\end{lstlisting}
+TYPE IDENTIFIER;
+TYPE IDENTIFIER = EXPRESSION;\end{lstlisting}
     In the first instance, we declare the type of the variable without initialising it.
     In the second case we declare and initialise the variable.
 \end{definition}
@@ -188,10 +188,10 @@ By default, C\# automatically assigns the \lstinline!int!, \lstinline!uint!,
 of the provided number. Any floating-point number is instantiated as a \lstinline!double!.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
-\createlinenumber{5}{\$}
-\createlinenumber{7}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
+\customlinemarker{5}{\$}
+\customlinemarker{7}{\$}
 \begin{lstlisting}
 (100).GetType()
 [System.Int32]
@@ -248,12 +248,12 @@ Note that all integer types can be converted to floating-point types.
 For example
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{\$}
-\createlinenumber{4}{\$}
-\createlinenumber{7}{\$}
-\createlinenumber{8}{\$}
-\createlinenumber{10}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{4}{\$}
+\customlinemarker{7}{\$}
+\customlinemarker{8}{\$}
+\customlinemarker{10}{\$}
 \begin{lstlisting}
 // 8 bit unsigned integer to 64 bit signed integer 
 byte b = 32; Console.WriteLine($"{b} {b.GetType()}")
@@ -278,12 +278,12 @@ The syntax for a type cast is as follows
 For example
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{\$}
-\createlinenumber{4}{\$}
-\createlinenumber{7}{\$}
-\createlinenumber{8}{\$}
-\createlinenumber{10}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{4}{\$}
+\customlinemarker{7}{\$}
+\customlinemarker{8}{\$}
+\customlinemarker{10}{\$}
 \begin{lstlisting}
 // Decimal to single precision floating-point number
 decimal pi = 3.14159265358979323m; Console.WriteLine($"{pi} {pi.GetType()}")
@@ -302,8 +302,8 @@ In the final example, to understand what is happening in the explicit conversion
 we must look at the binary representation of the two integers.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
 \begin{lstlisting}
 uint u = 9876; Console.WriteLine(Convert.ToString(u, 2).PadLeft(32, '0'))
 00000000000000000010011010010100
@@ -349,11 +349,11 @@ The following table lists the C\# operators starting with the highest precedence
 In C\#, arithmetic operations behave as expected.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
-\createlinenumber{5}{\$}
-\createlinenumber{7}{\$}
-\createlinenumber{9}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
+\customlinemarker{5}{\$}
+\customlinemarker{7}{\$}
+\customlinemarker{9}{\$}
 \begin{lstlisting}
 123 + 12
 135
@@ -375,10 +375,10 @@ Each result in the above examples have the type \lstinline!System.Int32!.
 Hence division between two 32 bit integers truncates any floating-point precision.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
-\createlinenumber{5}{\$}
-\createlinenumber{7}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
+\customlinemarker{5}{\$}
+\customlinemarker{7}{\$}
 \begin{lstlisting}
 123 / 12
 10
@@ -400,11 +400,11 @@ support the comparison, equality, increment and \linebreak decrement operators.
 A character is initialised using single quotation marks (\lstinline!'!). % chktex 38
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
-\createlinenumber{5}{\$}
-\createlinenumber{7}{\$}
-\createlinenumber{9}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
+\customlinemarker{5}{\$}
+\customlinemarker{7}{\$}
+\customlinemarker{9}{\$}
 \begin{lstlisting}
 char c = 'A'; c
 'A'
@@ -423,8 +423,8 @@ A string is a sequential read-only collection of character objects.
 A string is initialised using double quotation marks (\lstinline!"!). % chktex 18
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
 \begin{lstlisting}
 string s = "Hello, World!"; s
 "Hello, World!"
@@ -436,8 +436,8 @@ s.GetType()
 The characters in a string can be accessed by position (starting at 0).
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
 \begin{lstlisting}
 s[0]
 'H'
@@ -450,9 +450,9 @@ In C\#, string objects are immutable meaning that the string cannot be modified 
 to this object, it will simply point to a new location in memory.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
-\createlinenumber{6}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
+\customlinemarker{6}{\$}
 \begin{lstlisting}
 string s = "String with tyop."; s
 "String with tyop."
@@ -468,7 +468,7 @@ To use special characters such as newlines, tabs, backslashes, or double quotati
 use an escape sequence.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
+\customlinemarker{1}{\$}
 \begin{lstlisting}
 string s = "This is a quotation mark \".\nThis line appears on a new line."; s
 "This is a quotation mark \".\nThis line appears on a new line."
@@ -478,7 +478,7 @@ Note that the string is evaluated as a string literal. To view this string verba
 \lstinline!Console.WriteLine!.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
+\customlinemarker{1}{\$}
 \begin{lstlisting}
 Console.WriteLine(s) 
 This is a quotation mark ".
@@ -489,8 +489,8 @@ This line appears on a new line.
 If a string contains many escape sequences we can use verbatim strings for convenience.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
 \begin{lstlisting}
 string s = @"String with multiple escape sequences ""This is a quote"".
 This line appears on a new line.";
@@ -507,8 +507,8 @@ String interpolation allows us to reference variable names directly inside a str
 Interpolated strings are identified by the dollar sign.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
 \begin{lstlisting}
 int a = 40; int b = 13;
 $"Given a = {a} and b = {b}, a + b = {a + b}"
@@ -519,10 +519,10 @@ Composite formatting uses placeholders for variables which must be provided in o
 Here the same variable can be referenced many times in a string.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{\$}
-\createlinenumber{4}{\$}
-\createlinenumber{6}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{4}{\$}
+\customlinemarker{6}{\$}
 \begin{lstlisting}
 int a = 40; int b = 13;
 string.Format("Given a = {0} and b = {1}, a + b = {2}", a, b, a + b)
@@ -537,8 +537,8 @@ string.Format("We can reference `a` twice, here {0} and here {0}", a)
 Strings can be concatenated with numeric variables
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
 \begin{lstlisting}
 int a = 25;
 "The temperature is " + a + " degrees."
@@ -549,7 +549,7 @@ As the \lstinline!+! operator is evaluated from left to right, the following str
 will not evaluate the sum of 1, 2, and 3.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
+\customlinemarker{1}{\$}
 \begin{lstlisting}
 "sum = " + 1 + 2 + 3
 "sum = 123"
@@ -559,9 +559,9 @@ The \lstinline!ToString()! method can be accessed from all numeric types, with a
 format specifier which indicates the number of precision to display.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
-\createlinenumber{5}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
+\customlinemarker{5}{\$}
 \begin{lstlisting}
 (1498).ToString("G3")
 "1.5E+03"
@@ -574,8 +574,8 @@ format specifier which indicates the number of precision to display.
 These format specifiers can be applied directly in interpolated strings.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
 \begin{lstlisting}
 int i = 1498;
 $"{i:G3}, {i:F3}, {i:C2}"
@@ -585,8 +585,8 @@ $"{i:G3}, {i:F3}, {i:C2}"
 We can also add specify padding in interpolated strings.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
 \begin{lstlisting}
 decimal pi = 3.14159265358979323m;
 $"Pi with left padding {pi, 10:F6}"
@@ -599,8 +599,8 @@ We can convert a string to a number by calling the \lstinline!Parse! method foun
 or by using methods in the \lstinline!System.Convert! class.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{3}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
 \begin{lstlisting}
 double.Parse("2.718281")
 2.718281
@@ -617,12 +617,12 @@ In C\# we can group statements together inside a scope by using braces \lstinlin
 The statements inside this block are executed in order as a single instruction.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{.}
-\createlinenumber{3}{.}
-\createlinenumber{4}{.}
-\createlinenumber{5}{.}
-\createlinenumber{7}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{.}
+\customlinemarker{3}{.}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\customlinemarker{7}{\$}
 \begin{lstlisting}
 int i = 5;
 {
@@ -640,19 +640,19 @@ Here \lstinline!i! is accessed as an enclosing locally scoped variable.
 Here is another example that utilises nested blocks and demonstrates access.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{\$}
-\createlinenumber{3}{.}
-\createlinenumber{4}{.}
-\createlinenumber{5}{.}
-\createlinenumber{6}{.}
-\createlinenumber{7}{.}
-\createlinenumber{8}{.}
-\createlinenumber{9}{.}
-\createlinenumber{10}{.}
-\createlinenumber{11}{.}
-\createlinenumber{12}{.}
-\createlinenumber{13}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{3}{.}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\customlinemarker{6}{.}
+\customlinemarker{7}{.}
+\customlinemarker{8}{.}
+\customlinemarker{9}{.}
+\customlinemarker{10}{.}
+\customlinemarker{11}{.}
+\customlinemarker{12}{.}
+\customlinemarker{13}{\$}
 \begin{lstlisting}
 // Global scope    
 {
@@ -681,12 +681,12 @@ We also cannot declare a variable in a block that shares its name
 with another variable in its enclosing local scope.
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{.}
-\createlinenumber{3}{.}
-\createlinenumber{4}{.}
-\createlinenumber{5}{.}
-\createlinenumber{6}{.}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{.}
+\customlinemarker{3}{.}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\customlinemarker{6}{.}
 \begin{lstlisting}
 {
     int i = 5;
@@ -865,7 +865,7 @@ The following statements unconditionally transfer control:
 Note that jump statements can be placed anywhere inside the loop body and that any succeeding
 statements or the \lstinline!UPDATE! statement (in the \lstinline!for! structure) % chktex 13
 will not be executed.
-\subsection{Boolean}
+\subsection{Booleans}
 A Boolean (\lstinline!bool!) is a type that has two values,
 \lstinline!true! and \lstinline!false!.
 Boolean expressions are expressions that when evaluated, yield a Boolean value.
@@ -893,17 +893,17 @@ the right-expression is not evaluated.
 For example
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{.}
-\createlinenumber{3}{.}
-\createlinenumber{4}{.}
-\createlinenumber{5}{.}
-\createlinenumber{6}{\$}
-\createlinenumber{7}{.}
-\createlinenumber{8}{.}
-\createlinenumber{9}{.}
-\createlinenumber{10}{.}
-\createlinenumber{11}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{.}
+\customlinemarker{3}{.}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\customlinemarker{6}{\$}
+\customlinemarker{7}{.}
+\customlinemarker{8}{.}
+\customlinemarker{9}{.}
+\customlinemarker{10}{.}
+\customlinemarker{11}{\$}
 \begin{lstlisting}
 bool a() 
 { 
@@ -928,17 +928,17 @@ so regardless of the value of \lstinline!b()!, the result will be
 Similarly for {\ttfamily OR}:
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{.}
-\createlinenumber{3}{.}
-\createlinenumber{4}{.}
-\createlinenumber{5}{.}
-\createlinenumber{6}{\$}
-\createlinenumber{7}{.}
-\createlinenumber{8}{.}
-\createlinenumber{9}{.}
-\createlinenumber{10}{.}
-\createlinenumber{11}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{.}
+\customlinemarker{3}{.}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\customlinemarker{6}{\$}
+\customlinemarker{7}{.}
+\customlinemarker{8}{.}
+\customlinemarker{9}{.}
+\customlinemarker{10}{.}
+\customlinemarker{11}{\$}
 \begin{lstlisting}
 bool a() 
 { 
@@ -960,17 +960,17 @@ for the result to be true. However, if we reversed the order of
 the expressions:
 \begingroup
 \let\thelstnumber\relax
-\createlinenumber{1}{\$}
-\createlinenumber{2}{.}
-\createlinenumber{3}{.}
-\createlinenumber{4}{.}
-\createlinenumber{5}{.}
-\createlinenumber{6}{\$}
-\createlinenumber{7}{.}
-\createlinenumber{8}{.}
-\createlinenumber{9}{.}
-\createlinenumber{10}{.}
-\createlinenumber{11}{\$}
+\customlinemarker{1}{\$}
+\customlinemarker{2}{.}
+\customlinemarker{3}{.}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\customlinemarker{6}{\$}
+\customlinemarker{7}{.}
+\customlinemarker{8}{.}
+\customlinemarker{9}{.}
+\customlinemarker{10}{.}
+\customlinemarker{11}{\$}
 \begin{lstlisting}
 bool a() 
 { 
@@ -992,4 +992,266 @@ we can see that since \lstinline!a()! does not guarantee
 the resulting value, we must also evaluate \lstinline!b()!.
 
 The {\ttfamily NOT} operator simply negates the value of the Boolean expression.
+\section{Collections}
+\subsection{Arrays}
+If we want to effectively manage groups of related objects, we can utilise arrays and collections.
+When defining an array of type \lstinline!T!, we must append the type with square brackets \lstinline![ ]!.
+\begin{lstlisting}[numbers=none]
+TYPE[] IDENTIFIER;
+TYPE[] IDENTIFIER = EXPRESSION;
+\end{lstlisting}
+As a result, each item must have the same data type. To specify the array size, we can initialise
+the variable with the \lstinline!new! expression.
+\begin{lstlisting}[numbers=none]
+TYPE[] IDENTIFIER = new TYPE[SIZE];
+// Alternatively
+TYPE[] IDENTIFIER;
+IDENTIFIER = new TYPE[SIZE];
+\end{lstlisting}
+\subsection{Access}
+To access the array, we can use the identifier for that array. Each object within
+an array can be distinguished by its subscript (or index). To access the object within
+an array, we place the index inside square brackets \lstinline![i]! and append this to the 
+identifier. 
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{4}{\$}
+\customlinemarker{6}{\$}
+\customlinemarker{8}{\$}
+\customlinemarker{10}{\$}
+\begin{lstlisting}
+int[] intArray = new int[3]; 
+intArray
+int[3] { 0, 0, 0 }
+intArray[0] = 1; intArray[0]
+1
+intArray[1] = 2; intArray[0]
+2
+intArray[2] = 3; intArray[0]
+3
+intArray
+int[3] { 1, 2, 3 }
+\end{lstlisting}
+\endgroup
+Note that array indexing starts at 0. If the value of the elements inside the array
+are known when the array is initialised, we can set the element values using the following syntax.
+\begin{lstlisting}[numbers=none]
+TYPE[] IDENTIFIER = new TYPE[SIZE] { element1, element2, ..., elementN };
+TYPE[] IDENTIFIER = new TYPE[] { element1, element2, ..., elementN };
+TYPE[] IDENTIFIER = { element1, element2, ..., elementN };
+\end{lstlisting}
+Note that when using the first method, the number of elements \(N\) must be equal to the specified \lstinline!SIZE!. % chktex 13
+\subsection{Array Representation in Memory}
+To be able to access an array by index, the elements must be stored contiguously in memory, that is,
+stored one after the other. This means that each element \(i\) is \(i \times S_T\) bytes from \(i = 0\), 
+where \(S_T\) is the size of the array type.
+\subsection{Default Values}
+If an array is declared without initialisation, then each element takes one of the following
+default values based on the type:
+\begin{description}
+    \item[Numeric] \lstinline!0!
+    \item[Character] \lstinline!\u0000! or \lstinline!null!
+    \item[Boolean] \lstinline!false!
+\end{description}
+\subsection{ForEach Loops}
+The \lstinline!foreach! statement provides a simple, clean way to iterate through the elements of an array,
+without using the element index.
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{3}{.}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\begin{lstlisting}
+int[] array = { 1, 2, 3 };
+foreach (int i in array)
+{
+    Console.WriteLine(i);
+}
+1
+2
+3    
+\end{lstlisting}
+\endgroup
+Note that the values \lstinline!i! are readonly, and hence this structure 
+does not modify the elements of an array.
+
+If we wanted to modify these values, can we use either a \lstinline!while! or
+\lstinline!for! loop. The following example increments each value of an array 
+using a \lstinline!for! loop.
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{3}{.}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\customlinemarker{6}{\$}
+\begin{lstlisting}
+int[] array = { 1, 2, 3 };
+for (int i = 0; i < array.Length; i++)
+{
+    array[i]++;
+}
+array
+int[3] { 2, 3, 4 }
+\end{lstlisting}
+\endgroup
+\subsection{Compound Arrays}
+When we have two or more arrays of values that share
+the same indices, we can implement compound arrays to 
+create a correspondence between those arrays.
+\subsubsection{Parallel Arrays}
+Parallel arrays are useful when the various arrays
+hold different types of data. In this method, multiple 
+single dimensional arrays are created.
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{3}{\$}
+\customlinemarker{4}{.}
+\customlinemarker{5}{.}
+\customlinemarker{6}{.}
+\begin{lstlisting}
+string[] item = { "Shoes", "Shirt", "Pants" };
+int[] price = { 100, 40, 80 };
+for (int i = 0; i < item.Length; i++) 
+{
+    Console.WriteLine($"Item: {item[i]}\tPrice: {price[i]:C}");
+}
+Item: Shoes     Price: $100.00
+Item: Shirt     Price: $40.00
+Item: Pants     Price: $80.00
+\end{lstlisting}
+\endgroup
+Although there are benefits to using this approach, larger data
+sets with multiple columns may be better represented in a 
+multidimensional array.
+\subsubsection{Multidimensional Arrays}
+Multidimensional arrays behave similarly to regular arrays
+but use different declaration and access syntax. 
+\begin{lstlisting}[numbers=none]
+// 2D arrays
+TYPE[,] IDENTIFIER = new TYPE[SIZEX, SIZEY];
+// nD arrays
+TYPE[,,...] IDENTIFIER = new TYPE[SIZEX, SIZEY, ...];
+\end{lstlisting}
+When declaring the type, it is important to specify the correct
+number of commas (\lstinline!,!). The number of commas is equal to 
+the number of dimensions minus 1.
+
+When instantiating the array on the right hand side of the assignment,
+the length of each dimension is specified as an integer, and is separated by a comma.
+Similar to single dimensional arrays, we can set the values when we declare the array.
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\customlinemarker{2}{.}
+\customlinemarker{3}{\$}
+\begin{lstlisting}
+int[,] array2d = {{ 2, 3 },
+                  { 1, 5 }};
+array2d
+int[2, 2] { { 2, 3 }, { 1, 5 } }
+\end{lstlisting}
+\endgroup
+Multidimensional arrays are commonly separated at each dimension
+so that they are easier to read. 
+
+When accessing the value from a multidimensional array, 
+we must separate each index using a comma.
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{4}{\$}
+\customlinemarker{5}{.}
+\customlinemarker{6}{.}
+\customlinemarker{7}{.}
+\customlinemarker{8}{.}
+\customlinemarker{9}{.}
+\customlinemarker{10}{.}
+\begin{lstlisting}
+int ROW = array2d.GetLength(0);
+int COL = array2d.GetLength(1);
+
+for (int i = 0; i < ROW; i++)
+{
+    for (int j = 0; j < COL; j++)
+    {
+        Console.WriteLine($"The value at ({i}, {j}) is {array2d[i, j]}");
+    }
+}
+The value at (0, 0) is 2
+The value at (0, 1) is 3
+The value at (1, 0) is 1
+The value at (1, 1) is 5
+\end{lstlisting}
+\endgroup
+Here the \lstinline!GetLength()! methods are used to find the length 
+of both the first and second dimensions.
+\subsection{Lists}
+Lists allow us to have variable size arrays, meaning we can 
+add and remove elements during execution.
+\begin{lstlisting}[numbers=none]
+List<TYPE> IDENTIFIER = new List<TYPE>();
+\end{lstlisting}
+Initially this list has 0 elements, also known as its \textit{count}.
+We can add to this list using the \lstinline!Add()! method, and
+remove from it using the \lstinline!Remove()! method.
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\customlinemarker{2}{\$}
+\customlinemarker{4}{\$}
+\customlinemarker{5}{\$}
+\customlinemarker{6}{\$}
+\customlinemarker{7}{\$}
+\customlinemarker{8}{\$}
+\customlinemarker{9}{\$}
+\customlinemarker{10}{\$}
+\begin{lstlisting}
+List<int> list = new List<int>();
+list
+List<int>(0) { }
+list.Add(3)
+list.Add(1)
+list.Add(4)
+list.Add(5)
+list.Add(1)
+list.Add(5)
+list
+List<int>(6) { 3, 1, 4, 5, 1, 5 }
+\end{lstlisting}
+\endgroup
+By using the \lstinline!Remove()! method, we can remove the 
+accidental 5 that appears at index 3.
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\customlinemarker{3}{\$}
+\customlinemarker{5}{\$}
+\customlinemarker{7}{\$}
+\begin{lstlisting}
+list.Remove(5)
+true
+list
+List<int>(5) { 3, 1, 4, 1, 5 }
+list.Remove(7)
+false
+list
+List<int>(5) { 3, 1, 4, 1, 5 }
+\end{lstlisting}
+\endgroup
+From the first \lstinline!Remove()!, 
+only the first \lstinline!5! was removed from the list.
+The method also returned a Boolean value indicating that the value 
+\lstinline!5! existed in the list. When we try to remove the 
+number \lstinline!7!, the method returns \lstinline!false!,
+as the list does not contain a \lstinline!7!, and hence the 
+list remains unchanged.
 \end{document}
