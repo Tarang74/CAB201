@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OddNum
+namespace ArrayDouble
 {
     class Program
     {
@@ -12,11 +12,13 @@ namespace OddNum
         }
         public static void Main(string[] args)
         {
-            info("Question 11:");
+            info("Question 1:");
 
-            for (int i = 0; i < 50; i++)
+            double[] array = { 1.1, 2.2, 3.3, 4.4, 5.5 };
+
+            for (int i = 0; i < array.Length; i++)
             {
-                Console.WriteLine(2 * i + 1);
+                Console.WriteLine(array[i]);
             }
         }
     }

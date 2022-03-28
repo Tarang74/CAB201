@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace OddNum
+namespace ListFive
 {
     class Program
     {
@@ -12,11 +13,13 @@ namespace OddNum
         }
         public static void Main(string[] args)
         {
-            info("Question 11:");
+            info("Question 10:");
 
-            for (int i = 0; i < 50; i++)
+            List<int> list = new List<int>{ 0, 1, 2, 3, 4 };
+
+            foreach (int value in list)
             {
-                Console.WriteLine(2 * i + 1);
+                Console.WriteLine(value);
             }
         }
     }

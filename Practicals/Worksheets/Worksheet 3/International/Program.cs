@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OddNum
+namespace International
 {
     class Program
     {
@@ -12,12 +12,15 @@ namespace OddNum
         }
         public static void Main(string[] args)
         {
-            info("Question 11:");
+            info("Question 6:");
 
-            for (int i = 0; i < 50; i++)
+            int[] codes = { 100, 300, 200, 500, 1000, 600 };
+            string[] countries = { "UK", "USA", "France", "Chile", "China", "Egypt" };
+
+            for (int i = 0; i < countries.Length; i++)
             {
-                Console.WriteLine(2 * i + 1);
+                Console.WriteLine($"Code: {codes[i]}\tCountry: {countries[i]}");
             }
         }
     }
-}
+}   
