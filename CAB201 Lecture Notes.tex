@@ -1199,8 +1199,10 @@ Lists allow us to have variable size arrays, meaning we can
 add and remove elements during execution.
 \begin{lstlisting}[numbers=none]
 List<TYPE> IDENTIFIER = new List<TYPE>();
+List<TYPE> IDENTIFIER = new List<TYPE>{ elements };
 \end{lstlisting}
-Initially this list has 0 elements, also known as its \textit{count}.
+Initially the first technique creates a list with 0 elements, 
+also known as its \textit{count}.
 We can add to this list using the \lstinline!Add()! method, and
 remove from it using the \lstinline!Remove()! method.
 \begingroup
