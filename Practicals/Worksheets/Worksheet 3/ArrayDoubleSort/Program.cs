@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ArrayDoubleSort
 {
@@ -26,7 +26,7 @@ namespace ArrayDoubleSort
             Array.Sort<double>(values);
 
             Console.WriteLine("Sorted values: ");
-            foreach (int value in values)
+            foreach (double value in values)
             {
                 Console.WriteLine(value);
             }
