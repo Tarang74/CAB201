@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArrayDoubleSort
+namespace IntegerReverse
 {
     class Program
     {
@@ -12,21 +12,23 @@ namespace ArrayDoubleSort
         }
         public static void Main(string[] args)
         {
-            info("Question 4:");
+            info("Question 2:");
 
-            Console.WriteLine("Enter 10 values: ");
-            
-            double[] values = new double[10];
+            Console.Write("How many integers: ");
+            int amount = Int32.Parse(Console.ReadLine()!);
+
+            int[] values = new int[amount];
+
             for (int i = 0; i < values.Length; i++) 
             {
                 Console.Write($"Enter value {i}: ");
-                values[i] = Double.Parse(Console.ReadLine()!);
+                values[i] = Int32.Parse(Console.ReadLine()!);
             }
 
-            Array.Sort<double>(values);
+            Array.Reverse<int>(values);
 
-            Console.WriteLine("Sorted values: ");
-            foreach (double value in values)
+            Console.WriteLine("Reversed values: ");
+            foreach (int value in values)
             {
                 Console.WriteLine(value);
             }
