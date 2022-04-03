@@ -4,6 +4,8 @@
 
 ### Semester 1, 2022
 
+[Lecture notes PDF](CAB201%20Lecture%20Notes.pdf)
+
 ---
 
 This repository provides **lecture notes** for **CAB201 - Programming Principals**.
@@ -18,6 +20,7 @@ This repository provides **lecture notes** for **CAB201 - Programming Principals
 2. Types and Expressions
 3. Structured Programming
 4. Collections
+5. Methods
 
 ---
 
