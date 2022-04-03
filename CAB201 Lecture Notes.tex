@@ -1256,4 +1256,132 @@ The method also returned a Boolean value indicating that the value
 number \lstinline!7!, the method returns \lstinline!false!,
 as the list does not contain a \lstinline!7!, and hence the 
 list remains unchanged.
+\section{Methods}
+\subsection{Programming Complexity}
+Programming logic is usually complex as it involves modelling rules
+and constraints from the real world. 
+
+When dealing with complexity, we must guarantee:
+\begin{itemize}
+    \item Correctness
+    \begin{itemize}
+        \item Software must be trustworthy
+        \item Software must meet requirements
+        \item Valid inputs must always produce the required outcomes
+    \end{itemize}
+    \item Robustness
+    \begin{itemize}
+        \item Programs should not crash
+    \end{itemize}
+    \item Efficiency
+    \begin{itemize}
+        \item Programs must complete their work in a timely manner
+        \item Programs should utilise efficient algorithms
+        \item Programs should avoid unnecessary loops and convoluted logic, 
+        i.e., using existing standard libraries rather than writing our own code
+    \end{itemize}
+\end{itemize}
+We can use methods to address this complexity be decomposing large tasks into smaller tasks.
+\begin{itemize}
+    \item Each sub-task handles part of the larger problem
+    \item Each sub-task can be implemented separately as a method or group of methods
+    \item Tests can be developed to target each method individually
+\end{itemize}
+As long as each sub-task is correct, robust, and efficient, the overall program will be also.
+As sub-tasks are simpler than the original problem, these goals are easier to achieve.
+
+Methods can also help eliminate duplicate code, so that code is more compact, and by
+moving them into libraries, we can use them in other projects making programming
+more productive.
+\subsection{Declaring Methods}
+A method has the following syntax
+\begin{lstlisting}[numbers=none]
+[ACCESS_MODIFIER] RETURN_TYPE METHOD_IDENTIFIER(PARAMETER_LIST)
+{
+    STATEMENTS
+}    
+\end{lstlisting}
+\subsubsection{Access Modifiers}
+Access modifiers will be discussed in a later section.
+\subsubsection{Return Types}
+A return type specifies what type of value is returned to the method caller.
+If a method alters the state of the program and does not
+necessarily require an output, is a side effect method and its return type is  
+\lstinline!void!.
+\subsubsection{Identifiers}
+The identifier is the name of the method, which can be any valid C\# identifier.
+By convention, method identifiers are camel case with an upper-case first letter.
+\subsubsection{Parameter List}
+The parameter list declares the formal parameters of the method, i.e., 
+what arguments may be passed to the method. The parameter list is 
+a comma separated list of parameters that have the following syntax
+\begin{lstlisting}[numbers=none]
+[PARAMETER_MODIFIER] TYPE PARAMETER_IDENTIFIER [= DEFAULT_VALUE]
+\end{lstlisting}
+The parameter modifier tells the compiler whether to send an argument by reference
+or by value. There are 4 modifiers to choose from
+\begin{itemize}
+    \item \lstinline!in! --- Arguments are passed by reference but cannot be modified.
+    \item \lstinline!ref! --- Arguments are passed by reference and can be modified.
+    \item \lstinline!out! --- Arguments are passed by reference but must be initialised inside the method.
+    \item \lstinline!params! --- A variable number of arguments are passed by value.
+\end{itemize}
+By default, if a modifier is not specified, the argument is generally passed by value.
+
+The parameter type specifies what type of argument is to be passed. The parameter identifier 
+gives the argument an alias within the method's scope, and 
+default values can be assigned to parameters if they are optional.
+
+Note that parameters do not need to be re-declared inside the method.
+\subsubsection{Statements}
+The statements inside a method can consist of sequences of statements
+including declarations, expressions, and structured blocks.
+As a method introduces a nested block, all variables declared in a method body
+are local to the method.
+\subsection{Invoking Methods}
+To call a method we can invoke it using the following syntax
+\begin{lstlisting}[numbers=none]
+METHOD_IDENTIFIER(ARGUMENT_LIST)
+\end{lstlisting}
+If a method is defined in another class, we must qualify the name 
+with the appropriate class:
+\begin{lstlisting}[numbers=none]
+CLASS_NAME.METHOD_IDENTIFIER(ARGUMENT_LIST)
+\end{lstlisting}
+\subsubsection{Argument List}
+The argument list can be empty or a list of comma-separated expressions, 
+corresponding to the formal parameter list in the same order encountered.
+\begin{lstlisting}[numbers=none]
+[PARAMETER_MODIFIER] EXPRESSION
+\end{lstlisting}
+If the corresponding formal parameter is \lstinline!ref! or \lstinline!out!,
+the argument must also be qualified with the corresponding modifier.
+
+If we do not want to provide arguments in order, or if certain 
+optional parameters wish to be skipped, we can do so by
+providing the name of the parameter identifier using the following syntax.
+\begin{lstlisting}[numbers=none]
+PARAMETER_IDENTIFIER: [PARAMETER_MODIFIER] EXPRESSION
+\end{lstlisting}
+This allows us to provide arguments in an arbitrary order.
+\subsubsection{Control Return}
+When control is returned to the method caller, the method
+may provide an output if its return type is non-void.
+In this event, the method call can be treated as an expression
+and it can be assigned to a variable.
+\begin{lstlisting}[numbers=none]
+RETURN_TYPE IDENTIFIER = METHOD_IDENTIFIER(ARGUMENT_LIST)
+\end{lstlisting}
+Here the identifier being assigned the output must have the same
+type as the return type of the method.
+\subsection{Argument Types}
+While we can use parameter modifiers to force value type variables to be 
+sent by reference, certain structure types are implicitly passed by reference.
+
+Objects such as arrays are a pointer to a location in memory so that
+instead of passing a copy of that array into the method, 
+the address of its location is passed. 
+
+This allows the array elements to be modified from within 
+the method.
 \end{document}
