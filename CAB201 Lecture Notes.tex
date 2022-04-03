@@ -184,7 +184,7 @@ values of any type can be determined using \lstinline!TYPE.MinValue! and \linebr
 \end{table}
 \subsection{Type Conversion}
 By default, C\# automatically assigns the \lstinline!int!, \lstinline!uint!,
-\lstinline!long!, or \lstinline!ulong! type to any integer depending the size and sign
+\lstinline!long!, or \lstinline!ulong! type to any integer \linebreak depending the size and sign
 of the provided number. Any floating-point number is instantiated as a \lstinline!double!.
 \begingroup
 \let\thelstnumber\relax
@@ -638,6 +638,7 @@ Here \lstinline!i! is accessed as an enclosing locally scoped variable.
 \emph{This behaviour is akin to blocks defined in selection and iteration structures.}
 \subsubsection{Nested Blocks}
 Here is another example that utilises nested blocks and demonstrates access.
+
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -1201,8 +1202,7 @@ add and remove elements during execution.
 List<TYPE> IDENTIFIER = new List<TYPE>();
 List<TYPE> IDENTIFIER = new List<TYPE>{ elements };
 \end{lstlisting}
-Initially the first technique creates a list with 0 elements, 
-also known as its \textit{count}.
+The first syntax creates a list with 0 elements.
 We can add to this list using the \lstinline!Add()! method, and
 remove from it using the \lstinline!Remove()! method.
 \begingroup
@@ -1278,7 +1278,7 @@ When dealing with complexity, we must guarantee:
         \item Programs must complete their work in a timely manner
         \item Programs should utilise efficient algorithms
         \item Programs should avoid unnecessary loops and convoluted logic, 
-        i.e., using existing standard libraries rather than writing our own code
+        i.e., using existing \linebreak standard libraries rather than writing our own code
     \end{itemize}
 \end{itemize}
 We can use methods to address this complexity be decomposing large tasks into smaller tasks.

@@ -4,6 +4,10 @@
 
 ### Semester 1, 2022
 
+---
+
+## Document Downloads
+
 [Lecture notes PDF](CAB201%20Lecture%20Notes.pdf)
 
 ---
