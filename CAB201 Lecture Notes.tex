@@ -82,35 +82,33 @@ Programming involves:
     \item Testing
 \end{enumerate}
 \subsection{Analysis}
+Identify
 \begin{itemize}
-    \item What is the problem?
-    \item What data is involved --- input, output?
-    \item What is the relationship between input and output?
-    \item What other constraints?
+    \item the problem
+    \item data, input, and output
+    \item relationships between inputs and outputs
+    \item constraints
 \end{itemize}
 \subsection{Design}
 \begin{itemize}
-    \item Specify modules that need to be created to implement the solution.
-    \item Module --- group of closely related functions and data they need to do their job
-    \item Which parts of the problem are closely related? They probably belong together in a module.
-    \item How do modules fit together and communicate?
-    \item How can I test each of these modules to be sure they behave as desired?
-    \item How can I test the complete system to be sure it behaves as desired?
+    \item Specify modules required to implement the solution
+    \item Determine how modules will integrate with the system and other modules
+    \item Create tests for individual modules
+    \item Create tests for the complete system
 \end{itemize}
 \subsection{Implementation}
 \begin{itemize}
-    \item Create working software to ``do'' each part of the design
-    \item Select suitable algorithms and data structures to do each required item of functionality
+    \item Select suitable algorithms and data structures for design
     \item Write code to implement the algorithms and data structures
 \end{itemize}
 \subsection{Testing}
 \begin{itemize}
-    \item Before we write any code we should have a very clear idea how the program can be validated; usually that is done by testing
+    \item Before writing code, create a testing environment to validate the program
 \end{itemize}
 \section{Types and Expressions}
 \subsection{Expressions}
 \begin{definition}[Expressions]
-    An expression is a combination of values, variables and operators.
+    An expression is a combination of values, variables, and operators.
     In interactive mode, an interpreter evaluates expressions and displays the result.
     However, in a script, we must first compile the program to an executable in order
     to perform any tasks.
@@ -129,40 +127,40 @@ Programming involves:
     \begin{lstlisting}[numbers=none]
 TYPE IDENTIFIER;
 TYPE IDENTIFIER = EXPRESSION;\end{lstlisting}
-    In the first instance, we declare the type of the variable without initialising it.
-    In the second case we declare and initialise the variable.
+    In the first instance, we declare the type of the variable without initialisation.
+    In the second instance, we declare and initialise the variable.
 \end{definition}
 \begin{definition}[Literal]
     The term \textit{literal} refers to the literal representation of a value.
-    For example, when disambiguating between the variable \lstinline!dog!
-    and the string \lstinline!"dog"! we would say the \emph{``variable dog''} % chktex 18
+    For example, when disambiguating between the variable \lstinline{dog}
+    and the string \lstinline{"dog"} we would say the \emph{``variable dog''} % chktex 18
     vs.\ the \emph{``string literal dog''}.
 \end{definition}
 C\# identifiers must take the following into account
 \begin{itemize}
-    \item Identifiers can contain letters, digits and the underscore character (\lstinline!_!)
+    \item Identifiers can contain letters, digits and the underscore character (\lstinline{_})
     \item Identifiers must begin with a letter
     \item Identifiers cannot contain whitespaces
-    \item Identifiers are case sensitive (``\lstinline!Foo!'' and ``\lstinline!foo!'' are different variables) % chktex 38
+    \item Identifiers are case sensitive (``\lstinline{Foo}'' and ``\lstinline{foo}'' are different variables) % chktex 38
     \item Reserved words such as C\# keywords cannot be used as identifiers
 \end{itemize}
 \subsection{Types}
 There are 9 integer and 3 floating-point types in C\#, each with a different size and range. The minimum and maximum
-values of any type can be determined using \lstinline!TYPE.MinValue! and \linebreak \lstinline!TYPE.MaxValue!.
+values of any type can be determined using \lstinline{TYPE.MinValue} and \linebreak \lstinline{TYPE.MaxValue}.
 \begin{table}[H]
     \centering
     \begin{tabular}{c c c}
         \toprule
-        \textbf{C\# type}  & \textbf{Size} & \textbf{Range}                \\
+        \textbf{C\# type} & \textbf{Size} & \textbf{Range}                 \\
         \midrule
-        \lstinline!sbyte!  & 8 bit         & \(-2^7\) to \(2^7 - 1\)       \\
-        \lstinline!byte!   & 8 bit         & \(0\) to \(2^8 - 1\)          \\
-        \lstinline!short!  & 16 bit        & \(-2^{15}\) to \(2^{15} - 1\) \\
-        \lstinline!ushort! & 16 bit        & \(0\) to \(2^{16} - 1\)       \\
-        \lstinline!int!    & 32 bit        & \(-2^{31}\) to \(2^{31} - 1\) \\
-        \lstinline!uint!   & 32 bit        & \(0\) to \(2^{32} - 1\)       \\
-        \lstinline!long!   & 64 bit        & \(-2^{63}\) to \(2^{63} - 1\) \\
-        \lstinline!ulong!  & 64 bit        & \(0\) to \(2^{64} - 1\)       \\
+        \lstinline!sbyte!  & 8-bit         & \(-2^7\) to \(2^7 - 1\)        \\
+        \lstinline!byte!   & 8-bit         & \(0\) to \(2^8 - 1\)           \\
+        \lstinline!short!  & 16-bit        & \(-2^{15}\) to \(2^{15} - 1\) \\
+        \lstinline!ushort! & 16-bit        & \(0\) to \(2^{16} - 1\)       \\
+        \lstinline!int!    & 32-bit        & \(-2^{31}\) to \(2^{31} - 1\) \\
+        \lstinline!uint!   & 32-bit        & \(0\) to \(2^{32} - 1\)       \\
+        \lstinline!long!   & 64-bit        & \(-2^{63}\) to \(2^{63} - 1\) \\
+        \lstinline!ulong!  & 64-bit        & \(0\) to \(2^{64} - 1\)       \\
         \bottomrule
     \end{tabular}
     \caption{Integer types in C\#.}
@@ -172,20 +170,20 @@ values of any type can be determined using \lstinline!TYPE.MinValue! and \linebr
     \centering
     \begin{tabular}{c c c c}
         \toprule
-        \textbf{C\# type}   & \textbf{Size} & \textbf{Range}                                              & \textbf{Precision}   \\
+        \textbf{C\# type}                                                                                 & \textbf{Size}        & \textbf{Range} & \textbf{Precision} \\
         \midrule
-        \lstinline!float!   & 32 bit        & \(\pm 1.5 \times 10^{-45}\) to \(\pm 3.4 \times 10^{38}\)   & \sim 6 to 9 digits   \\
-        \lstinline!double!  & 64 bit        & \(\pm 5.0 \times 10^{-324}\) to \(\pm 1.7 \times 10^{308}\) & \sim 15 to 17 digits \\
-        \lstinline!decimal! & 128 bit       & \(\pm 1.0 \times 10^{-28}\) to \(7.9228 \times 10^{28}\)    & \sim 28 to 29 digits \\
+        \lstinline!float!   & 32-bit        & \(\pm 1.5 \times 10^{-45}\) to \(\pm 3.4 \times 10^{38}\)   & \sim 6 to 9 digits                                         \\
+        \lstinline!double!  & 64-bit        & \(\pm 5.0 \times 10^{-324}\) to \(\pm 1.7 \times 10^{308}\) & \sim 15 to 17 digits                                       \\
+        \lstinline!decimal! & 128-bit       & \(\pm 1.0 \times 10^{-28}\) to \(7.9228 \times 10^{28}\)    & \sim 28 to 29 digits                                       \\
         \bottomrule
     \end{tabular}
     \caption{Floating-point types in C\#.}
     % \label{}
 \end{table}
 \subsection{Type Conversion}
-By default, C\# automatically assigns the \lstinline!int!, \lstinline!uint!,
-\lstinline!long!, or \lstinline!ulong! type to any integer \linebreak depending the size and sign
-of the provided number. Any floating-point number is instantiated as a \lstinline!double!.
+By default, C\# automatically assigns the \lstinline{int}, \lstinline{uint},
+\lstinline{long}, or \lstinline{ulong} type to any integer \linebreak depending the size and sign
+of the provided number. Any floating-point number is instantiated as a \lstinline{double}.
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -208,7 +206,7 @@ To override this behaviour we can add a suffix to the number.
     \centering
     \begin{tabular}{c c}
         \toprule
-        \textbf{Type}       & \textbf{Suffix}                                \\
+        \textbf{Type} & \textbf{Suffix}                                      \\
         \midrule
         \lstinline!uint!    & \lstinline!u!                                  \\
         \lstinline!long!    & \lstinline!l!                                  \\
@@ -222,22 +220,24 @@ To override this behaviour we can add a suffix to the number.
     \caption{Type suffixes for numeric types.}
     % \label{}
 \end{table}
-If a literal is prefixed with \lstinline!u!, its type is the first
+If a literal is prefixed with \lstinline{u}, its type is the first
 of the following types in which its value can be represented:
-\lstinline!uint!, \lstinline!ulong!.
+\lstinline{uint}, \lstinline{ulong}.
 
-Similarly, if a literal is prefixed with \lstinline!l!, its type is the first
+Similarly, if a literal is prefixed with \lstinline{l}, its type is the first
 of the following types in which its value can be represented:
-\lstinline!long!, \lstinline!ulong!.
+\lstinline{long}, \lstinline{ulong}.
 
 If the value of an integer is within the range of the destination type,
 the value can be implicitly converted to the remaining integer types.
 \subsubsection{Implicit Conversion}
-Implicit conversions do not require any special syntax as the conversion
+Implicit conversions do not require special syntax as the conversion
 always succeeds and no data is lost.
-The following diagram illustrates implicit conversions for numeric types.
-The direction of the arrows indicate possible implicit conversions where
+
+The following diagram illustrates all possible implicit conversions for numeric types
+where the direction of the arrow indicates possible implicit conversions where
 intermediate types can be skipped.
+
 Note that all integer types can be converted to floating-point types.
 \begin{figure}[H]
     \centering
@@ -255,13 +255,13 @@ For example
 \customlinemarker{8}{\$}
 \customlinemarker{10}{\$}
 \begin{lstlisting}
-// 8 bit unsigned integer to 64 bit signed integer 
+// 8-bit unsigned integer to 64-bit signed integer 
 byte b = 32; Console.WriteLine($"{b} {b.GetType()}")
 32 System.Byte
 long l = b; Console.WriteLine($"{l} {l.GetType()}")
 32 System.Int64
 
-// 16 bit signed integer to double precision floating-point number
+// 16-bit signed integer to double precision floating-point number
 short s = 30000; Console.WriteLine($"{s} {s.GetType()}")
 30000 System.Int16
 double d = s; Console.WriteLine($"{d} {d.GetType()}")
@@ -291,7 +291,7 @@ decimal pi = 3.14159265358979323m; Console.WriteLine($"{pi} {pi.GetType()}")
 float fPi = (float) pi; Console.WriteLine($"{fPi} {fPi.GetType()}")
 3.141593 System.Single
 
-// 32 bit unsigned integer to 8 bit signed integer
+// 32-bit unsigned integer to 8-bit signed integer
 uint u = 9876; Console.WriteLine($"{u} {u.GetType()}")
 9876 System.UInt32
 byte b = (byte) u; Console.WriteLine($"{b} {b.GetType()}")
@@ -312,7 +312,7 @@ byte b = (byte) u; Console.WriteLine(Convert.ToString(b, 2).PadLeft(8, '0'))
 \end{lstlisting}
 \endgroup
 Notice that the value is determined by copying the 8 least significant bits
-from the 32 bit unsigned integer.
+from the 32-bit unsigned integer.
 \subsection{Operators}
 The following table lists the C\# operators starting with the highest precedence to the lowest.
 \begin{table}[H]
@@ -323,7 +323,7 @@ The following table lists the C\# operators starting with the highest precedence
         \midrule
         \lstinline!x.y!, \lstinline!f(x)!, \lstinline!a[i]!, \lstinline!x++!,
         \lstinline!x--!, \lstinline?x!?, \lstinline!x->y! and other keywords                                         & Primary                           \\
-        \lstinline!+x!, \lstinline!-x!, \lstinline+!x+, \lstinline!~x!,
+        \lstinline!+x!, \lstinline!-x!, \lstinline?!x?, \lstinline!~x!,
         \lstinline!++x!, \lstinline!--x!, \lstinline!^x!, \lstinline!(T)x!, \lstinline!await!,
         \lstinline!&x!, \lstinline!*x!, \lstinline!true!, \lstinline!false!                                          & Unary                             \\
         \lstinline!x..y!                                                                                             & Range                             \\
@@ -367,12 +367,13 @@ In C\#, arithmetic operations behave as expected.
 3
 \end{lstlisting}
 \endgroup
+All results in the example above are of type \lstinline{System.Int32}.
+
 Binary operators always convert the resulting data type to the data type of the
 argument with the largest size in memory
 (with a few exceptions when converting between floating-point types).
-Each result in the above examples have the type \lstinline!System.Int32!.
 
-Hence division between two 32 bit integers truncates any floating-point precision.
+Hence division between two 32-bit integers truncates any floating-point precision.
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -390,14 +391,13 @@ Hence division between two 32 bit integers truncates any floating-point precisio
 10.25
 \end{lstlisting}
 \endgroup
-Here the final three results are converted to the type \lstinline!System.Double!
-using the reasoning given above.
+Here only the latter three expressions are converted to \lstinline{System.Double}.
 \subsection{Characters}
 A character type represents a \textbf{single} Unicode UTF-16 character.
-Character objects can be implicitly converted to 16 bit unsigned integers and
-support the comparison, equality, increment and \linebreak decrement operators.
+Character objects can be implicitly converted to 16-bit unsigned integers and
+support the comparison, equality, increment and decrement operators.
 
-A character is initialised using single quotation marks (\lstinline!'!). % chktex 38
+A character is initialised using single quotation marks (\lstinline{'}). % chktex 38
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -419,8 +419,8 @@ true
 \end{lstlisting}
 \endgroup
 \subsection{Strings}
-A string is a sequential read-only collection of character objects.
-A string is initialised using double quotation marks (\lstinline!"!). % chktex 18
+A string is a sequential read-only collection of character objects that
+is initialised using double quotation marks (\lstinline{"}). % chktex 18
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -433,7 +433,7 @@ s.GetType()
 \end{lstlisting}
 \endgroup
 \subsubsection{String Indexing}
-The characters in a string can be accessed by position (starting at 0).
+The characters in a string can be accessed by position using indexing (starting at 0).
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -475,7 +475,7 @@ string s = "This is a quotation mark \".\nThis line appears on a new line."; s
 \end{lstlisting}
 \endgroup
 Note that the string is evaluated as a string literal. To view this string verbatim, we must use
-\lstinline!Console.WriteLine!.
+\lstinline{Console.WriteLine}.
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -545,7 +545,7 @@ int a = 25;
 "The temperature is 25 degrees."
 \end{lstlisting}
 \endgroup
-As the \lstinline!+! operator is evaluated from left to right, the following string concatenation
+As the \lstinline{+} operator is evaluated from left to right, the following string concatenation
 will not evaluate the sum of 1, 2, and 3.
 \begingroup
 \let\thelstnumber\relax
@@ -555,7 +555,7 @@ will not evaluate the sum of 1, 2, and 3.
 "sum = 123"
 \end{lstlisting}
 \endgroup
-The \lstinline!ToString()! method can be accessed from all numeric types, with a
+The \lstinline{ToString()} method can be accessed from all numeric types, with a
 format specifier which indicates the number of precision to display.
 \begingroup
 \let\thelstnumber\relax
@@ -595,8 +595,8 @@ $"Pi with left padding {pi, 10:F6}"
 \endgroup
 For more information see: \href{https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings}{\textit{Custom numeric format strings}}.
 \subsubsection{String to Numeric Conversion}
-We can convert a string to a number by calling the \lstinline!Parse! method found on numeric types,
-or by using methods in the \lstinline!System.Convert! class.
+We can convert a string to a number by calling the \lstinline{Parse} method found on numeric types,
+or by using methods in the \lstinline{System.Convert} class.
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -634,7 +634,7 @@ Console.WriteLine(i);
 10
 \end{lstlisting}
 \endgroup
-Here \lstinline!i! is accessed as an enclosing locally scoped variable.
+Here \lstinline{i} is accessed as an enclosing locally scoped variable.
 \emph{This behaviour is akin to blocks defined in selection and iteration structures.}
 \subsubsection{Nested Blocks}
 Here is another example that utilises nested blocks and demonstrates access.
@@ -673,9 +673,9 @@ Console.WriteLine(i);
 (1,19): error CS0103: The name 'i' does not exist in the current context
 \end{lstlisting}
 \endgroup
-In this example we see that the variable \lstinline!i! is local to block 1 and therefore accessible to block 2.
+In this example, we see that the variable \lstinline{i} is local to block 1 and therefore accessible to block 2.
 
-However, the converse is not true. \lstinline!i! cannot be accessed by its enclosing scope
+However, the converse is not true. \lstinline{i} cannot be accessed by its enclosing scope
 as local variables are destroyed when a block ends.
 
 We also cannot declare a variable in a block that shares its name
@@ -713,13 +713,13 @@ if (CONDITION)
     STATEMENTS
 }
 \end{lstlisting}
-In both cases, \lstinline!CONDITION! is an expression that returns a Boolean value % chktex 13
-when evaluated. If this value is \lstinline!true!, the subsequent statement(s) will
-be executed. Conversely, if the expression yields \lstinline!false!, the subsequent
-statement(s) will be ignored and control passes to the next statement after the \lstinline!if!
+In both cases, \lstinline{CONDITION} is an expression that returns a Boolean value % chktex 13
+when evaluated. If this value is \lstinline{true}, the subsequent statement(s) will
+be executed. Conversely, if the expression yields \lstinline{false}, the subsequent
+statement(s) will be ignored and control passes to the next statement after the \lstinline{if}
 statement.
 \subsubsection{If-else Statements}
-We can add an alternative statement if \lstinline!CONDITION! is \lstinline!false! using an \lstinline{else} % chktex 13
+We can add an alternative statement if \lstinline{CONDITION} is \lstinline{false} using an \lstinline{else} % chktex 13
 clause.
 \begin{lstlisting}[numbers=none]
 // Single statement
@@ -733,11 +733,11 @@ if (CONDITION)
     STATEMENTS_2;
 }
 \end{lstlisting}
-This structure differs to the previous example slightly as either \lstinline!STATEMENT_1! or \lstinline!STATEMENT_2!
-will be executed. Again the decision depends on the Boolean value returned by the condition.
+This structure differs from the previous example as either \lstinline{STATEMENT_1} or \lstinline{STATEMENT_2}
+can be executed. This decision depends on the Boolean value returned by the condition.
 \subsubsection{Nested if Statements}
-The blocks in an \lstinline!if! statement can also allow us to nest any number of
-\lstinline!if! statements to create a more complex flow of control.
+The blocks in an \lstinline{if} statement also allow us to nest any number of
+\lstinline{if} statements to create a complex flow of control.
 \begin{lstlisting}[numbers=none]
 if (CONDITION_1) if (CONDITION_2) STATEMENT_2 else STATEMENT_1;
 // Written using braces
@@ -752,11 +752,11 @@ if (CONDITION_1)
     STATEMENT_1
 }
 \end{lstlisting}
-Generally nested \lstinline!if! statements are difficult to read and should be avoided if possible.
+Generally, nested \lstinline{if} statements are difficult to read and should be avoided if possible.
 \subsubsection{Cascading if Statements}
-An alternative to nested \lstinline!if! statements are cascading \lstinline!if! statements.
-These statements allow us to provide controlled alternatives to an \lstinline!if-else! statement if the
-first condition returns \lstinline!false!.
+An alternative to nested \lstinline{if} statements are cascading \lstinline{if} statements.
+These statements allow us to provide controlled alternatives to an \lstinline{if-else} statement if the
+first condition returns \lstinline{false}.
 \begin{lstlisting}[numbers=none]
 if (CONDITION_1) 
 {
@@ -774,15 +774,15 @@ else {
 }
 \end{lstlisting}
 In this structure, any statement \(1<i<n\) will be executed if
-and only if all conditions before \(i\) yield \lstinline!false! and
-\lstinline!CONDITION_I! yields \lstinline!true!. % chktex 13
+and only if all conditions before \(i\) yield \lstinline{false} and
+\lstinline{CONDITION_I} yields \lstinline{true}. % chktex 13
 
-The final statement \(n\) after the \lstinline!else! clause is executed
-if all preceding conditions return \lstinline!false!.
+The final statement \(n\) after the \lstinline{else} clause is executed
+if all preceding conditions return \lstinline{false}.
 
-Note that the \lstinline!else! clause may be omitted.
+Note that the \lstinline{else} clause may be omitted.
 \subsubsection{Switch Statements}
-A \lstinline!switch! statement is an alternative to cascading \lstinline!if!
+A \lstinline{switch} statement is an alternative to cascading \lstinline{if}
 statements and are another kind of multi-way branch.
 \begin{lstlisting}[numbers=none]
 switch (EXPRESSION) 
@@ -799,16 +799,16 @@ switch (EXPRESSION)
         break;
 }
 \end{lstlisting}
-In this structure, \lstinline!EXPRESSION! is any numeric or string expression, % chktex 13
-and \lstinline!CONSTANT! is a literal of matching type. % chktex 13
-This means that \lstinline!STATEMENTS_I! is executed if \lstinline!EXPRESSION == CONSTANT_I!. % chktex 13
+In this structure, \lstinline{EXPRESSION} is any numeric or string expression, % chktex 13
+and \lstinline{CONSTANT} is a literal of matching type. % chktex 13
+This means that \lstinline{STATEMENTS_I} is executed if \lstinline{EXPRESSION == CONSTANT_I}. % chktex 13
 
-The default branch behaves similarly to an \lstinline!else! clause and is executed if all
-none of the cases are satisfied.
+The default branch behaves similarly to an \lstinline{else} clause and it is executed if
+none of the preceding cases are satisfied.
 
 Each branch must end with one of the following keywords depending on where the
-switch statement is defined: \lstinline!break!, \lstinline!return!,
-\lstinline!goto!, \lstinline!throw!, or \lstinline!continue!.
+switch statement is defined: \lstinline{break}, \lstinline{return},
+\lstinline{goto}, \lstinline{throw}, or \lstinline{continue}.
 \subsection{Iteration}
 Iterative constructs allow us to repeat statements zero, one, or many times,
 without making multiple copies of the statement.
@@ -821,7 +821,7 @@ while (CONDITION)
 \end{lstlisting}
 Fundamental semantics:
 \begin{enumerate}
-    \item Execute \lstinline!STATEMENTS! if \lstinline!CONDITION == true!. % chktex 13
+    \item Execute \lstinline{STATEMENTS} if \lstinline{CONDITION == true}. % chktex 13
     \item Goto Step 1.
 \end{enumerate}
 \subsubsection{Do-while Statements}
@@ -834,8 +834,8 @@ while (CONDITION)
 \end{lstlisting}
 Fundamental semantics:
 \begin{enumerate}
-    \item Execute \lstinline!STATEMENTS!. % chktex 13
-    \item Goto Step 1 if \lstinline!CONDITION == true!.
+    \item Execute \lstinline{STATEMENTS}. % chktex 13
+    \item Goto Step 1 if \lstinline{CONDITION == true}.
 \end{enumerate}
 \subsubsection{For Statements}
 \begin{lstlisting}[numbers=none]
@@ -846,50 +846,50 @@ for (INIT; CONDITION; UPDATE)
 \end{lstlisting}
 Fundamental semantics:
 \begin{enumerate}
-    \item Execute \lstinline!INIT!. % chktex 13
-    \item Execute \lstinline!STATEMENTS! if \lstinline!CONDITION == true!. % chktex 13
-    \item Execute \lstinline!UPDATE!.
+    \item Execute \lstinline{INIT}. % chktex 13
+    \item Execute \lstinline{STATEMENTS} if \lstinline{CONDITION == true}. % chktex 13
+    \item Execute \lstinline{UPDATE}.
     \item Goto Step 2.
 \end{enumerate}
-Generally a \lstinline!while! statement is used when the number of iterations is unknown and
-\lstinline!for! statements are used otherwise. Both of these structures can execute
+Generally, a \lstinline{while} statement is used when the number of iterations is unknown and
+\lstinline{for} statements are used otherwise. Both of these structures can execute
 statements either zero, one or many times.
 
-While uncommon, \lstinline!do-while! statements are used if we want to execute
+While uncommon, \lstinline{do-while} statements are used if we want to execute
 the loop body at least once.
 \subsection{Jump Statements}
 The following statements unconditionally transfer control:
 \begin{itemize}
-    \item \lstinline!break! terminates the closest enclosing iteration or switch statement
-    \item \lstinline!continue! starts a new iteration of the closest enclosing iteration statement
+    \item \lstinline{break} terminates the closest enclosing iteration or switch statement
+    \item \lstinline{continue} starts a new iteration of the closest enclosing iteration statement
 \end{itemize}
 Note that jump statements can be placed anywhere inside the loop body and that any succeeding
-statements or the \lstinline!UPDATE! statement (in the \lstinline!for! structure) % chktex 13
+statements or the \lstinline{UPDATE} statement (in the \lstinline{for} structure) % chktex 13
 will not be executed.
 \subsection{Booleans}
-A Boolean (\lstinline!bool!) is a type that has two values,
-\lstinline!true! and \lstinline!false!.
+A Boolean (\lstinline{bool}) is a type that has two values,
+\lstinline{true} and \lstinline{false}.
 Boolean expressions are expressions that when evaluated, yield a Boolean value.
 \subsubsection{Comparison Operators}
 Comparison operators are a common Boolean expression:
 \begin{itemize}
-    \item \lstinline!x == y!
+    \item \lstinline{x == y}
     \item \lstinline+x != y+ % chktex 26
-    \item \lstinline!x < y!
-    \item \lstinline!x > y!
-    \item \lstinline!x <= y!
-    \item \lstinline!x >= y!
+    \item \lstinline{x < y}
+    \item \lstinline{x > y}
+    \item \lstinline{x <= y}
+    \item \lstinline{x >= y}
 \end{itemize}
 \subsubsection{Logical Operators}
 Logical operators are also Boolean expressions:
 \begin{itemize}
     \item \lstinline+!a+ (not)
-    \item \lstinline!a && b! (and)
-    \item \lstinline!a || b! (or)
+    \item \lstinline{a && b} (and)
+    \item \lstinline{a || b} (or)
 \end{itemize}
 In C\#, logical operators use short-circuit evaluation, meaning that
-if the left-expression guarantees the resulting Boolean value,
-the right-expression is not evaluated.
+if the left expression guarantees the resulting Boolean value,
+the right expression is not evaluated.
 
 For example
 \begingroup
@@ -921,10 +921,10 @@ a was executed.
 False
 \end{lstlisting}
 \endgroup
-Here we see that the second function \lstinline!b()! was not executed
+Here we see that the second function \lstinline{b()} was not executed
 as the {\ttfamily AND} operator requires both expressions to be true,
-so regardless of the value of \lstinline!b()!, the result will be
-\lstinline!false!.
+so regardless of the value of \lstinline{b()}, the result will be
+\lstinline{false}.
 
 Similarly for {\ttfamily OR}:
 \begingroup
@@ -956,7 +956,7 @@ b was executed.
 True
 \end{lstlisting}
 \endgroup
-Here only one of the two expressions need to be \lstinline!true!
+Here only one of the two expressions needs to evaluate to \lstinline{true}
 for the result to be true. However, if we reversed the order of
 the expressions:
 \begingroup
@@ -989,20 +989,20 @@ b was executed.
 True
 \end{lstlisting}
 \endgroup
-we can see that since \lstinline!a()! does not guarantee
-the resulting value, we must also evaluate \lstinline!b()!.
+we can see that since \lstinline{a()} does not guarantee
+the resulting Boolean value, we must also evaluate \lstinline{b()}.
 
 The {\ttfamily NOT} operator simply negates the value of the Boolean expression.
 \section{Collections}
 \subsection{Arrays}
 If we want to effectively manage groups of related objects, we can utilise arrays and collections.
-When defining an array of type \lstinline!T!, we must append the type with square brackets \lstinline![ ]!.
+When defining an array of type \lstinline{T}, we must append the type with square brackets \lstinline{[ ]}.
 \begin{lstlisting}[numbers=none]
 TYPE[] IDENTIFIER;
 TYPE[] IDENTIFIER = EXPRESSION;
 \end{lstlisting}
 As a result, each item must have the same data type. To specify the array size, we can initialise
-the variable with the \lstinline!new! expression.
+the variable with the \lstinline{new} expression.
 \begin{lstlisting}[numbers=none]
 TYPE[] IDENTIFIER = new TYPE[SIZE];
 // Alternatively
@@ -1012,8 +1012,8 @@ IDENTIFIER = new TYPE[SIZE];
 \subsection{Access}
 To access the array, we can use the identifier for that array. Each object within
 an array can be distinguished by its subscript (or index). To access the object within
-an array, we place the index inside square brackets \lstinline![i]! and append this to the 
-identifier. 
+an array, we place the index inside square brackets \lstinline{[i]} and append this to the
+identifier.
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -1043,21 +1043,21 @@ TYPE[] IDENTIFIER = new TYPE[SIZE] { element1, element2, ..., elementN };
 TYPE[] IDENTIFIER = new TYPE[] { element1, element2, ..., elementN };
 TYPE[] IDENTIFIER = { element1, element2, ..., elementN };
 \end{lstlisting}
-Note that when using the first method, the number of elements \(N\) must be equal to the specified \lstinline!SIZE!. % chktex 13
+Note that when using the first method, the number of elements \(N\) must be equal to the specified \lstinline{SIZE}. % chktex 13
 \subsection{Array Representation in Memory}
 To be able to access an array by index, the elements must be stored contiguously in memory, that is,
-stored one after the other. This means that each element \(i\) is \(i \times S_T\) bytes from \(i = 0\), 
+stored one after the other. This means that each element \(i\) is \(i \times S_T\) bytes from \(i = 0\),
 where \(S_T\) is the size of the array type.
 \subsection{Default Values}
 If an array is declared without initialisation, then each element takes one of the following
 default values based on the type:
 \begin{description}
-    \item[Numeric] \lstinline!0!
-    \item[Character] \lstinline!\u0000! or \lstinline!null!
-    \item[Boolean] \lstinline!false!
+    \item[Numeric] \lstinline{0}
+    \item[Character] \lstinline{\u0000} or \lstinline{null}
+    \item[Boolean] \lstinline{false}
 \end{description}
 \subsection{ForEach Loops}
-The \lstinline!foreach! statement provides a simple, clean way to iterate through the elements of an array,
+The \lstinline{foreach} statement provides a simple, clean way to iterate through the elements of an array,
 without using the element index.
 \begingroup
 \let\thelstnumber\relax
@@ -1077,12 +1077,12 @@ foreach (int i in array)
 3    
 \end{lstlisting}
 \endgroup
-Note that the values \lstinline!i! are readonly, and hence this structure 
+Note that the values \lstinline{i} are read-only, and hence this structure
 does not modify the elements of an array.
 
-If we wanted to modify these values, can we use either a \lstinline!while! or
-\lstinline!for! loop. The following example increments each value of an array 
-using a \lstinline!for! loop.
+If we wanted to modify these values, can we use either a \lstinline{while} or
+\lstinline{for} loop. The following example increments each value of an array
+using a \lstinline{for} loop.
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -1103,11 +1103,11 @@ int[3] { 2, 3, 4 }
 \endgroup
 \subsection{Compound Arrays}
 When we have two or more arrays of values that share
-the same indices, we can implement compound arrays to 
+the same indices, we can implement compound arrays to
 create a correspondence between those arrays.
 \subsubsection{Parallel Arrays}
 Parallel arrays are useful when the various arrays
-hold different types of data. In this method, multiple 
+hold different types of data. In this method, multiple
 single dimensional arrays are created.
 \begingroup
 \let\thelstnumber\relax
@@ -1130,11 +1130,11 @@ Item: Pants     Price: $80.00
 \end{lstlisting}
 \endgroup
 Although there are benefits to using this approach, larger data
-sets with multiple columns may be better represented in a 
+sets with multiple columns may be better represented in a
 multidimensional array.
 \subsubsection{Multidimensional Arrays}
 Multidimensional arrays behave similarly to regular arrays
-but use different declaration and access syntax. 
+but use different declaration and access syntax.
 \begin{lstlisting}[numbers=none]
 // 2D arrays
 TYPE[,] IDENTIFIER = new TYPE[SIZEX, SIZEY];
@@ -1142,7 +1142,7 @@ TYPE[,] IDENTIFIER = new TYPE[SIZEX, SIZEY];
 TYPE[,,...] IDENTIFIER = new TYPE[SIZEX, SIZEY, ...];
 \end{lstlisting}
 When declaring the type, it is important to specify the correct
-number of commas (\lstinline!,!). The number of commas is equal to 
+number of commas (\lstinline{,}). The number of commas is equal to
 the number of dimensions minus 1.
 
 When instantiating the array on the right hand side of the assignment,
@@ -1161,9 +1161,9 @@ int[2, 2] { { 2, 3 }, { 1, 5 } }
 \end{lstlisting}
 \endgroup
 Multidimensional arrays are commonly separated at each dimension
-so that they are easier to read. 
+so that they are easier to read.
 
-When accessing the value from a multidimensional array, 
+When accessing the value from a multidimensional array,
 we must separate each index using a comma.
 \begingroup
 \let\thelstnumber\relax
@@ -1193,18 +1193,18 @@ The value at (1, 0) is 1
 The value at (1, 1) is 5
 \end{lstlisting}
 \endgroup
-Here the \lstinline!GetLength()! methods are used to find the length 
+Here the \lstinline{GetLength()} methods are used to find the length
 of both the first and second dimensions.
 \subsection{Lists}
-Lists allow us to have variable size arrays, meaning we can 
+Lists allow us to have variable size arrays, meaning we can
 add and remove elements during execution.
 \begin{lstlisting}[numbers=none]
 List<TYPE> IDENTIFIER = new List<TYPE>();
 List<TYPE> IDENTIFIER = new List<TYPE>{ elements };
 \end{lstlisting}
 The first syntax creates a list with 0 elements.
-We can add to this list using the \lstinline!Add()! method, and
-remove from it using the \lstinline!Remove()! method.
+We can add to this list using the \lstinline{Add()} method, and
+remove from it using the \lstinline{Remove()} method.
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -1230,7 +1230,7 @@ list
 List<int>(6) { 3, 1, 4, 5, 1, 5 }
 \end{lstlisting}
 \endgroup
-By using the \lstinline!Remove()! method, we can remove the 
+By using the \lstinline{Remove()} method, we can remove the
 accidental 5 that appears at index 3.
 \begingroup
 \let\thelstnumber\relax
@@ -1249,39 +1249,39 @@ list
 List<int>(5) { 3, 1, 4, 1, 5 }
 \end{lstlisting}
 \endgroup
-From the first \lstinline!Remove()!, 
-only the first \lstinline!5! was removed from the list.
-The method also returned a Boolean value indicating that the value 
-\lstinline!5! existed in the list. When we try to remove the 
-number \lstinline!7!, the method returns \lstinline!false!,
-as the list does not contain a \lstinline!7!, and hence the 
+From the first \lstinline{Remove()},
+only the first \lstinline{5} was removed from the list.
+The method also returned a Boolean value indicating that the value
+\lstinline{5} existed in the list. When we try to remove the
+number \lstinline{7}, the method returns \lstinline{false},
+as the list does not contain a \lstinline{7}, and hence the
 list remains unchanged.
 \section{Methods}
 \subsection{Programming Complexity}
 Programming logic is usually complex as it involves modelling rules
-and constraints from the real world. 
+and constraints from the real world.
 
 When dealing with complexity, we must guarantee:
 \begin{itemize}
     \item Correctness
-    \begin{itemize}
-        \item Software must be trustworthy
-        \item Software must meet requirements
-        \item Valid inputs must always produce the required outcomes
-    \end{itemize}
+          \begin{itemize}
+              \item The software is trustworthy
+              \item The software meets requirements
+              \item Valid inputs always produce the required outcomes
+          \end{itemize}
     \item Robustness
-    \begin{itemize}
-        \item Programs should not crash
-    \end{itemize}
+          \begin{itemize}
+              \item The program does not crash
+          \end{itemize}
     \item Efficiency
-    \begin{itemize}
-        \item Programs must complete their work in a timely manner
-        \item Programs should utilise efficient algorithms
-        \item Programs should avoid unnecessary loops and convoluted logic, 
-        i.e., using existing \linebreak standard libraries rather than writing our own code
-    \end{itemize}
+          \begin{itemize}
+              \item The program completes its work quickly
+              \item The program utilises efficient algorithms
+              \item The program does not introduce unnecessary loops or convoluted logic
+              \item The program uses existing standard libraries
+          \end{itemize}
 \end{itemize}
-We can use methods to address this complexity be decomposing large tasks into smaller tasks.
+We can use methods to address this complexity by decomposing large tasks into smaller tasks.
 \begin{itemize}
     \item Each sub-task handles part of the larger problem
     \item Each sub-task can be implemented separately as a method or group of methods
@@ -1306,30 +1306,30 @@ Access modifiers will be discussed in a later section.
 \subsubsection{Return Types}
 A return type specifies what type of value is returned to the method caller.
 If a method alters the state of the program and does not
-necessarily require an output, is a side effect method and its return type is  
-\lstinline!void!.
+necessarily require an output, is a side effect method and its return type is
+\lstinline{void}.
 \subsubsection{Identifiers}
 The identifier is the name of the method, which can be any valid C\# identifier.
-By convention, method identifiers are camel case with an upper-case first letter.
+By convention, method identifiers are camel-case with an upper-case first letter.
 \subsubsection{Parameter List}
-The parameter list declares the formal parameters of the method, i.e., 
-what arguments may be passed to the method. The parameter list is 
-a comma separated list of parameters that have the following syntax
+The parameter list declares the formal parameters of the method, i.e.,
+what arguments may be passed to the method. The parameter list is
+a comma-separated list of parameters that have the following syntax
 \begin{lstlisting}[numbers=none]
 [PARAMETER_MODIFIER] TYPE PARAMETER_IDENTIFIER [= DEFAULT_VALUE]
 \end{lstlisting}
 The parameter modifier tells the compiler whether to send an argument by reference
 or by value. There are 4 modifiers to choose from
 \begin{itemize}
-    \item \lstinline!in! --- Arguments are passed by reference but cannot be modified.
-    \item \lstinline!ref! --- Arguments are passed by reference and can be modified.
-    \item \lstinline!out! --- Arguments are passed by reference but must be initialised inside the method.
-    \item \lstinline!params! --- A variable number of arguments are passed by value.
+    \item \lstinline{in} --- Arguments are passed by reference but cannot be modified.
+    \item \lstinline{ref} --- Arguments are passed by reference and can be modified.
+    \item \lstinline{out} --- Arguments are passed by reference but must be initialised inside the method.
+    \item \lstinline{params} --- A variable number of arguments are passed by value.
 \end{itemize}
 By default, if a modifier is not specified, the argument is generally passed by value.
 
-The parameter type specifies what type of argument is to be passed. The parameter identifier 
-gives the argument an alias within the method's scope, and 
+The parameter type specifies what type of argument is to be passed. The parameter identifier
+gives the argument an alias within the method's scope, and
 default values can be assigned to parameters if they are optional.
 
 Note that parameters do not need to be re-declared inside the method.
@@ -1343,21 +1343,21 @@ To call a method we can invoke it using the following syntax
 \begin{lstlisting}[numbers=none]
 METHOD_IDENTIFIER(ARGUMENT_LIST)
 \end{lstlisting}
-If a method is defined in another class, we must qualify the name 
+If a method is defined in another class, we must qualify the name
 with the appropriate class:
 \begin{lstlisting}[numbers=none]
 CLASS_NAME.METHOD_IDENTIFIER(ARGUMENT_LIST)
 \end{lstlisting}
 \subsubsection{Argument List}
-The argument list can be empty or a list of comma-separated expressions, 
+The argument list can be empty or a list of comma-separated expressions,
 corresponding to the formal parameter list in the same order encountered.
 \begin{lstlisting}[numbers=none]
 [PARAMETER_MODIFIER] EXPRESSION
 \end{lstlisting}
-If the corresponding formal parameter is \lstinline!ref! or \lstinline!out!,
+If the corresponding formal parameter is \lstinline{ref} or \lstinline{out},
 the argument must also be qualified with the corresponding modifier.
 
-If we do not want to provide arguments in order, or if certain 
+If we do not want to provide arguments in order, or if certain
 optional parameters wish to be skipped, we can do so by
 providing the name of the parameter identifier using the following syntax.
 \begin{lstlisting}[numbers=none]
@@ -1375,13 +1375,13 @@ RETURN_TYPE IDENTIFIER = METHOD_IDENTIFIER(ARGUMENT_LIST)
 Here the identifier being assigned the output must have the same
 type as the return type of the method.
 \subsection{Argument Types}
-While we can use parameter modifiers to force value type variables to be 
+While we can use parameter modifiers to force value type variables to be
 sent by reference, certain structure types are implicitly passed by reference.
 
 Objects such as arrays are a pointer to a location in memory so that
-instead of passing a copy of that array into the method, 
-the address of its location is passed. 
+instead of passing a copy of that array into the method,
+the address of its location is passed.
 
-This allows the array elements to be modified from within 
-the method. 
+This allows the array elements to be modified from within
+the method.
 \end{document}
