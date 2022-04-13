@@ -8,7 +8,7 @@
 
 ## Downloads
 
-Lecture notes download: [Lecture notes PDF](CAB201%20Lecture%20Notes.pdf)
+Lecture notes download: [CAB201 Lecture Notes PDF](CAB201%20Lecture%20Notes.pdf)
 
 ---
 
