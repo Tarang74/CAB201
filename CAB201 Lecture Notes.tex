@@ -1,9 +1,12 @@
 %!TEX program = xelatex
 \documentclass{article}
-\usepackage{LaTeX-Submodule/template}
+\input{./LaTeX-Submodule/template.tex}
 
 % Additional packages & macros
 \usepackage{accsupp} % PDF accessibility options
+\usepackage[os=mac]{menukeys} % Format menu sequences, paths and keystrokes
+
+\usepackage{fontawesome5}
 
 %% Prevent user from selecting numbers when selecting code
 \newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
@@ -151,10 +154,10 @@ values of any type can be determined using \lstinline{TYPE.MinValue} and \linebr
     \centering
     \begin{tabular}{c c c}
         \toprule
-        \textbf{C\# type} & \textbf{Size} & \textbf{Range}                 \\
+        \textbf{C\# type}  & \textbf{Size} & \textbf{Range}                \\
         \midrule
-        \lstinline!sbyte!  & 8-bit         & \(-2^7\) to \(2^7 - 1\)        \\
-        \lstinline!byte!   & 8-bit         & \(0\) to \(2^8 - 1\)           \\
+        \lstinline!sbyte!  & 8-bit         & \(-2^7\) to \(2^7 - 1\)       \\
+        \lstinline!byte!   & 8-bit         & \(0\) to \(2^8 - 1\)          \\
         \lstinline!short!  & 16-bit        & \(-2^{15}\) to \(2^{15} - 1\) \\
         \lstinline!ushort! & 16-bit        & \(0\) to \(2^{16} - 1\)       \\
         \lstinline!int!    & 32-bit        & \(-2^{31}\) to \(2^{31} - 1\) \\
@@ -170,11 +173,11 @@ values of any type can be determined using \lstinline{TYPE.MinValue} and \linebr
     \centering
     \begin{tabular}{c c c c}
         \toprule
-        \textbf{C\# type}                                                                                 & \textbf{Size}        & \textbf{Range} & \textbf{Precision} \\
+        \textbf{C\# type}   & \textbf{Size} & \textbf{Range}                                              & \textbf{Precision}   \\
         \midrule
-        \lstinline!float!   & 32-bit        & \(\pm 1.5 \times 10^{-45}\) to \(\pm 3.4 \times 10^{38}\)   & \sim 6 to 9 digits                                         \\
-        \lstinline!double!  & 64-bit        & \(\pm 5.0 \times 10^{-324}\) to \(\pm 1.7 \times 10^{308}\) & \sim 15 to 17 digits                                       \\
-        \lstinline!decimal! & 128-bit       & \(\pm 1.0 \times 10^{-28}\) to \(7.9228 \times 10^{28}\)    & \sim 28 to 29 digits                                       \\
+        \lstinline!float!   & 32-bit        & \(\pm 1.5 \times 10^{-45}\) to \(\pm 3.4 \times 10^{38}\)   & \sim 6 to 9 digits   \\
+        \lstinline!double!  & 64-bit        & \(\pm 5.0 \times 10^{-324}\) to \(\pm 1.7 \times 10^{308}\) & \sim 15 to 17 digits \\
+        \lstinline!decimal! & 128-bit       & \(\pm 1.0 \times 10^{-28}\) to \(7.9228 \times 10^{28}\)    & \sim 28 to 29 digits \\
         \bottomrule
     \end{tabular}
     \caption{Floating-point types in C\#.}
@@ -206,7 +209,7 @@ To override this behaviour we can add a suffix to the number.
     \centering
     \begin{tabular}{c c}
         \toprule
-        \textbf{Type} & \textbf{Suffix}                                      \\
+        \textbf{Type}       & \textbf{Suffix}                                \\
         \midrule
         \lstinline!uint!    & \lstinline!u!                                  \\
         \lstinline!long!    & \lstinline!l!                                  \\
@@ -1384,19 +1387,18 @@ the address of its location is passed.
 
 This allows the array elements to be modified from within
 the method.
-\section{Streams}
-\subsection{Command Line Arguments}
+\section{Command Line Arguments}
 When writing a program, we use the \lstinline{Main}
 method to indicate the entry point of our program.
 
 This method also allows us to pass arguments that can be
 specified when the program is run. These arguments are called
 command line arguments.
-\subsubsection{Visual Studio}
+\subsection{Visual Studio}
 In Visual Studio, we can supply command line arguments
 through the \menu{{Launch profiles UI}}, which can be accessed through
 \menu{Project>Properties>Debug}.
-\subsubsection{Command Line Interfaces}
+\subsection{Command Line Interfaces}
 \emph{A command line interface processes commands using lines of text;
     ensure that all commands are entered correctly before proceeding.}
 
@@ -1404,37 +1406,36 @@ through the \menu{{Launch profiles UI}}, which can be accessed through
 If we wish to use a command line interface, such as the Windows DOS Command Prompt
 or Powershell, or the UNIX terminals provided in macOS and Linux distributions,
 we must ensure that we are working in the correct directory.
-\begin{tcolorboxlarge}[title={Windows DOS}]
-    In Windows, launching a terminal will take us to either the user directory,
-    \begin{lstlisting}[language=bash,numbers=none]
-C:\Users\username>\end{lstlisting}
-    or the system directory,
-    \begin{lstlisting}[language=bash, numbers=none]
-C:\Windows\System32>\end{lstlisting}
-    if we launch the terminal as an Administrator.
-\end{tcolorboxlarge}
-
-\begin{tcolorboxlarge}[title=UNIX]
-    \vspace*{0.3cm}
-    In UNIX operating systems, launching a terminal takes us to the home directory,
-    \begin{lstlisting}[language=bash,numbers=none]
-username@hostname ~ % \end{lstlisting}
-    Note the prompt may look different on Linux distributions, and the \lstinline{%} may be replaced by a \lstinline{$} if
-    the user is a superuser (\lstinline{sudo}).
-\end{tcolorboxlarge}
+\subsubsection{Windows DOS}
+In Windows, launching a terminal will take us to either the user directory,
+\begin{lstlisting}[language=bash,numbers=none]
+C:\Users\username>
+\end{lstlisting}
+or the system directory,
+\begin{lstlisting}[language=bash, numbers=none]
+C:\Windows\System32>
+\end{lstlisting}
+if we launch the terminal as an Administrator.
+\subsubsection{UNIX}
+In UNIX operating systems, launching a terminal takes us to the home directory,
+\begin{lstlisting}[language=bash,numbers=none]
+username@hostname ~ % 
+\end{lstlisting}
+Note the prompt may look different on Linux distributions, and the \lstinline{%} may be replaced by a \lstinline{$} if
+the user is a superuser (\lstinline{sudo}).
+\subsection{Working Directory}
 We can use the \lstinline{cd} (change directory) command to
 set the current directory to the location of our C\# project.
-\begin{tcolorboxlarge}[title={Windows DOS}]
-    \begin{lstlisting}[numbers=none]
+\subsubsection{Windows DOS}
+\begin{lstlisting}[numbers=none]
 C:\Users\username>cd C:\path\to\project
-C:\path\to\project>\end{lstlisting}
-\end{tcolorboxlarge}
-\begin{tcolorboxlarge}[title=UNIX]
-    \begin{lstlisting}[numbers=none]
+C:\path\to\project>
+\end{lstlisting}
+\subsubsection{UNIX}
+\begin{lstlisting}[numbers=none]
 username@hostname ~ % cd /path/to/project
 username@hostname project %
 \end{lstlisting}
-\end{tcolorboxlarge}
 After completing these steps, we can execute our program with command line arguments.
 \begingroup
 \let\thelstnumber\relax
@@ -1443,7 +1444,7 @@ After completing these steps, we can execute our program with command line argum
 dotnet run <args>
 \end{lstlisting}
 \endgroup
-\subsection{Arguments}
+\subsection{Accessing Command Line Arguments}
 The \lstinline{Main} method's signature:
 \begin{lstlisting}[numbers=none]
 static void Main(string[] args)
@@ -1451,9 +1452,26 @@ static void Main(string[] args)
 converts all command line arguments to strings,
 where arguments are separated by spaces. If we wish to maintain the spaces
 in a string, we can surround that argument with double quotation marks (\lstinline{"}). % chktex 18
-
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\begin{lstlisting}
+dotnet run "First argument" Second Third "Fourth argument" 
+\end{lstlisting}
+\endgroup
 The arguments can be accessed with the parameter identifier (\lstinline{args})
 using iteration.
+\begingroup
+\let\thelstnumber\relax
+\customlinemarker{1}{\$}
+\begin{lstlisting}
+foreach(string arg in args) Console.WriteLine(arg);
+First argument
+Second
+Third
+Fourth Argument
+\end{lstlisting}
+\endgroup
 \subsection{Debugging}
 During a debugging session, we can watch the variables that are currently on the stack.
 In Visual Studio we can use the \menu{Immediate Window} found through
@@ -1463,4 +1481,69 @@ To pause the program during execution, we must enter step mode by placing a brea
 anywhere in the program's control. This will pause the program before the breakpoint 
 and allow us to view and modify values currently on the stack. This debugging window
 is very similar to the C\# interactive CLI. % chktex 13
+\section{The File System}
+\subsection{Directories}
+Using the \lstinline{System.IO} class, we can view information about the files and directories in 
+the current working directory. We can do so by using the following \lstinline{using} preprocessor directive:
+\begin{lstlisting}[numbers=none]
+using System.IO;
+\end{lstlisting}
+To retrieve information about the project directory we must first fetch the environment directory.
+\begin{lstlisting}[numbers=none]
+string pwd = Environment.CurrentDirectory;
+\end{lstlisting}
+we can then use the \lstinline{DirectoryInfo} class to access metadata about a directory,
+\begin{lstlisting}[numbers=none]
+DirectoryInfo directoryInfo = new DirectoryInfo("PATH\TO\DIRECTORY");
+\end{lstlisting}
+and the \lstinline{FileInfo} class to access metadata about a file.
+\begin{lstlisting}[numbers=none]
+FileInfo fileInfo = new FileInfo("PATH\TO\FILE");
+\end{lstlisting}
+This allows us to utilise the various \href{https://docs.microsoft.com/en-us/dotnet/api/system.io.directoryinfo?view=net-6.0#methods}{DirectoryInfo \faIcon{external-link-alt}}
+and \href{https://docs.microsoft.com/en-us/dotnet/api/system.io.fileinfo?view=net-6.0#methods}{FileInfo \faIcon{external-link-alt}} methods.
+\subsection{File I/O}
+To access the contents of files, we use of the \lstinline{File} type in order to query, read, write, create, copy, or delete a
+file from a directory. 
+\subsubsection{File Existence}
+Before we use any IO methods, we must ensure that the file exists. 
+We can use the \lstinline{Exists} method to accomplish this:
+\begin{lstlisting}[numbers=none]
+File.Exists("PATH\TO\FILE")
+\end{lstlisting}
+\subsubsection{Reading from a File}
+Once we have confirmed the file exists, we can read from it using the \lstinline{StreamReader} class.
+\begin{lstlisting}[numbers=none]
+{
+    using StreamReader reader = new StreamReader("PATH\TO\FILE");
+
+    while (!reader.EndOfStream) {
+        Console.WriteLine(reader.ReadLine());
+    }
+}
+// Alternatively
+using (StreamReader reader = new StreamReader("PATH\TO\FILE"))
+{
+    while (!reader.EndOfStream)
+    {
+        Console.WriteLine(reader.ReadLine());
+    }
+}
+\end{lstlisting}
+Note the usage of the \lstinline{using} statement, this ensures the file is properly closed at the end 
+of the enclosing block.
+\subsubsection{Writing to a File}
+Similar to the previous section, we can use the \lstinline{StreamWriter} class to write to a new file.
+\begin{lstlisting}[numbers=none]
+    {
+        using StreamWriter writer = new StreamWriter("PATH\TO\FILE");
+
+        writer.WriteLine("FILE_CONTENTS");
+    }
+    // Alternatively
+    using (using StreamWriter writer = new StreamWriter("PATH\TO\FILE"))
+    {
+        writer.WriteLine("FILE_CONTENTS");
+    }
+\end{lstlisting}
 \end{document}
