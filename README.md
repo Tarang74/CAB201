@@ -25,7 +25,8 @@ This repository provides **lecture notes** for **CAB201 - Programming Principals
 3. Structured Programming
 4. Collections
 5. Methods
-6. Streams
+6. Command Line Arguments
+7. The File System
 
 ---
 
