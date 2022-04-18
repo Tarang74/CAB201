@@ -1,4 +1,4 @@
-# CAB201 - Programming Principals
+# CAB201 - Programming Principles
 
 ## Dr Alan Woodley
 
@@ -12,7 +12,7 @@ Lecture notes download: [CAB201 Lecture Notes PDF](CAB201%20Lecture%20Notes.pdf)
 
 ---
 
-This repository provides **lecture notes** for **CAB201 - Programming Principals**.
+This repository provides **lecture notes** for **CAB201 - Programming Principles**.
 
 *The contents of the lecture notes are described below.*
 
