@@ -1421,7 +1421,7 @@ In UNIX operating systems, launching a terminal takes us to the home directory,
 \begin{lstlisting}[language=bash,numbers=none]
 username@hostname ~ % 
 \end{lstlisting}
-Note the prompt may look different on Linux distributions, and the \lstinline{%} may be replaced by a \lstinline{$} if
+Note the prompt may look different on Linux distributions, and the \lstinline|%| may be replaced by a \lstinline{$} if
 the user is a superuser (\lstinline{sudo}).
 \subsection{Working Directory}
 We can use the \lstinline{cd} (change directory) command to
@@ -1535,15 +1535,15 @@ of the enclosing block.
 \subsubsection{Writing to a File}
 Similar to the previous section, we can use the \lstinline{StreamWriter} class to write to a new file.
 \begin{lstlisting}[numbers=none]
-    {
-        using StreamWriter writer = new StreamWriter("PATH\TO\FILE");
+{
+    using StreamWriter writer = new StreamWriter("PATH\TO\FILE");
 
-        writer.WriteLine("FILE_CONTENTS");
-    }
-    // Alternatively
-    using (using StreamWriter writer = new StreamWriter("PATH\TO\FILE"))
-    {
-        writer.WriteLine("FILE_CONTENTS");
-    }
+    writer.WriteLine(CONTENT_TO_ADD);
+}
+// Alternatively
+using (using StreamWriter writer = new StreamWriter("PATH\TO\FILE"))
+{
+    writer.WriteLine(CONTENT_TO_ADD);
+}
 \end{lstlisting}
 \end{document}
