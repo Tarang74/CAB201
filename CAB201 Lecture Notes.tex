@@ -1259,7 +1259,7 @@ The method also returned a Boolean value indicating that the value
 number \lstinline{7}, the method returns \lstinline{false},
 as the list does not contain a \lstinline{7}, and hence the
 list remains unchanged.
-\section{Methods}
+\section{Methods}\label{section:methods}
 \subsection{Programming Complexity}
 Programming logic is usually complex as it involves modelling rules
 and constraints from the real world.
@@ -1546,4 +1546,498 @@ using (using StreamWriter writer = new StreamWriter("PATH\TO\FILE"))
     writer.WriteLine(CONTENT_TO_ADD);
 }
 \end{lstlisting}
+\section{Classes}
+Classes are used to define a new type of object. They provide a blueprint for creating objects,
+providing initial values for maintaining state, and implementations of behaviour.
+
+To create a class in C\#, we can use the following syntax.
+\begin{lstlisting}[numbers=none]
+[ACCESS_MODIFIER] class CLASS_IDENTIFIER 
+{
+    // Class members
+}     
+\end{lstlisting}
+\subsection{Objects}
+If we wish to implement this class we can \textit{instantiate} it,
+or create an instance of it, using the \lstinline{new} keyword.
+\begin{lstlisting}[numbers=none]
+CLASS_IDENTIFIER IDENTIFIER = new CLASS_IDENTIFIER();
+\end{lstlisting}
+\subsection{Access Modifier}
+All types and type members have an accessibility level. This level controls whether they can
+be used from other code inside the assembly or other assemblies. An assembly is a \lstinline{.dll}
+or \lstinline{.exe} created by compiling one or more \lstinline{.cs} file in a single compilation.
+
+Additional information is available at \href{https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers}{Access Modifiers (C\# Programming Guide)}.
+
+In order of highest access to lowest:
+\begin{enumerate}
+    \item Public
+    \item Internal 
+    \item Protected
+    \item Protected internal
+    \item Private protected
+    \item Private
+\end{enumerate}
+\subsubsection{Public}
+Accessible by code in the same assembly or another assembly. 
+The accessibility level of public members of a type is controlled by the accessibility level of the type itself.
+\subsubsection{Internal}
+Accessible by code in the same assembly, but not from another assembly.
+\subsubsection{Protected}
+Accessible by code in the same class, or in a derived class.
+\subsubsection{Protected Internal}
+Accessible by code in the same assembly, or from a derived class in another assembly.
+\subsubsection{Private Protected}
+Accessible by code in a derived class in the same assembly.
+\subsubsection{Private}
+Accessible by code in the same class.
+\subsection{Members}
+A class contains many kinds of members that represent the state of that class through its data and behaviour.
+Fields, properties, methods, and constructors are kinds of members.
+These members are placed in the scope of the class they belong to.
+\subsubsection{Static Members}
+The static modifier can be used to declare a member which belongs to the type itself, 
+rather than to a specific object.
+
+A class can be static so that all its members are also static. This class cannot be 
+instantiated so its members must be referenced through the class.
+\begin{lstlisting}
+static class Class 
+{
+    public static void Method() { }
+}
+
+public class Program 
+{
+    public static void  Main() 
+    {
+        Class.Method();
+    } 
+}
+\end{lstlisting}
+Static fields represent the global state across the class. 
+They should be used inside classes only if they are associated with that class.
+
+Methods can also be static when they do not depend on any non-static fields.
+\subsubsection{Instance Members}
+Instance members are non-static members that belong to each instance of a class.
+
+Instance fields are unique to each object, and instance methods can access the 
+non-static fields for each object.
+\subsection{Methods}
+As mentioned in \hyperref[section:methods]{Section~\ref{section:methods}}, methods are used to 
+create reusable code. In a class, non-static methods have access to the 
+state of an object, meaning they can be unique to every instance.
+\subsection{Constructors}
+Constructors are special methods that are called when an object is created. 
+The constructor may be omitted or used to initialise the fields of an object.
+A constructor must use the same identifier as the enclosing class and does not have a return type.
+\begin{lstlisting}[numbers=none]
+[ACCESS_MODIFIER] CLASS_IDENTIFIER(PARAMETER_LIST) {
+    // Constructor body
+}
+\end{lstlisting}
+Arguments are passed to the parameter list when the object is instantiated:
+\begin{lstlisting}[numbers=none]
+CLASS_IDENTIFIER IDENTIFIER = new CLASS_IDENTIFIER(ARGUMENT_LIST); 
+\end{lstlisting}
+The constructor body can then assign parameters to their corresponding fields (or properties).
+Additionally, the constructor can perform initialisation procedures that manage the state of the class.
+\subsection{Fields}
+A field is a variable of any type that is declared inside a class. A class may contain both instance 
+or static fields. The syntax is as follows,
+\begin{lstlisting}[numbers=none]
+[ACCESS_MODIFIER] TYPE IDENTIFIER [= DEFAULT_VALUE];
+\end{lstlisting}
+Constant fields use the \lstinline{const} keyword so that their values are determined at compilation time, and cannot be changed
+by the program. Constant fields can be either instance or static fields.
+
+The following example assigns a name to every instance of the \lstinline{Person} class while keeping track of 
+how many instances have been made using an incrementor in the constructor.
+\begin{lstlisting}
+class Person
+{
+    public static int count = 0;
+    public string name;
+
+    public Person(string _name)
+    {
+        name = _name;
+        count++;
+    }
+}
+
+public class Program
+{
+    public static void  Main()
+    {
+        Person Alice = new Person("Alice");
+        Console.WriteLine(Person.count);
+
+        Person Bob = new Person("Bob");
+        Console.WriteLine(Person.count);
+    }
+}
+\end{lstlisting}
+Output:
+\begin{lstlisting}[numbers=none]
+1
+2
+\end{lstlisting}
+Note the usage of the underscore in the parameter identifier. We can instead use
+the \lstinline{this} keyword to distinguish the two variables:
+\begin{lstlisting}[numbers=none]
+public Person(string name)
+{
+    this.name = name;
+    count++;
+}
+\end{lstlisting}
+\subsection{Properties}
+A property is a public member that provides a flexible mechanism to read, write, 
+or compute the value of its associated private field. Properties are special methods called accessors that are commonly used to validate inputs
+or update other fields that depend on the field being modified.
+
+This allows for complex data structures while ensuring the implementation is safe and 
+the data is easily accessible. 
+
+A property has two accessors; \lstinline{get} and \lstinline{set}. The get property accessor is used to
+return the property value, and the set property accessor is used to assign a new value.
+
+Properties start with a capital letter and have the same name as their associated field.
+\begin{lstlisting}[numbers=none]
+private TYPE FIELD_IDENTIFIER;
+public TYPE PROPERTY_IDENTIFIER 
+{
+    get
+    {
+        return FIELD_IDENTIFIER;
+    }
+    set
+    {
+        FIELD_IDENTIFIER = value;
+    }
+}
+\end{lstlisting}
+In the example above, the getter simply returns the field associated with the property.
+Within the setter, the parameter \lstinline{value} represents the value that is being 
+assigned to the field. We can whatever validation we want in this block before the new value is assigned to 
+the field identifier.
+\subsubsection{Auto-Implemented Properties}
+If both getter and setter accessors do not require a body, i.e., \lstinline{get} simply returns the field, and
+\lstinline{set} only assigns the incoming value to the field, we can use an auto-implemented property.
+\begin{lstlisting}[numbers=none]
+public TYPE PROPERTY_IDENTIFIER { [ACCESS_MODIFIER] get; [ACCESS_MODIFIER] set; }
+\end{lstlisting}
+Here we do not need an additional private field, but rather we can use the \lstinline{private} access modifier before
+the \lstinline{set} keyword. This allows us to quickly create a variable that is either public, read-only, or write-only.
+\subsubsection{Example}
+The following example illustrates all of these concepts.
+\begin{lstlisting}
+class NumberExponent 
+{
+    public int Result { get; private set; }
+
+    private int exponent;
+    public int Exponent 
+    {
+        get
+        {
+            return exponent;
+        }
+        set
+        {
+            if (value > 0)
+            {
+                exponent = value;
+                Result = (int)Math.Pow(number, exponent);
+            }
+            else
+            {
+                Console.WriteLine("Exponent cannot be negative.");
+            }
+        }
+    }
+
+    private int number;
+    public int Number
+    {
+        get
+        {
+            return number;
+        }
+        set
+        {
+            number = value;
+            Result = (int)Math.Pow(number, exponent);
+        }
+    }
+
+    public NumberExponent(int _number, int _exponent)
+    {
+        // Set values using property setters
+        Number = _number;
+        Exponent = _exponent;
+    }
+}
+
+public class Program
+{
+    public static void  Main()
+    {
+        NumberExponent n = new NumberExponent(2, 2);
+        Console.WriteLine(n.Result);
+        
+        n.Number = 3;
+        Console.WriteLine(n.Result);
+
+        n.Exponent = -1;
+        Console.WriteLine(n.Result);
+    }
+}
+\end{lstlisting}
+Output:
+\begin{lstlisting}[numbers=none]
+4
+9
+Exponent cannot be negative.
+9
+\end{lstlisting}
+\subsection{Overloading}
+Method overloading is a feature that allows methods to be declared in multiple ways by altering
+either the number or type of parameters, along with the return type of the overloaded method. 
+
+The following example illustrates how a class constructor can be overloaded to 
+accept various sets of arguments.
+\begin{lstlisting}
+public class Person
+{
+    public string name;
+    public string email;
+    public int age;
+
+    public Person(string _name, string _email, int _age)
+    {
+        name = _name;
+        email = _email;
+        age = _age;
+    }
+
+    public Person(string _name, string _email)
+    {
+        name = _name;
+        email = _email;
+        age = 0;
+    }
+
+    public Person(string _name, int _age)
+    {
+        name = _name;
+        email = "";
+        age = _age;
+    }
+
+    public Person(string _name)
+    {
+        name = _name;
+        email = "";
+        age = 0;
+    }
+}
+
+public static class Program
+{
+    public static void Main()
+    {
+        Person a = new Person("A", "A@email.com", 5);
+        Person b = new Person("B", "B@email.com");
+        Person c = new Person("C", 9);
+        Person d = new Person("D");
+    }
+}
+\end{lstlisting}
+If the method signature allows, we can avoid code duplication by passing 
+the parameters of the overloaded methods into a another method inside the same class 
+using the \lstinline{this} keyword, while providing default values for the remaining unknown parameters.
+\begin{lstlisting}    
+public class Person
+{
+    public string name;
+    public string email;
+    public int age;
+
+    public Person(string _name, string _email, int _age)
+    {
+        name = _name;
+        email = _email;
+        age = _age;
+    }
+
+    public Person(string _name, string _email) : this(_name, _email, 0) { }
+
+    public Person(string _name, int _age) : this(_name, "", _age) { }
+
+    public Person(string _name) : this(_name, "", 0) { }
+}
+\end{lstlisting}
+As the \lstinline{this} keyword is restricted to constructor overloads, 
+we can use an alternative approach in which the overloaded method
+calls the base method in its body. 
+
+Here we define a new method called
+\lstinline{Information} that prints the fields of the person specified.
+\begin{lstlisting}
+public class Person
+{
+    ...
+
+    public void Information(Person p)
+    {
+        Console.WriteLine($"Name: {p.name} Email: {p.email} Age: {p.age}");
+    }
+
+    public void Information() { Information(this); }
+}
+
+public static class Program
+{
+    public static void Main()
+    {
+        ...
+
+        a.Information(b);
+        a.Information();
+    }
+}
+\end{lstlisting}
+Output:
+\begin{lstlisting}[numbers=none]
+Name: B Email: B@email.com Age: 0
+Name: A Email: A@email.com Age: 5
+\end{lstlisting}
+Here the \lstinline{this} keyword is used as a reference to the object which called the method, rather than the method itself.
+It is used to pass the caller as an argument to the base method that implements the functionality.
+
+In addition to omitting parameters, the set of parameters can be modified provided the set of parameter types
+is unique. The following example shows valid overloads for a numeric addition method.
+\begin{lstlisting}
+public int Add(int a, int b); // Base method
+public int Add(double a, int b); // First parameter modified
+public int Add(int a, double b); // Second parameter modified
+public double Add(double a, double b); // Both parameters and return type modified 
+public int Add(int a, int b, int c); // Additional parameter
+\end{lstlisting}
+The following examples are not valid overloads (Assuming the above overloads are also implemented).
+\begin{lstlisting}
+public int Add(int b, int a); // Parameter types are not unique 
+public double Add(int a, int b); // Parameter types are not unique 
+\end{lstlisting}
+This is because parameter identifiers cannot be used to distinguish two overloaded methods, 
+hence the program does not know which method to call when invoked with two 32-bit integer arguments.
+\subsection{Class Relationships}
+To understand the relationships between classes, we can use the following terminology to describe specific
+characterstics of a relationship.
+\subsubsection{Composition}
+A composition is a ``part-of'' relationship where class A maintains a reference of class B and manages its lifespan.
+\begin{lstlisting}[numbers=none]
+class B
+{
+    ...
+}
+class A
+{
+    B b = new B();
+}
+\end{lstlisting}
+Example:
+\begin{lstlisting}
+class Engine
+{
+    string manufacturer;
+    int horsepower;
+    ...
+}
+class Car
+{
+    Engine engine = new Engine("Ferrari", 800)
+}
+\end{lstlisting}
+\subsubsection{Aggregation}
+An aggregation is a ``has-a'' relationship where class A maintains a reference of class B but does not manage its lifespan.
+Class A has ownership over class B.
+\begin{lstlisting}[numbers=none]
+class B
+{
+    ...
+}
+class A
+{
+    B b;
+    
+    A(B b)
+    {
+        this.b = b;
+    }
+}
+\end{lstlisting}
+Example:
+\begin{lstlisting}
+public class Address
+{
+    ...
+}
+public class Person
+{
+    private Address address;
+    public Person(Address address)
+    {
+        this.address = address;  
+    }
+}
+\end{lstlisting}
+\subsubsection{Association}
+An association is a ``uses'' relationship where class A does not maintain a reference of class B nor manage its lifespan.
+Both classes are independent of each other.
+\begin{lstlisting}[numbers=none]
+class B
+{
+    Foo(A a)
+    {
+        // Do foo
+    }
+}
+class A
+{
+    DoFoo(B b)
+    {
+        b.Foo(this);
+    }
+} 
+\end{lstlisting}
+Example:
+\begin{lstlisting}
+class Course
+{
+    string name;
+    int id;
+
+    void Enrol(Student student)
+    {
+        // Enrol student
+    }
+}
+
+class Student
+{
+    public void Enrol(Course course)
+    {
+        course.Enrol(this);
+    }
+}
+\end{lstlisting}
+\subsection{Namespaces}
+Namespaces are used to declare scopes containing a set of related objects. We can also nest namespaces 
+using a nested directory structure for large projects. Multiple files can declare the same namespace 
+with different classes to separate functionality.
 \end{document}
