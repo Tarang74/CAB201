@@ -2040,4 +2040,36 @@ class Student
 Namespaces are used to declare scopes containing a set of related objects. We can also nest namespaces 
 using a nested directory structure for large projects. Multiple files can declare the same namespace 
 with different classes to separate functionality.
+\section{Object Oriented Design}
+\subsection{Multiple Classes}
+As the complexity of a program increases, we can create additional classes to maintain the structure of 
+the program. To do so, we can either create a class in a new file under the same namespace, or in the 
+same file by declaring a new class scope.
+\subsection{Modular Decomposition}
+Modular decomposition partitions a programs code into a collection of modules. 
+The quality of a modular decomposition is assessed based on its coupling and cohesion.
+\begin{itemize}
+    \item Cohesion --- Code within a module is closely related
+    \item Coupling --- The interaction between code from different modules is minimal
+\end{itemize}
+In an object oriented model, the methods required to validate fields or perform other 
+unassociated tasks should limit access to other classes. 
+
+Access to relevant fields and methods from other classes should be 
+limited to avoid unnecessary complexity.
+\subsection{Functional Decomposition}
+Prior to object oriented design, functionality was divided into several smaller functions.
+Modules were then derived by grouping related functions.
+
+However, as a program evolves, existing modules will need to be adapted
+as new functionality is added, or if existing functionality is modified or removed.
+This results in a time penalty as users need to revisit old codebases,
+in order to reuse them for future projects.
+\subsection{Abstraction}
+Abstraction is a concept that generalises the underlying complexity 
+and implementation details of an object.
+\subsection{Encapsulation}
+Encapsulation restricts the access to logically related data 
+allowing us to hide the internal \linebreak functionality acting on logically 
+related data inside functions.
 \end{document}
