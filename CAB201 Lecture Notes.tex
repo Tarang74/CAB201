@@ -1,4 +1,5 @@
-%!TEX program = xelatex
+%!TEX TS-program = xelatex
+%!TEX options = -aux-directory=Debug -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error -synctex=1 "%DOC%"
 \documentclass{article}
 \input{LaTeX-Submodule/template.tex}
 
@@ -7,6 +8,8 @@
 \usepackage[os=mac]{menukeys} % Format menu sequences, paths and keystrokes
 
 \usepackage{fontawesome5}
+
+\usepackage{tikz-uml}
 
 %% Prevent user from selecting numbers when selecting code
 \newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
@@ -1477,13 +1480,13 @@ During a debugging session, we can watch the variables that are currently on the
 In Visual Studio we can use the \menu{Immediate Window} found through
 \menu{Debug>Windows>{Immediate Window}}.
 
-To pause the program during execution, we must enter step mode by placing a breakpoint 
-anywhere in the program's control. This will pause the program before the breakpoint 
+To pause the program during execution, we must enter step mode by placing a breakpoint
+anywhere in the program's control. This will pause the program before the breakpoint
 and allow us to view and modify values currently on the stack. This debugging window
 is very similar to the C\# interactive CLI. % chktex 13
 \section{The File System}
 \subsection{Directories}
-Using the \lstinline{System.IO} class, we can view information about the files and directories in 
+Using the \lstinline{System.IO} class, we can view information about the files and directories in
 the current working directory. We can do so by using the following \lstinline{using} preprocessor directive:
 \begin{lstlisting}[numbers=none]
 using System.IO;
@@ -1504,9 +1507,9 @@ This allows us to utilise the various \href{https://docs.microsoft.com/en-us/dot
 and \href{https://docs.microsoft.com/en-us/dotnet/api/system.io.fileinfo?view=net-6.0#methods}{FileInfo \faIcon{external-link-alt}} methods.
 \subsection{File I/O}
 To access the contents of files, we use of the \lstinline{File} type in order to query, read, write, create, copy, or delete a
-file from a directory. 
+file from a directory.
 \subsubsection{File Existence}
-Before we use any IO methods, we must ensure that the file exists. 
+Before we use any IO methods, we must ensure that the file exists.
 We can use the \lstinline{Exists} method to accomplish this:
 \begin{lstlisting}[numbers=none]
 File.Exists("PATH\TO\FILE")
@@ -1530,7 +1533,7 @@ using (StreamReader reader = new StreamReader("PATH\TO\FILE"))
     }
 }
 \end{lstlisting}
-Note the usage of the \lstinline{using} statement, this ensures the file is properly closed at the end 
+Note the usage of the \lstinline{using} statement, this ensures the file is properly closed at the end
 of the enclosing block.
 \subsubsection{Writing to a File}
 Similar to the previous section, we can use the \lstinline{StreamWriter} class to write to a new file.
@@ -1573,14 +1576,14 @@ Additional information is available at \href{https://docs.microsoft.com/en-us/do
 In order of highest access to lowest:
 \begin{enumerate}
     \item Public
-    \item Internal 
+    \item Internal
     \item Protected
     \item Protected internal
     \item Private protected
     \item Private
 \end{enumerate}
 \subsubsection{Public}
-Accessible by code in the same assembly or another assembly. 
+Accessible by code in the same assembly or another assembly.
 The accessibility level of public members of a type is controlled by the accessibility level of the type itself.
 \subsubsection{Internal}
 Accessible by code in the same assembly, but not from another assembly.
@@ -1597,10 +1600,10 @@ A class contains many kinds of members that represent the state of that class th
 Fields, properties, methods, and constructors are kinds of members.
 These members are placed in the scope of the class they belong to.
 \subsubsection{Static Members}
-The static modifier can be used to declare a member which belongs to the type itself, 
+The static modifier can be used to declare a member which belongs to the type itself,
 rather than to a specific object.
 
-A class can be static so that all its members are also static. This class cannot be 
+A class can be static so that all its members are also static. This class cannot be
 instantiated so its members must be referenced through the class.
 \begin{lstlisting}
 static class Class 
@@ -1616,21 +1619,21 @@ public class Program
     } 
 }
 \end{lstlisting}
-Static fields represent the global state across the class. 
+Static fields represent the global state across the class.
 They should be used inside classes only if they are associated with that class.
 
 Methods can also be static when they do not depend on any non-static fields.
 \subsubsection{Instance Members}
 Instance members are non-static members that belong to each instance of a class.
 
-Instance fields are unique to each object, and instance methods can access the 
+Instance fields are unique to each object, and instance methods can access the
 non-static fields for each object.
 \subsection{Methods}
-As mentioned in \hyperref[section:methods]{Section~\ref{section:methods}}, methods are used to 
-create reusable code. In a class, non-static methods have access to the 
+As mentioned in \hyperref[section:methods]{Section~\ref{section:methods}}, methods are used to
+create reusable code. In a class, non-static methods have access to the
 state of an object, meaning they can be unique to every instance.
 \subsection{Constructors}
-Constructors are special methods that are called when an object is created. 
+Constructors are special methods that are called when an object is created.
 The constructor may be omitted or used to initialise the fields of an object.
 A constructor must use the same identifier as the enclosing class and does not have a return type.
 \begin{lstlisting}[numbers=none]
@@ -1645,7 +1648,7 @@ CLASS_IDENTIFIER IDENTIFIER = new CLASS_IDENTIFIER(ARGUMENT_LIST);
 The constructor body can then assign parameters to their corresponding fields (or properties).
 Additionally, the constructor can perform initialisation procedures that manage the state of the class.
 \subsection{Fields}
-A field is a variable of any type that is declared inside a class. A class may contain both instance 
+A field is a variable of any type that is declared inside a class. A class may contain both instance
 or static fields. The syntax is as follows,
 \begin{lstlisting}[numbers=none]
 [ACCESS_MODIFIER] TYPE IDENTIFIER [= DEFAULT_VALUE];
@@ -1653,7 +1656,7 @@ or static fields. The syntax is as follows,
 Constant fields use the \lstinline{const} keyword so that their values are determined at compilation time, and cannot be changed
 by the program. Constant fields can be either instance or static fields.
 
-The following example assigns a name to every instance of the \lstinline{Person} class while keeping track of 
+The following example assigns a name to every instance of the \lstinline{Person} class while keeping track of
 how many instances have been made using an incrementor in the constructor.
 \begin{lstlisting}
 class Person
@@ -1695,12 +1698,12 @@ public Person(string name)
 }
 \end{lstlisting}
 \subsection{Properties}
-A property is a public member that provides a flexible mechanism to read, write, 
+A property is a public member that provides a flexible mechanism to read, write,
 or compute the value of its associated private field. Properties are special methods called accessors that are commonly used to validate inputs
 or update other fields that depend on the field being modified.
 
-This allows for complex data structures while ensuring the implementation is safe and 
-the data is easily accessible. 
+This allows for complex data structures while ensuring the implementation is safe and
+the data is easily accessible.
 
 A property has two accessors; \lstinline{get} and \lstinline{set}. The get property accessor is used to
 return the property value, and the set property accessor is used to assign a new value.
@@ -1721,8 +1724,8 @@ public TYPE PROPERTY_IDENTIFIER
 }
 \end{lstlisting}
 In the example above, the getter simply returns the field associated with the property.
-Within the setter, the parameter \lstinline{value} represents the value that is being 
-assigned to the field. We can whatever validation we want in this block before the new value is assigned to 
+Within the setter, the parameter \lstinline{value} represents the value that is being
+assigned to the field. We can whatever validation we want in this block before the new value is assigned to
 the field identifier.
 \subsubsection{Auto-Implemented Properties}
 If both getter and setter accessors do not require a body, i.e., \lstinline{get} simply returns the field, and
@@ -1806,9 +1809,9 @@ Exponent cannot be negative.
 \end{lstlisting}
 \subsection{Overloading}
 Method overloading is a feature that allows methods to be declared in multiple ways by altering
-either the number or type of parameters, along with the return type of the overloaded method. 
+either the number or type of parameters, along with the return type of the overloaded method.
 
-The following example illustrates how a class constructor can be overloaded to 
+The following example illustrates how a class constructor can be overloaded to
 accept various sets of arguments.
 \begin{lstlisting}
 public class Person
@@ -1857,8 +1860,8 @@ public static class Program
     }
 }
 \end{lstlisting}
-If the method signature allows, we can avoid code duplication by passing 
-the parameters of the overloaded methods into a another method inside the same class 
+If the method signature allows, we can avoid code duplication by passing
+the parameters of the overloaded methods into a another method inside the same class
 using the \lstinline{this} keyword, while providing default values for the remaining unknown parameters.
 \begin{lstlisting}    
 public class Person
@@ -1881,9 +1884,9 @@ public class Person
     public Person(string _name) : this(_name, "", 0) { }
 }
 \end{lstlisting}
-As the \lstinline{this} keyword is restricted to constructor overloads, 
+As the \lstinline{this} keyword is restricted to constructor overloads,
 we can use an alternative approach in which the overloaded method
-calls the base method in its body. 
+calls the base method in its body.
 
 Here we define a new method called
 \lstinline{Information} that prints the fields of the person specified.
@@ -1925,15 +1928,15 @@ is unique. The following example shows valid overloads for a numeric addition me
 public int Add(int a, int b); // Base method
 public int Add(double a, int b); // First parameter modified
 public int Add(int a, double b); // Second parameter modified
-public double Add(double a, double b); // Both parameters and return type modified 
+public double Add(double a, double b); // Parameters and return type modified 
 public int Add(int a, int b, int c); // Additional parameter
 \end{lstlisting}
-The following examples are not valid overloads (Assuming the above overloads are also implemented).
+The following examples are not valid overloads (assuming the above overloads are also implemented).
 \begin{lstlisting}
 public int Add(int b, int a); // Parameter types are not unique 
 public double Add(int a, int b); // Parameter types are not unique 
 \end{lstlisting}
-This is because parameter identifiers cannot be used to distinguish two overloaded methods, 
+This is because parameter identifiers cannot be used to distinguish two overloaded methods,
 hence the program does not know which method to call when invoked with two 32-bit integer arguments.
 \subsection{Class Relationships}
 To understand the relationships between classes, we can use the following terminology to describe specific
@@ -2037,25 +2040,25 @@ class Student
 }
 \end{lstlisting}
 \subsection{Namespaces}
-Namespaces are used to declare scopes containing a set of related objects. We can also nest namespaces 
-using a nested directory structure for large projects. Multiple files can declare the same namespace 
+Namespaces are used to declare scopes containing a set of related objects. We can also nest namespaces
+using a nested directory structure for large projects. Multiple files can declare the same namespace
 with different classes to separate functionality.
 \section{Object Oriented Design}
 \subsection{Multiple Classes}
-As the complexity of a program increases, we can create additional classes to maintain the structure of 
-the program. To do so, we can either create a class in a new file under the same namespace, or in the 
+As the complexity of a program increases, we can create additional classes to maintain the structure of
+the program. To do so, we can either create a class in a new file under the same namespace, or in the
 same file by declaring a new class scope.
 \subsection{Modular Decomposition}
-Modular decomposition partitions a programs code into a collection of modules. 
+Modular decomposition partitions a programs code into a collection of modules.
 The quality of a modular decomposition is assessed based on its coupling and cohesion.
 \begin{itemize}
     \item Cohesion --- Code within a module is closely related
     \item Coupling --- The interaction between code from different modules is minimal
 \end{itemize}
-In an object oriented model, the methods required to validate fields or perform other 
-unassociated tasks should limit access to other classes. 
+In an object oriented model, the methods required to validate fields or perform other
+unassociated tasks should limit access to other classes.
 
-Access to relevant fields and methods from other classes should be 
+Access to relevant fields and methods from other classes should be
 limited to avoid unnecessary complexity.
 \subsection{Functional Decomposition}
 Prior to object oriented design, functionality was divided into several smaller functions.
@@ -2066,10 +2069,248 @@ as new functionality is added, or if existing functionality is modified or remov
 This results in a time penalty as users need to revisit old codebases,
 in order to reuse them for future projects.
 \subsection{Abstraction}
-Abstraction is a concept that generalises the underlying complexity 
+Abstraction is a concept that generalises the underlying complexity
 and implementation details of an object.
 \subsection{Encapsulation}
-Encapsulation restricts the access to logically related data 
-allowing us to hide the internal \linebreak functionality acting on logically 
+Encapsulation restricts the access to logically related data
+allowing us to hide the internal \linebreak functionality acting on logically
 related data inside functions.
+\subsection{User Stories}
+The requirements of a task are often expressed as a set of ``user stories''. These
+stories are a simple description of required functionality and are told from the perspective
+of a particular type of user. They consist of:
+\begin{itemize}
+    \item the type of user --- a particular persona
+    \item action --- what they want to acheive
+    \item benefit/value --- why its important
+\end{itemize}
+User stories keep the focus on the use, enable collaboration, drive creative solutions, and create momentum.
+
+When writing user stories, consider:
+\begin{itemize}
+    \item the definition of ``done''
+    \item outlining subtasks or tasks
+    \item user personas
+    \item ordered steps
+    \item feedback
+    \item time
+\end{itemize}
+Some limitations to user stories are that they scale-up very quickly, they can sometimes
+be vague, informal or incomplete, they can lack non-functional requirements, and also don't
+represent how to fulfil a task.
+\subsection{Software Development Model}
+The following sections discus various software development models.
+\subsubsection{Waterfall Model}
+The waterfall model can be described by the following steps:
+\begin{enumerate}
+    \item Analysing requirements
+    \item Design
+    \item Implementation
+    \item Testing
+    \item Deployment
+\end{enumerate}
+This model provides clearly defined stages with well understood milestones and
+it is easy to manage due to the rigidity of the model.
+Phases are processed and completed one at a time, and results are well documented.
+This model is well suited for smaller projects where requirements are well understood.
+
+Some disadvantages to this are that no working software is produced until the final stages of the
+development lifecycle. This leads to large amounts of risk and uncertainty for complex projects
+as it cannot accommodate for changing requirements.
+\subsubsection{Interactive and Incremental Design}
+The interactive and incremental model focuses on smaller subtasks which are completed
+one by one so that the process as a whole is iterative. This makes handling complex problems
+easier and allows for changes to the requirements through refactoring.
+
+Refactoring is the process of modifying existing code to facilitate new required functionality.
+It is important to refactor code before adding additional functionality.
+\subsection{Object Oriented Design}
+In the initial stages of a project, candidate classes should be identified such that they are tangible entities
+and abstract concepts. A technique for identifying classes is by looking for nouns.
+
+When designing methods, we need to decide which class a method belongs to based on what the class is
+responsible for. Methods are found by looking for verbs in a project outline.
+During this stage, we must also consider the data associated with the program and which class
+has ownership over the data, so that methods acting on data can be placed in the appropriate class
+to maintain privacy.
+\subsection{Unified Modelling Language}
+The Unified Modelling Language (UML) is a modelling language that provides a standard for visualising the
+design of a system.
+
+Class diagrams are a type of UML diagram that describe the structure of a program by showing the program's classes,
+their attributes, operations, and relationships with other objects.
+
+A class with implementation level details, is represented as a table with three rows:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|} % chktex 44
+        \hline % chktex 44
+        \textbf{Object name} \\
+        \hline % chktex 44
+        Fields               \\
+        \hline % chktex 44
+        Methods              \\
+        \hline % chktex 44
+    \end{tabular}
+    % \caption{} % \label{}
+\end{table}
+\subsection{Classes}
+The name of a class is placed in the first row and is styled \textbf{bold}.
+
+The following styles are also applied where applicable:
+\begin{itemize}
+    \item \textit{Italics} --- Abstract classes
+    \item \underline{Underline} --- Static classes
+\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|} % chktex 44
+        \hline % chktex 44
+        \textbf{Class} \\
+        \hline % chktex 44
+    \end{tabular}
+    % \caption{} % \label{}
+\end{table}
+\subsection{Interfaces}
+Interfaces have the same rules as classes, but are preceded by ``<<Interface>>'':
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|} % chktex 44
+        \hline % chktex 44
+        \textbf{<<Interface>>} \\
+        \textbf{Interface}     \\
+        \hline % chktex 44
+    \end{tabular}
+    % \caption{} % \label{}
+\end{table}
+\subsection{Properties and Operations}
+For the following sections, brackets (\lstinline{[]}) are used to denote optional fields.
+
+Properties (or fields) and operations (or methods) are represented using the following syntax:
+\subsubsection{Property}
+\begin{lstlisting}[numbers=none]
+[visibility] ['/'] property-name [':' property-type] ['['multiplicity']'] 
+    ['=' default-value] [property-modifiers]
+\end{lstlisting}
+\subsubsection{Operation}
+\begin{lstlisting}[numbers=none]
+[visibility] signature [operation-properties]
+\end{lstlisting}
+The following sections explain each of the placeholders.
+\subsection{Visibility}
+Visibility refers to an objects access level, and is represented by the following symbols:
+\begin{description}
+    \item[\(+\)] Public
+    \item[\(\sim\)] Internal
+    \item[\(\#\)] Protected
+    \item[\(-\)] Private
+\end{description}
+\subsection{Derived `/'}
+The forward-slash (\lstinline{/}) is used to represent a derived field, meaning its value depends on
+the value of other fields in that class.
+\subsection{Multiplicity}
+Multiplicity allows us to specify cardinality, i.e., the number of elements in a collection.
+
+Multiplicity is specified using a range of values, and it uses the following syntax:
+\begin{lstlisting}[numbers=none]
+a..b
+\end{lstlisting}
+which means a collection can contain \(n\) elements such that \(a \leq n \leq b\).
+For unbounded ranges, we can use an asterisk (\lstinline{*}), i.e.,
+``1 or more'' would have the multiplicity: \lstinline{1..*}.
+\subsection{Property Modifiers}
+A property modifier can be one of the following:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c}
+        \toprule
+        \textbf{Modifier}     & \textbf{Description}                                               \\
+        \midrule
+        id                    & The property is an identifier                                      \\
+        readOnly              & The property is read only                                          \\
+        ordered               & The property is ordered                                            \\
+        unique                & The property is unique                                             \\
+        nonunique             & The property may have duplicate values                             \\
+        sequence              & The property is an ordered bag (unique = false and ordered = true) \\
+        union                 & The property is a derived union of its subsets                     \\
+        redefines P           & The property redefines an inherited property named P               \\
+        subsets P             & The property is a subset of the property named P                   \\
+        <property-constraint> & A constraint that applies to the property (i.e., \(P>0\))          \\
+        \bottomrule
+    \end{tabular}
+    % \caption{} % \label{}
+\end{table}
+These property modifiers are placed between braces \lstinline!{}! and separated by commas.
+\subsection{Operation Signatures}
+An operations signature takes the following syntax:
+\begin{lstlisting}[numbers=none]
+operation-name'('[parameter-list]')' [':' return-type ['['multiplicity']']]
+\end{lstlisting}
+The parameter list is formatted in the same was as in C\#.
+\subsection{Operation Properties}
+An operation property can be one of the following:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c}
+        \toprule
+        \textbf{Modifier}     & \textbf{Description}                                       \\
+        \midrule
+        redefines O           & The operation redefines an inherited operation named O     \\
+        query                 & The operation does not change the state of the system      \\
+        ordered               & The valued of the return parameter are ordered             \\
+        unique                & The values of the return parameter are unique              \\
+        <operation-constaint> & A constraint that applies to the operation (i.e., \(O>0\)) \\
+        \bottomrule
+    \end{tabular}
+    % \caption{} % \label{}
+\end{table}
+These property modifiers are placed between braces \lstinline!{}! and separated by commas.
+\subsection{Class Relationships}
+The following arrows are used to show relationships between classes:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c c}
+        \toprule
+        \textbf{Relationship}        & \textbf{Arrow}                                              & \textbf{Description} \\
+        \midrule
+        Association                  & \begin{tikzpicture}[baseline=(current bounding box.center)]
+                                           \node (a) at (0, 0) {\(C_1\)};
+                                           \node (b) at (3, 0) {\(C_2\)};
+                                           \umlassoc{a}{b};
+                                       \end{tikzpicture}
+                                     & \(C_1\) uses \(C_2\)                                                               \\
+        Aggregation                  & \begin{tikzpicture}[baseline=(current bounding box.center)]
+                                           \node (a) at (0, 0) {\(C_1\)};
+                                           \node (b) at (3, 0) {\(C_2\)};
+                                           \umlaggreg{a}{b};
+                                       \end{tikzpicture}
+                                     & \(C_1\) has a \(C_2\)                                                              \\
+        Composition                  & \begin{tikzpicture}[baseline=(current bounding box.center)]
+                                           \node (a) at (0, 0) {\(C_1\)};
+                                           \node (b) at (3, 0) {\(C_2\)};
+                                           \umlcompo{b}{a};
+                                       \end{tikzpicture}
+                                     & \(C_1\) is part of \(C_2\)                                                         \\
+        Generalisation (inheritance) & \begin{tikzpicture}[baseline=(current bounding box.center)]
+                                           \node (a) at (0, 0) {\(C_1\)};
+                                           \node (b) at (3, 0) {\(C_2\)};
+                                           \umlinherit{a}{b};
+                                       \end{tikzpicture}
+                                     & \(C_1\) extends \(C_2\)                                                            \\
+        Realisation (implementation) & \begin{tikzpicture}[baseline=(current bounding box.center)]
+                                           \node (a) at (0, 0) {\(C_1\)};
+                                           \node (b) at (3, 0) {\(C_2\)};
+                                           \umlreal{a}{b};
+                                       \end{tikzpicture}
+                                     & \(C_1\) realises \(C_2\)                                                           \\
+        Dependency                   & \begin{tikzpicture}[baseline=(current bounding box.center)]
+                                           \node (a) at (0, 0) {\(C_1\)};
+                                           \node (b) at (3, 0) {\(C_2\)};
+                                           \umldep{a}{b};
+                                       \end{tikzpicture}
+                                     & \(C_1\) depends on \(C_2\)                                                         \\
+        \bottomrule
+    \end{tabular}
+    % \caption{} % \label{}
+\end{table}
 \end{document}
