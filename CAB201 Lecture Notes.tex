@@ -2133,10 +2133,10 @@ responsible for. Methods are found by looking for verbs in a project outline.
 During this stage, we must also consider the data associated with the program and which class
 has ownership over the data, so that methods acting on data can be placed in the appropriate class
 to maintain privacy.
-\subsection{Unified Modelling Language}
+\section{Unified Modelling Language}
 The Unified Modelling Language (UML) is a modelling language that provides a standard for visualising the
 design of a system.
-
+\subsection{Class Diagrams}
 Class diagrams are a type of UML diagram that describe the structure of a program by showing the program's classes,
 their attributes, operations, and relationships with other objects.
 
@@ -2313,4 +2313,137 @@ The following arrows are used to show relationships between classes:
     \end{tabular}
     % \caption{} % \label{}
 \end{table}
+\section{Inheritance}
+Inheritance is a object-oriented principle that allows us to create new classes that reuse, extend, and modify 
+the behaviour defined in another class.
+
+The class whose members are inherited is called the base class, 
+and the class that inherits those members is called the derived class.
+
+For example:
+\begin{lstlisting}
+class A { }
+class B : A { }
+\end{lstlisting}
+In this example, class B inherits class A, so that it is the derived class, and A is the base class.
+
+In a UML class diagram, this is referred to as the generalisation of a derived class.
+\subsection{Methods}
+If a method is implemented in a base class, it can be accessed by a derived object, even if 
+the derived class does not implement the method.
+
+For example, B\@ has access to the \lstinline{PrintHello} method although it does not define it.
+\begin{lstlisting}
+class A
+{
+    public void PrintHello() { Console.WriteLine("Hello"); }
+}
+class B : A { }
+
+static void Main()
+{
+    B b = new B();
+    b.PrintHello(); // prints "Hello" 
+}
+\end{lstlisting}
+\subsection{Virtual Methods}
+A virtual method provides a default implementation for a method which may be reimplemented
+by derived classes. The method can be reimplemented using the \lstinline{override} keyword. 
+If a derived class does not override a virtual method, the base classes implementation will be used.
+
+For example, B reimplements the \lstinline{PrintHello} method, while C uses A's default implementation.
+\begin{lstlisting}
+class A
+{
+    public virtual void PrintHello() { Console.WriteLine("Hello"); }
+}
+class B : A
+{
+    public override void PrintHello() { Console.WriteLine("Hello B"); }
+}
+class C : A { }
+
+static void Main()
+{
+    B b = new B();
+    C c = new C();
+    b.PrintHello(); // prints "Hello B" 
+    c.PrintHello(); // prints "Hello" 
+}
+\end{lstlisting}
+Note that the signature and modifiers must match the base class implementation.
+
+Although B reimplements this method, it can still call the base classes implementation using the 
+\lstinline{base} keyword.
+\begin{lstlisting}
+class A
+{
+    public virtual void PrintHello() { Console.WriteLine("Hello"); }
+}
+class B : A
+{
+    public override void PrintHello() 
+    { 
+        base.PrintHello();
+        // Perform additional tasks
+    }
+}
+
+static void Main()
+{
+    B b = new B();
+    b.PrintHello(); // prints "Hello B" 
+}
+\end{lstlisting}
+This technique should be utilised if a reimplementation only \textit{adds} to a base classes methods 
+rather than modifying their implementations. This avoids repeating code.
+\subsection{Object Class}
+In C\# all classes are implicitly derived from the \lstinline{Object} class. This class contains built-in methods
+such as \lstinline{Equals()}, \lstinline{GetHashCode()}, and \lstinline{ToString()}. These are all virtual methods that
+are also able to be reimplemented in user defined classes. 
+\begin{description}
+    \item[Equals] Determines whether the specified object is equal to the current object.
+    \item[GetHashCode] Serves as the default hash function.
+    \item[ToString] Returns a string that represents the current object.  
+\end{description}
+The following example overrides the \lstinline{Equals} and \lstinline{ToString} methods.
+\begin{lstlisting}
+class Point
+{
+    public int x, y;
+
+    public Point(int x, int y) 
+    {
+        this.x = x;
+        this.y = y;
+    }
+    public override bool Equals(Object obj) 
+    {
+        // Check for nullity and compare types
+        if ((obj == null) || ! this.GetType().Equals(obj.GetType()))
+        {
+            return false;
+        }
+        else {
+            // Type cast obj onto Point 
+            Point p = (Point) obj;
+            return (x == p.x) && (y == p.y);
+        }
+    }
+    public override string ToString() { return $"({x}, {y})"; }
+}
+
+static void Main()
+{
+    Point a = new Point(2, 3);
+    Point b = new Point(2, 3);
+    Point c = new Point(4, 5);
+
+    a.Equals(b); // true
+    b.Equals(c); // false
+    c.ToString() // prints "(4, 5)"
+}
+\end{lstlisting}
+\section{Polymorphism}
+
 \end{document}
