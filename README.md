@@ -29,6 +29,9 @@ This repository provides **lecture notes** for **CAB201 - Programming Principles
 7. The File System
 8. Classes
 9. Object Oriented Design
+10. Unified Modelling Language
+11. Inheritance
+12. Polymorphism
 
 ---
 
