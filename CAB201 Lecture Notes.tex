@@ -1611,7 +1611,7 @@ static class Class
     public static void Method() { }
 }
 
-public class Program 
+class Program 
 {
     public static void  Main() 
     {
@@ -1671,7 +1671,7 @@ class Person
     }
 }
 
-public class Program
+class Program
 {
     public static void  Main()
     {
@@ -1785,7 +1785,7 @@ class NumberExponent
     }
 }
 
-public class Program
+class Program
 {
     public static void  Main()
     {
@@ -1814,7 +1814,7 @@ either the number or type of parameters, along with the return type of the overl
 The following example illustrates how a class constructor can be overloaded to
 accept various sets of arguments.
 \begin{lstlisting}
-public class Person
+class Person
 {
     public string name;
     public string email;
@@ -1849,7 +1849,7 @@ public class Person
     }
 }
 
-public static class Program
+static class Program
 {
     public static void Main()
     {
@@ -1864,7 +1864,7 @@ If the method signature allows, we can avoid code duplication by passing
 the parameters of the overloaded methods into a another method inside the same class
 using the \lstinline{this} keyword, while providing default values for the remaining unknown parameters.
 \begin{lstlisting}    
-public class Person
+class Person
 {
     public string name;
     public string email;
@@ -1891,7 +1891,7 @@ calls the base method in its body.
 Here we define a new method called
 \lstinline{Information} that prints the fields of the person specified.
 \begin{lstlisting}
-public class Person
+class Person
 {
     ...
 
@@ -1903,7 +1903,7 @@ public class Person
     public void Information() { Information(this); }
 }
 
-public static class Program
+static class Program
 {
     public static void Main()
     {
@@ -1986,11 +1986,11 @@ class A
 \end{lstlisting}
 Example:
 \begin{lstlisting}
-public class Address
+class Address
 {
     ...
 }
-public class Person
+class Person
 {
     private Address address;
     public Person(Address address)
@@ -2339,7 +2339,7 @@ class A
     public void PrintHello() { Console.WriteLine("Hello"); }
 }
 class B : A { }
-
+...
 static void Main()
 {
     B b = new B();
@@ -2362,7 +2362,7 @@ class B : A
     public override void PrintHello() { Console.WriteLine("Hello B"); }
 }
 class C : A { }
-
+...
 static void Main()
 {
     B b = new B();
@@ -2432,7 +2432,7 @@ class Point
     }
     public override string ToString() { return $"({x}, {y})"; }
 }
-
+...
 static void Main()
 {
     Point a = new Point(2, 3);
@@ -2445,5 +2445,135 @@ static void Main()
 }
 \end{lstlisting}
 \section{Polymorphism}
+Polymorphism allows us to declare a common operation that is implemented differently across derived types.
+\subsection{Abstract Classes}
+Abstract classes allow us to develop partially implemented classes without 
+the need to fully implement methods like in concrete classes. 
 
+This allows us to declare abstract methods that have no implementation in 
+the base class, but must be implemented (using \lstinline{override}) in all
+derived classes. It follows that abstract classes cannot be instantiated.
+
+To declare an abstract class or method, we can use the \lstinline{abstract} keyword.
+Note that abstract methods can only be declared inside abstract classes.
+\begin{lstlisting}
+abstract class Animal 
+{
+    public string name;
+
+    Animal(string name) 
+    {
+        this.name = name;
+    }
+    public abstract void Speak();
+}
+class Dog : Animal 
+{
+    Dog(string name) : base(name) { }
+    public override void Speak()
+    {
+        Console.WriteLine("Woof");
+    }
+}
+class Cat : Animal 
+{
+    Cat(string name) : base(name) { }
+    public override void Speak()
+    {
+        Console.WriteLine("Meow");
+    }
+}
+...
+static void Main()
+{
+    Animal dog = new Dog("Jack");
+    Animal cat = new Cat("James");
+
+    dog.Speak(); // prints "Woof"
+    cat.Speak(); // prints "Meow"
+}  
+\end{lstlisting}
+\subsection{Static and Dynamic Types}
+We can assign a \lstinline{Dog} and \lstinline{Cat} object to the base type \lstinline{Animal}, through inheritance.
+Here \lstinline{Animal} is the static type, and \lstinline{Dog}/\lstinline{Cat} are dynamic types.
+\subsection{Polymorphic Assignment}
+Polymorphic assignment decides which method implementation is invoked given a virtual method
+in an inherited class.
+\begin{lstlisting}
+abstract class A 
+{ 
+    public virtual void Hello()
+    {
+        Console.WriteLine("Hello");
+    } 
+}
+
+class B : A 
+{ 
+    public override void Hello()
+    {
+        Console.WriteLine("Bonjour");
+    } 
+}
+class C : A { }
+
+class D : B { }
+
+static void Main() 
+{
+    A b = new B(); // static type: A, dynamic type: B
+    A c = new C(); // static type: A, dynamic type: C
+    B d = new D(); // static type: B, dynamic type: D
+
+    b.Hello(); // prints: "Bonjour"
+    c.Hello(); // prints: "Hello"
+    d.Hello(); // prints: "Bonjour"
+}
+\end{lstlisting}
+The program attempts to use the current classes implementation of \lstinline{Hello}, and if no override exists, the base class implementation is used.
+\subsection{Interfaces}
+Interfaces allow us to enforce method implementations onto a derived class. Here derived classes \textit{implement} interfaces.
+Interfaces only contain method signatures which act as contracts so that all implementing classes must provide their own implementation.
+Another advantage of using interfaces is that a class can implement multiple interfaces.
+
+An interface is declared using the \lstinline{interface} keyword, and it does not require the \lstinline{abstract} or \lstinline{virtual}
+keywords. Due to this, any derived classes also do not need to use the \lstinline{override} keyword. As a convention, interfaces in
+C\# start with a capital I.
+\begin{lstlisting}
+interface IAnimal
+{
+    public void Speak();
+}
+class Dog : IAnimal
+{
+    public void Speak() 
+    {
+        Console.WriteLine("Woof");
+    }
+}
+...
+static void Main()
+{
+    IAnimal dog = new Dog();
+    dog.Speak(); // prints: "Woof"
+}
+\end{lstlisting}
+\subsection{Interface Design}
+Interfaces allow us to decouple code which creates better modular design by removing dependencies.
+From the principle of Interface Segregation, it is better to have multiple simple interfaces rather than one large 
+interface, so that clients can depend only on parts they require. 
+
+By using interfaces, clients only see what each class does, rather than how it does it.
+\subsection{Future Expansion}
+When applying polymorphism, it is important to consider future expansion of types so that if a user
+wishes to implement a new derived type, fields and methods are carefully chosen to apply to 
+many different problems. This includes the names given to class members.
+\subsection{Liskov Substitution Principle}
+The Liskov Substitution Principle is based on the concept of ``substitutability''. Given 
+that \lstinline{B} inherits from \lstinline{A},
+let \lstinline{F(A a)} be a property that accepts objects of type \lstinline{A}, then the property \lstinline{F(B b)} should not alter any of
+the desirable properties of \lstinline{F}.
+
+When inheriting from a class, we must ensure that all fields and methods are reuseable and a genuine \textit{is-a}
+relationship exists.
 \end{document}
