@@ -8,7 +8,7 @@
 
 ## Downloads
 
-Lecture notes download: [CAB201 Lecture Notes PDF](CAB201%20Lecture%20Notes.pdf)
+Lecture notes download: [CAB201 Lecture Notes PDF](https://www.github.com/Tarang74/CAB201/raw/main/CAB201%20Lecture%20Notes.pdf)
 
 ---
 
@@ -38,4 +38,3 @@ This repository provides **lecture notes** for **CAB201 - Programming Principles
 ![Copyright](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)
 
 This work is licensed under a [Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
- 
