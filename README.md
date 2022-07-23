@@ -35,7 +35,6 @@ This repository provides **lecture notes** for **CAB201 - Programming Principles
 
 ---
 
-![Copyright](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)
+[![license](https://forthebadge.com/images/badges/cc-nc-sa.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-This work is licensed under a [Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
-
+This work is licensed under a [Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
