@@ -31,6 +31,22 @@
     }
 }
 
+\lstset{
+	language=c,                % Language for syntax highlighting
+	basicstyle=\ttfamily,      % Style for fonts
+	numbers=left,              % Line numbers
+	numberstyle=\tiny,         % Line number style
+	frame=tb,                  % Frame lines on top and bottom
+	tabsize=4,                 % Size of tabs
+	% columns=fixed,             % Fix character columns
+	showstringspaces=false,    % Don't underscore spaces
+	showtabs=false,            % Don't underscore tabs
+	keepspaces,                % Keep spaces as spaces, not whitespace
+	commentstyle=\color{red},  % Colour comments as red
+	keywordstyle=\color{blue}, % Colour keywords as blue
+	breaklines=true,           % Break lines, so they don't go over the page
+}
+
 % Header and footer
 \newcommand{\unitName}{Programming Principles}
 \newcommand{\unitTime}{Semester 1, 2022}
@@ -76,8 +92,8 @@
 \lstset{numbers=left, firstnumber=1, numberstyle=\ttfamily\emptyaccsupp}
 \section{Programming}
 \begin{definition}
-    Programming is the process of designing and building an executable
-    computer program to accomplish a specific computing result or to
+    Programming is the process of designing and building an executable computer program 
+    to accomplish a specific computing result or to
     perform a specific task.
 \end{definition}
 Programming involves:
@@ -400,8 +416,8 @@ Hence division between two 32-bit integers truncates any floating-point precisio
 Here only the latter three expressions are converted to \lstinline{System.Double}.
 \subsection{Characters}
 A character type represents a \textbf{single} Unicode UTF-16 character.
-Character objects can be implicitly converted to 16-bit unsigned integers and
-support the comparison, equality, increment and decrement operators.
+Character objects can be implicitly converted to 16-bit unsigned integers, and
+support the comparison, equality, increment and \linebreak decrement operators.
 
 A character is initialised using single quotation marks (\lstinline{'}). % chktex 38
 \begingroup
@@ -459,12 +475,12 @@ to this object, it will simply point to a new location in memory.
 \customlinemarker{1}{\$}
 \customlinemarker{3}{\$}
 \customlinemarker{6}{\$}
-\begin{lstlisting}
+\begin{lstlisting}[escapeinside=||]
 string s = "String with tyop."; s
 "String with tyop."
 s[14] = 'p';
-(1,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned 
-to -- it is read only
+(1,1): error CS0200: Property or indexer '|string.this[int]|' cannot be assigned to 
+-- it |is| read only
 s = "String without typo."
 "String without typo."
 \end{lstlisting}
@@ -485,9 +501,9 @@ Note that the string is evaluated as a string literal. To view this string verba
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
-\begin{lstlisting}
+\begin{lstlisting}[escapeinside=||]
 Console.WriteLine(s) 
-This is a quotation mark ".
+This |is| a quotation mark ".
 This line appears on a new line.
 \end{lstlisting}
 \endgroup
@@ -497,12 +513,12 @@ If a string contains many escape sequences we can use verbatim strings for conve
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
 \customlinemarker{3}{\$}
-\begin{lstlisting}
+\begin{lstlisting}[escapeinside=||]
 string s = @"String with multiple escape sequences ""This is a quote"".
 This line appears on a new line.";
 Console.WriteLine(s)
-String with multiple escape sequences "This is a quote".
-This line appears on a new line.
+String |with| multiple escape sequences "This is a quote".
+This line appears on a |new| line.
 \end{lstlisting}
 \endgroup
 \subsubsection{Format Strings}
@@ -660,7 +676,7 @@ Here is another example that utilises nested blocks and demonstrates access.
 \customlinemarker{11}{.}
 \customlinemarker{12}{.}
 \customlinemarker{13}{\$}
-\begin{lstlisting}
+\begin{lstlisting}[escapeinside=||]
 // Global scope    
 {
     // Block 1     
@@ -676,7 +692,7 @@ Here is another example that utilises nested blocks and demonstrates access.
 Console.WriteLine(i);
 5
 10
-(1,19): error CS0103: The name 'i' does not exist in the current context
+(1,19): error CS0103: The name 'i' does not exist |in| the current context
 \end{lstlisting}
 \endgroup
 In this example, we see that the variable \lstinline{i} is local to block 1 and therefore accessible to block 2.
@@ -694,7 +710,7 @@ with another variable in its enclosing local scope.
 \customlinemarker{4}{.}
 \customlinemarker{5}{.}
 \customlinemarker{6}{.}
-\begin{lstlisting}
+\begin{lstlisting}[escapeinside=||]
 {
     int i = 5;
     {
@@ -702,7 +718,7 @@ with another variable in its enclosing local scope.
     }   
 }
 (4,13): error CS0136: A local or parameter named 'i' cannot be declared
-in this scope because that name is used in an enclosing local scope to 
+|in| |this| scope because that name |is| used |in| an enclosing local scope to 
 define a local or parameter
 \end{lstlisting}
 \endgroup
@@ -713,6 +729,7 @@ If statements have the following syntax.
 \begin{lstlisting}[numbers=none]
 // Single statement
 if (CONDITION) STATEMENT;
+
 // Multiple statements
 if (CONDITION)
 {
@@ -730,13 +747,14 @@ clause.
 \begin{lstlisting}[numbers=none]
 // Single statement
 if (CONDITION) STATEMENT_1 else STATEMENT_2;
+
 // Multiple statements
 if (CONDITION) 
 {
     STATEMENTS_1
 } else
 {
-    STATEMENTS_2;
+    STATEMENTS_2
 }
 \end{lstlisting}
 This structure differs from the previous example as either \lstinline{STATEMENT_1} or \lstinline{STATEMENT_2}
@@ -779,7 +797,7 @@ else {
     STATEMENTS_N
 }
 \end{lstlisting}
-In this structure, any statement \(1<i<n\) will be executed if
+In this structure, any statement \(1 < i \leq n\) will be executed if
 and only if all conditions before \(i\) yield \lstinline{false} and
 \lstinline{CONDITION_I} yields \lstinline{true}. % chktex 13
 
@@ -794,14 +812,14 @@ statements and are another kind of multi-way branch.
 switch (EXPRESSION) 
 {
     case CONSTANT_1:
-        STATEMENTS_1;
+        STATEMENTS_1
         break;
     case CONSTANT_2:
-        STATEMENTS_2;
+        STATEMENTS_2
         break;
     ...
     default:
-        STATEMENTS_N;
+        STATEMENTS_N
         break;
 }
 \end{lstlisting}
@@ -830,7 +848,7 @@ Fundamental semantics:
     \item Execute \lstinline{STATEMENTS} if \lstinline{CONDITION == true}. % chktex 13
     \item Goto Step 1.
 \end{enumerate}
-\subsubsection{Do-while Statements}
+\subsubsection{Do-While Statements}
 \begin{lstlisting}[numbers=none]
 do 
 {
@@ -1011,6 +1029,7 @@ As a result, each item must have the same data type. To specify the array size, 
 the variable with the \lstinline{new} expression.
 \begin{lstlisting}[numbers=none]
 TYPE[] IDENTIFIER = new TYPE[SIZE];
+
 // Alternatively
 TYPE[] IDENTIFIER;
 IDENTIFIER = new TYPE[SIZE];
@@ -1144,6 +1163,7 @@ but use different declaration and access syntax.
 \begin{lstlisting}[numbers=none]
 // 2D arrays
 TYPE[,] IDENTIFIER = new TYPE[SIZEX, SIZEY];
+
 // nD arrays
 TYPE[,,...] IDENTIFIER = new TYPE[SIZEX, SIZEY, ...];
 \end{lstlisting}
@@ -1152,8 +1172,8 @@ number of commas (\lstinline{,}). The number of commas is equal to
 the number of dimensions minus 1.
 
 When instantiating the array on the right hand side of the assignment,
-the length of each dimension is specified as an integer, and is separated by a comma.
-Similar to single dimensional arrays, we can set the values when we declare the array.
+the length of each dimension is specified as a comma-separated integer.
+Similar to single-dimensional arrays, we can set the values when we declare the array.
 \begingroup
 \let\thelstnumber\relax
 \customlinemarker{1}{\$}
@@ -1506,7 +1526,7 @@ FileInfo fileInfo = new FileInfo("PATH\TO\FILE");
 This allows us to utilise the various \href{https://docs.microsoft.com/en-us/dotnet/api/system.io.directoryinfo?view=net-6.0#methods}{DirectoryInfo \faIcon{external-link-alt}}
 and \href{https://docs.microsoft.com/en-us/dotnet/api/system.io.fileinfo?view=net-6.0#methods}{FileInfo \faIcon{external-link-alt}} methods.
 \subsection{File I/O}
-To access the contents of files, we use of the \lstinline{File} type in order to query, read, write, create, copy, or delete a
+To access the contents of files, we use the \lstinline{File} type in order to query, read, write, create, copy, or delete a
 file from a directory.
 \subsubsection{File Existence}
 Before we use any IO methods, we must ensure that the file exists.
@@ -1524,6 +1544,7 @@ Once we have confirmed the file exists, we can read from it using the \lstinline
         Console.WriteLine(reader.ReadLine());
     }
 }
+
 // Alternatively
 using (StreamReader reader = new StreamReader("PATH\TO\FILE"))
 {
@@ -1543,6 +1564,7 @@ Similar to the previous section, we can use the \lstinline{StreamWriter} class t
 
     writer.WriteLine(CONTENT_TO_ADD);
 }
+
 // Alternatively
 using (using StreamWriter writer = new StreamWriter("PATH\TO\FILE"))
 {
@@ -1604,7 +1626,7 @@ The static modifier can be used to declare a member which belongs to the type it
 rather than to a specific object.
 
 A class can be static so that all its members are also static. This class cannot be
-instantiated so its members must be referenced through the class.
+instantiated so its members must be referenced from the class.
 \begin{lstlisting}
 static class Class 
 {
@@ -1613,7 +1635,7 @@ static class Class
 
 class Program 
 {
-    public static void  Main() 
+    public static void Main() 
     {
         Class.Method();
     } 
@@ -1649,7 +1671,7 @@ The constructor body can then assign parameters to their corresponding fields (o
 Additionally, the constructor can perform initialisation procedures that manage the state of the class.
 \subsection{Fields}
 A field is a variable of any type that is declared inside a class. A class may contain both instance
-or static fields. The syntax is as follows,
+and static fields. The syntax is as follows,
 \begin{lstlisting}[numbers=none]
 [ACCESS_MODIFIER] TYPE IDENTIFIER [= DEFAULT_VALUE];
 \end{lstlisting}
@@ -1661,25 +1683,25 @@ how many instances have been made using an incrementor in the constructor.
 \begin{lstlisting}
 class Person
 {
-    public static int count = 0;
-    public string name;
+    public static int Count = 0;
+    public string Name;
 
-    public Person(string _name)
+    public Person(string name)
     {
-        name = _name;
-        count++;
+        Name = name;
+        Count++;
     }
 }
 
 class Program
 {
-    public static void  Main()
+    public static void Main()
     {
         Person Alice = new Person("Alice");
-        Console.WriteLine(Person.count);
+        Console.WriteLine(Person.Count);
 
         Person Bob = new Person("Bob");
-        Console.WriteLine(Person.count);
+        Console.WriteLine(Person.Count);
     }
 }
 \end{lstlisting}
@@ -1688,13 +1710,13 @@ Output:
 1
 2
 \end{lstlisting}
-Note the usage of the underscore in the parameter identifier. We can instead use
-the \lstinline{this} keyword to distinguish the two variables:
-\begin{lstlisting}[numbers=none]
-public Person(string name)
+Note that we can use the \lstinline{this} keyword
+to distinguish the parameter and field names, if, for example, the parameter was also capitalised:
+\begin{lstlisting}
+public Person(string Name)
 {
-    this.name = name;
-    count++;
+    this.Name = Name;
+    Count++;
 }
 \end{lstlisting}
 \subsection{Properties}
@@ -1725,7 +1747,7 @@ public TYPE PROPERTY_IDENTIFIER
 \end{lstlisting}
 In the example above, the getter simply returns the field associated with the property.
 Within the setter, the parameter \lstinline{value} represents the value that is being
-assigned to the field. We can whatever validation we want in this block before the new value is assigned to
+assigned to the field. We can implement whatever validation we want in this block before the new value is assigned to
 the field identifier.
 \subsubsection{Auto-Implemented Properties}
 If both getter and setter accessors do not require a body, i.e., \lstinline{get} simply returns the field, and
@@ -1777,11 +1799,11 @@ class NumberExponent
         }
     }
 
-    public NumberExponent(int _number, int _exponent)
+    public NumberExponent(int number, int exponent)
     {
         // Set values using property setters
-        Number = _number;
-        Exponent = _exponent;
+        Number = number;
+        Exponent = exponent;
     }
 }
 
@@ -1816,36 +1838,36 @@ accept various sets of arguments.
 \begin{lstlisting}
 class Person
 {
-    public string name;
-    public string email;
-    public int age;
+    public string Name;
+    public string Email;
+    public int Age;
 
-    public Person(string _name, string _email, int _age)
+    public Person(string name, string email, int age)
     {
-        name = _name;
-        email = _email;
-        age = _age;
+        Name = name;
+        Email = email;
+        Age = age;
     }
 
-    public Person(string _name, string _email)
+    public Person(string name, string email)
     {
-        name = _name;
-        email = _email;
-        age = 0;
+        Name = name;
+        Email = email;
+        Age = 0;
     }
 
-    public Person(string _name, int _age)
+    public Person(string name, int age)
     {
-        name = _name;
-        email = "";
-        age = _age;
+        Name = name;
+        Email = "";
+        Age = age;
     }
 
-    public Person(string _name)
+    public Person(string name)
     {
-        name = _name;
-        email = "";
-        age = 0;
+        Name = name;
+        Email = "";
+        Age = 0;
     }
 }
 
@@ -1861,27 +1883,27 @@ static class Program
 }
 \end{lstlisting}
 If the method signature allows, we can avoid code duplication by passing
-the parameters of the overloaded methods into a another method inside the same class
+the parameters of the overloaded methods into another method inside the same class
 using the \lstinline{this} keyword, while providing default values for the remaining unknown parameters.
 \begin{lstlisting}    
 class Person
 {
-    public string name;
-    public string email;
-    public int age;
+    public string Name;
+    public string Email;
+    public int Age;
 
-    public Person(string _name, string _email, int _age)
+    public Person(string name, string email, int age)
     {
-        name = _name;
-        email = _email;
-        age = _age;
+        Name = name;
+        Email = email;
+        Age = age;
     }
 
-    public Person(string _name, string _email) : this(_name, _email, 0) { }
+    public Person(string name, string email) : this(name, email, 0) { }
 
-    public Person(string _name, int _age) : this(_name, "", _age) { }
+    public Person(string name, int age) : this(name, "", age) { }
 
-    public Person(string _name) : this(_name, "", 0) { }
+    public Person(string name) : this(name, "", 0) { }
 }
 \end{lstlisting}
 As the \lstinline{this} keyword is restricted to constructor overloads,
@@ -1897,7 +1919,7 @@ class Person
 
     public void Information(Person p)
     {
-        Console.WriteLine($"Name: {p.name} Email: {p.email} Age: {p.age}");
+        Console.WriteLine($"Name: {p.Name} Email: {p.Email} Age: {p.Age}");
     }
 
     public void Information() { Information(this); }
@@ -1919,7 +1941,7 @@ Output:
 Name: B Email: B@email.com Age: 0
 Name: A Email: A@email.com Age: 5
 \end{lstlisting}
-Here the \lstinline{this} keyword is used as a reference to the object which called the method, rather than the method itself.
+Here the \lstinline{this} keyword is used as a reference to the object that calls the method, rather than the object itself.
 It is used to pass the caller as an argument to the base method that implements the functionality.
 
 In addition to omitting parameters, the set of parameters can be modified provided the set of parameter types
@@ -1940,7 +1962,7 @@ This is because parameter identifiers cannot be used to distinguish two overload
 hence the program does not know which method to call when invoked with two 32-bit integer arguments.
 \subsection{Class Relationships}
 To understand the relationships between classes, we can use the following terminology to describe specific
-characterstics of a relationship.
+characteristics of a relationship.
 \subsubsection{Composition}
 A composition is a ``part-of'' relationship where class A maintains a reference of class B and manages its lifespan.
 \begin{lstlisting}[numbers=none]
@@ -2046,10 +2068,10 @@ with different classes to separate functionality.
 \section{Object Oriented Design}
 \subsection{Multiple Classes}
 As the complexity of a program increases, we can create additional classes to maintain the structure of
-the program. To do so, we can either create a class in a new file under the same namespace, or in the
+the program. To do so, we can either create a class in a new file under the same namespace; or in the
 same file by declaring a new class scope.
 \subsection{Modular Decomposition}
-Modular decomposition partitions a programs code into a collection of modules.
+Modular decomposition partitions code into a collection of modules.
 The quality of a modular decomposition is assessed based on its coupling and cohesion.
 \begin{itemize}
     \item Cohesion --- Code within a module is closely related
@@ -2081,8 +2103,8 @@ stories are a simple description of required functionality and are told from the
 of a particular type of user. They consist of:
 \begin{itemize}
     \item the type of user --- a particular persona
-    \item action --- what they want to acheive
-    \item benefit/value --- why its important
+    \item action --- what they want to achieve
+    \item benefit/value --- why it's important
 \end{itemize}
 User stories keep the focus on the use, enable collaboration, drive creative solutions, and create momentum.
 
@@ -2095,11 +2117,11 @@ When writing user stories, consider:
     \item feedback
     \item time
 \end{itemize}
-Some limitations to user stories are that they scale-up very quickly, they can sometimes
+Some limitations to user stories are that they scale up very quickly, they can sometimes
 be vague, informal or incomplete, they can lack non-functional requirements, and also don't
 represent how to fulfil a task.
 \subsection{Software Development Model}
-The following sections discus various software development models.
+The following sections discuss various software development models.
 \subsubsection{Waterfall Model}
 The waterfall model can be described by the following steps:
 \begin{enumerate}
@@ -2116,13 +2138,13 @@ This model is well suited for smaller projects where requirements are well under
 
 Some disadvantages to this are that no working software is produced until the final stages of the
 development lifecycle. This leads to large amounts of risk and uncertainty for complex projects
-as it cannot accommodate for changing requirements.
+as the project cannot accommodate changing requirements.
 \subsubsection{Interactive and Incremental Design}
 The interactive and incremental model focuses on smaller subtasks which are completed
 one by one so that the process as a whole is iterative. This makes handling complex problems
 easier and allows for changes to the requirements through refactoring.
 
-Refactoring is the process of modifying existing code to facilitate new required functionality.
+Refactoring is the process of modifying existing code to facilitate newly required functionality.
 It is important to refactor code before adding additional functionality.
 \subsection{Object Oriented Design}
 In the initial stages of a project, candidate classes should be identified such that they are tangible entities
@@ -2140,7 +2162,7 @@ design of a system.
 Class diagrams are a type of UML diagram that describe the structure of a program by showing the program's classes,
 their attributes, operations, and relationships with other objects.
 
-A class with implementation level details, is represented as a table with three rows:
+A class with implementation level details is represented as a table with three rows:
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|} % chktex 44
@@ -2188,9 +2210,9 @@ For the following sections, brackets (\lstinline{[]}) are used to denote optiona
 
 Properties (or fields) and operations (or methods) are represented using the following syntax:
 \subsubsection{Property}
-\begin{lstlisting}[numbers=none]
+\begin{lstlisting}[numbers=none, escapeinside=||]
 [visibility] ['/'] property-name [':' property-type] ['['multiplicity']'] 
-    ['=' default-value] [property-modifiers]
+    ['=' |default|-value] [property-modifiers]
 \end{lstlisting}
 \subsubsection{Operation}
 \begin{lstlisting}[numbers=none]
@@ -2227,7 +2249,7 @@ A property modifier can be one of the following:
         \textbf{Modifier}     & \textbf{Description}                                               \\
         \midrule
         id                    & The property is an identifier                                      \\
-        readOnly              & The property is read only                                          \\
+        readOnly              & The property is read-only                                          \\
         ordered               & The property is ordered                                            \\
         unique                & The property is unique                                             \\
         nonunique             & The property may have duplicate values                             \\
@@ -2246,7 +2268,7 @@ An operations signature takes the following syntax:
 \begin{lstlisting}[numbers=none]
 operation-name'('[parameter-list]')' [':' return-type ['['multiplicity']']]
 \end{lstlisting}
-The parameter list is formatted in the same was as in C\#.
+The parameter list has similar syntax to C\#, but identifiers and types are swapped.
 \subsection{Operation Properties}
 An operation property can be one of the following:
 \begin{table}[H]
@@ -2314,7 +2336,7 @@ The following arrows are used to show relationships between classes:
     % \caption{} % \label{}
 \end{table}
 \section{Inheritance}
-Inheritance is a object-oriented principle that allows us to create new classes that reuse, extend, and modify 
+Inheritance is an object oriented principle that allows us to create new classes that reuse, extend, and modify 
 the behaviour defined in another class.
 
 The class whose members are inherited is called the base class, 
@@ -2325,7 +2347,7 @@ For example:
 class A { }
 class B : A { }
 \end{lstlisting}
-In this example, class B inherits class A, so that it is the derived class, and A is the base class.
+In this example, class B inherits class A, so it is the derived class, and A is the base class.
 
 In a UML class diagram, this is referred to as the generalisation of a derived class.
 \subsection{Methods}
@@ -2347,9 +2369,9 @@ static void Main()
 }
 \end{lstlisting}
 \subsection{Virtual Methods}
-A virtual method provides a default implementation for a method which may be reimplemented
+A virtual method provides a default implementation for a method that may be reimplemented
 by derived classes. The method can be reimplemented using the \lstinline{override} keyword. 
-If a derived class does not override a virtual method, the base classes implementation will be used.
+If a derived class does not override a virtual method, the base class implementation is used.
 
 For example, B reimplements the \lstinline{PrintHello} method, while C uses A's default implementation.
 \begin{lstlisting}
@@ -2410,12 +2432,12 @@ The following example overrides the \lstinline{Equals} and \lstinline{ToString} 
 \begin{lstlisting}
 class Point
 {
-    public int x, y;
+    public int X, Y;
 
     public Point(int x, int y) 
     {
-        this.x = x;
-        this.y = y;
+        X = x;
+        Y = y;
     }
     public override bool Equals(Object obj) 
     {
@@ -2427,10 +2449,10 @@ class Point
         else {
             // Type cast obj onto Point 
             Point p = (Point) obj;
-            return (x == p.x) && (y == p.y);
+            return (x == p.X) && (y == p.Y);
         }
     }
-    public override string ToString() { return $"({x}, {y})"; }
+    public override string ToString() { return $"({X}, {Y})"; }
 }
 ...
 static void Main()
@@ -2448,7 +2470,7 @@ static void Main()
 Polymorphism allows us to declare a common operation that is implemented differently across derived types.
 \subsection{Abstract Classes}
 Abstract classes allow us to develop partially implemented classes without 
-the need to fully implement methods like in concrete classes. 
+the need to fully \linebreak implement methods like in concrete classes. 
 
 This allows us to declare abstract methods that have no implementation in 
 the base class, but must be implemented (using \lstinline{override}) in all
@@ -2459,11 +2481,11 @@ Note that abstract methods can only be declared inside abstract classes.
 \begin{lstlisting}
 abstract class Animal 
 {
-    public string name;
+    public string Name;
 
     Animal(string name) 
     {
-        this.name = name;
+        Name = name;
     }
     public abstract void Speak();
 }
@@ -2533,7 +2555,7 @@ static void Main()
 The program attempts to use the current classes implementation of \lstinline{Hello}, and if no override exists, the base class implementation is used.
 \subsection{Interfaces}
 Interfaces allow us to enforce method implementations onto a derived class. Here derived classes \textit{implement} interfaces.
-Interfaces only contain method signatures which act as contracts so that all implementing classes must provide their own implementation.
+Interfaces only contain method signatures that act as contracts so that all implementing classes must provide an implementation.
 Another advantage of using interfaces is that a class can implement multiple interfaces.
 
 An interface is declared using the \lstinline{interface} keyword, and it does not require the \lstinline{abstract} or \lstinline{virtual}
@@ -2559,7 +2581,7 @@ static void Main()
 }
 \end{lstlisting}
 \subsection{Interface Design}
-Interfaces allow us to decouple code which creates better modular design by removing dependencies.
+Interfaces allow us to decouple code which enables modular design by removing dependencies.
 From the principle of Interface Segregation, it is better to have multiple simple interfaces rather than one large 
 interface, so that clients can depend only on parts they require. 
 
