@@ -1,4 +1,4 @@
-# General Editor dotfiles 
+# General Editor dotfiles
 *.vscode
 
 # Complete diagnostics reported by LaTeX
@@ -35,8 +35,16 @@
 # Intermediary output for PDF files
 *.xdv
 
-# Miscellaneous 
+# Miscellaneous
 *.fls
+
+# Minted
+*.pyg
+*.pygstyle
+*.pygtex
+
+# LaTeX indent
+*.bak*
 
 Assessment
 app.csx
