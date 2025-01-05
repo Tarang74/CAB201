@@ -70,10 +70,10 @@ Programming involves:
     \item Testing
 \end{enumerate}
 \subsection{Analysis}
-Identify
+Identify:
 \begin{itemize}
     \item the problem
-    \item data, input, and output
+    \item data, inputs, and outputs
     \item relationships between inputs and outputs
     \item constraints
 \end{itemize}
@@ -88,7 +88,7 @@ Identify
 \subsection{Implementation}
 \begin{itemize}
     \item Select suitable algorithms and data structures for design
-    \item Write code to implement the algorithms and data structures
+    \item Write code to implement algorithms and data structures
 \end{itemize}
 \subsection{Testing}
 \begin{itemize}
@@ -99,12 +99,13 @@ Identify
 \subsection{Expressions}
 \begin{definition}[Expressions]
     An expression is a combination of values, variables, and operators.
-    In interactive mode, an interpreter evaluates expressions and displays the result.
-    However, in a script, we must first compile the program to an executable in order
-    to perform any tasks.
+    In interactive mode, an interpreter evaluates expressions and
+    displays the result of this expression. However, in a script, we
+    must first compile the entire program into an executable format,
+    before we can perform any tasks.
 \end{definition}
 \begin{definition}[Type]
-    The type of an expression is ``what kind of data'' the expression carries.
+    The type of an expression is \textit{the kind of data} the expression carries.
 \end{definition}
 \begin{definition}[Variables]
     Variables are a kind of expression which have an \textbf{identity} and a \textbf{value}.
@@ -126,7 +127,7 @@ TYPE IDENTIFIER = EXPRESSION;
 \begin{definition}[Literal]
     The term \textit{literal} refers to the literal representation of a value.
     For example, when disambiguating between the variable \mintinline{csharp}{dog}
-    and the string \mintinline{csharp}{"dog"} we would say the \emph{``variable dog''} % chktex 18
+    and the string \mintinline{csharp}{"dog"} we would say the \emph{``variable dog''}
     vs.\ the \emph{``string literal dog''}.
 \end{definition}
 C\# identifiers must take the following into account
@@ -135,13 +136,13 @@ C\# identifiers must take the following into account
           character (\mintinline{csharp}{_})
     \item Identifiers must begin with a letter
     \item Identifiers cannot contain whitespaces
-    \item Identifiers are case sensitive (``\mintinline{csharp}{Foo}''
-          and ``\mintinline{csharp}{foo}'' are different variables) % chktex 38
+    \item Identifiers are case-sensitive (``\mintinline{csharp}{Foo}''
+          and ``\mintinline{csharp}{foo}'' are different variables)
     \item Reserved words such as C\# keywords cannot be used as
           identifiers
 \end{itemize}
 \subsection{Types}
-There are 9 integer and 3 floating-point types in C\#, each with a
+There are 9 integers and 3 floating-point types in C\#, each with a
 different size and range. The minimum and maximum values of any type
 can be determined using \mintinline{csharp}{TYPE.MinValue} and
 \linebreak \mintinline{csharp}{TYPE.MaxValue}.
@@ -181,8 +182,8 @@ can be determined using \mintinline{csharp}{TYPE.MinValue} and
 \subsection{Type Conversion}
 By default, C\# automatically assigns the \mintinline{csharp}{int},
 \mintinline{csharp}{uint}, \mintinline{csharp}{long}, or
-\mintinline{csharp}{ulong} type to any integer \linebreak depending the
-size and sign of the provided number. Any floating-point number is
+\mintinline{csharp}{ulong} type to any integer \linebreak depending on
+the size and sign of the provided number. Any floating-point number is
 instantiated as a \mintinline{csharp}{double}.
 \begin{minted}[escapeinside=||]{csharp}
 |\$| (100).GetType()
@@ -223,7 +224,7 @@ If the value of an integer is within the range of the destination type,
 the value can be implicitly converted to the remaining integer types.
 \subsubsection{Implicit Conversion}
 Implicit conversions do not require special syntax as the conversion
-always succeeds and no data is lost. The following diagram illustrates
+always succeeds, and no data is lost. The following diagram illustrates
 all possible implicit conversions for numeric types where the direction
 of the arrow indicates possible implicit conversions where intermediate
 types can be skipped. Note that all integer types can be converted to
@@ -298,17 +299,17 @@ precedence to the lowest.
         \mintinline{csharp}!x..y!                                                                                                                                          & Range                                                                                                                                        \\
         \mintinline{csharp}!switch!, \mintinline{csharp}!with!                                                                                                             & ---                                                                                                                                          \\
         \mintinline{csharp}!x * y!, \mintinline{csharp}!x / y!, \mintinline{csharp}!x % y!                                                      & Multiplicative                    \\
-        \mintinline{csharp}!x + y!, \mintinline{csharp}!x - y!                                                                                                             & Additive                                                                                                                                     \\ % chktex 8
+        \mintinline{csharp}!x + y!, \mintinline{csharp}!x - y!                                                                                                             & Additive                                                                                                                                     \\
         \mintinline{csharp}!x << y!, \mintinline{csharp}!x >> y!                                                                                                           & Shift                                                                                                                                        \\
         \mintinline{csharp}!x < y!, \mintinline{csharp}!x > y!, \mintinline{csharp}!x <= y!, \mintinline{csharp}!x >= y!, \mintinline{csharp}!is!, \mintinline{csharp}!as! & Relational and type-testing                                                                                                                  \\
-        \mintinline{csharp}!x == y!, \mintinline{csharp}{x != y}                                                                                                           & Equality                                                                                                                                     \\ % chktex 26
+        \mintinline{csharp}!x == y!, \mintinline{csharp}{x != y}                                                                                                           & Equality                                                                                                                                     \\
         \mintinline{csharp}!x                                                                                                                                              & y!                                                                                 & Logical {\ttfamily{AND}}                                \\
         \mintinline{csharp}!x ^ y!                                                                                                                                         & Logical {\ttfamily{XOR}}                                                                                                                     \\
         \mintinline{csharp}!x | y!                                                                                                                                         & Logical {\ttfamily{OR}}                                                                                                                      \\
         \mintinline{csharp}!x                                                                                                                                              &                                                                                    & y!                       & Conditional {\ttfamily{AND}} \\
         \mintinline{csharp}!x || y!                                                                                                                                        & Conditional {\ttfamily{OR}}                                                                                                                  \\
-        \mintinline{csharp}!x ?? y!                                                                                                                                        & Null-coalescing operator                                                                                                                     \\ % chktex 26
-        \mintinline{csharp}!c ? t : f!                                                                                                                                     & Conditional operator                                                                                                                         \\ % chktex 26
+        \mintinline{csharp}!x ?? y!                                                                                                                                        & Null-coalescing operator                                                                                                                     \\
+        \mintinline{csharp}!c ? t : f!                                                                                                                                     & Conditional operator                                                                                                                         \\
         \mintinline{csharp}!x = y!, \mintinline{csharp}!=>! and shorthand assignments                                                                                      & Assignment and lambda declaration                                                                                                            \\
         \bottomrule
     \end{tabular}
@@ -332,7 +333,7 @@ All results in the example above are of type
 \mintinline{csharp}{System.Int32}. Binary operators always convert the
 resulting data type to the data type of the argument with the largest
 size in memory (with a few exceptions when converting between
-floating-point types). Hence division between two 32-bit integers
+floating-point types). Hence, division between two 32-bit integers
 truncates any floating-point precision.
 \begin{minted}[escapeinside=||]{csharp}
 |\$| 123 / 12
@@ -569,11 +570,11 @@ returns a Boolean value when evaluated. If this value is
 executed. Conversely, if the expression yields
 \mintinline{csharp}{false}, the subsequent statement(s) will be ignored
 and control passes to the next statement after the
-\mintinline{csharp}{if} statement.% chktex 13
-\subsubsection{If-else Statements}
+\mintinline{csharp}{if} statement.
+\subsubsection{If-Else Statements}
 We can add an alternative statement if \mintinline{csharp}{CONDITION}
 is \mintinline{csharp}{false} using an \mintinline{csharp}{else}
-clause.% chktex 13
+clause.
 \begin{minted}{csharp}
 // Single statement
 if (CONDITION) STATEMENT_1 else STATEMENT_2;
@@ -668,7 +669,7 @@ In this structure, \mintinline{csharp}{EXPRESSION} is any numeric or
 string expression, and \mintinline{csharp}{CONSTANT} is a literal of
 matching type. This means that \mintinline{csharp}{STATEMENTS_I} is
 executed if \mintinline{csharp}{EXPRESSION == CONSTANT_I}. The default
-branch behaves similarly to an \mintinline{csharp}{else} clause and it
+branch behaves similarly to an \mintinline{csharp}{else} clause, and it
 is executed if none of the preceding cases are satisfied. Each branch
 must end with one of the following keywords depending on where the
 switch statement is defined: \mintinline{csharp}{break},
@@ -687,8 +688,8 @@ while (CONDITION)
 Fundamental semantics:
 \begin{enumerate}
     \item Execute \mintinline{csharp}{STATEMENTS} if
-          \mintinline{csharp}{CONDITION == true}. % chktex 13
-    \item Goto Step 1.
+          \mintinline{csharp}{CONDITION == true}.
+    \item Go to Step 1.
 \end{enumerate}
 \subsubsection{Do-While Statements}
 \begin{minted}{csharp}
@@ -700,8 +701,8 @@ while (CONDITION)
 \end{minted}
 Fundamental semantics:
 \begin{enumerate}
-    \item Execute \mintinline{csharp}{STATEMENTS}. % chktex 13
-    \item Goto Step 1 if \mintinline{csharp}{CONDITION == true}.
+    \item Execute \mintinline{csharp}{STATEMENTS}.
+    \item Go to Step 1 if \mintinline{csharp}{CONDITION == true}.
 \end{enumerate}
 \subsubsection{For Statements}
 \begin{minted}{csharp}
@@ -712,11 +713,11 @@ for (INIT; CONDITION; UPDATE)
 \end{minted}
 Fundamental semantics:
 \begin{enumerate}
-    \item Execute \mintinline{csharp}{INIT}. % chktex 13
+    \item Execute \mintinline{csharp}{INIT}.
     \item Execute \mintinline{csharp}{STATEMENTS} if
-          \mintinline{csharp}{CONDITION == true}. % chktex 13
+          \mintinline{csharp}{CONDITION == true}.
     \item Execute \mintinline{csharp}{UPDATE}.
-    \item Goto Step 2.
+    \item Go to Step 2.
 \end{enumerate}
 Generally, a \mintinline{csharp}{while} statement is used when the number of iterations is unknown and
 \mintinline{csharp}{for} statements are used otherwise. Both of these structures can execute
@@ -730,9 +731,9 @@ The following statements unconditionally transfer control:
     \item \mintinline{csharp}{continue} starts a new iteration of the closest enclosing iteration statement
 \end{itemize}
 Note that jump statements can be placed anywhere inside the loop body and that any succeeding
-statements or the \mintinline{csharp}{UPDATE} statement (in the \mintinline{csharp}{for} structure) % chktex 13
+statements or the \mintinline{csharp}{UPDATE} statement (in the \mintinline{csharp}{for} structure)
 will not be executed.
-\subsection{Booleans}
+\subsection{Boolean Expressions}
 A Boolean (\mintinline{csharp}{bool}) is a type that has two values,
 \mintinline{csharp}{true} and \mintinline{csharp}{false}. Boolean
 expressions are expressions that when evaluated, yield a Boolean value.
@@ -774,7 +775,7 @@ False
 Here we see that the second function \mintinline{csharp}{b()} was not
 executed as the {\ttfamily AND} operator requires both expressions to
 be true, so regardless of the value of \mintinline{csharp}{b()}, the
-result will be \mintinline{csharp}{false}. Similarly for {\ttfamily
+result will be \mintinline{csharp}{false}. Similarly, for {\ttfamily
 OR}:
 \begin{minted}[escapeinside=||]{csharp}
 |\$| bool a()
@@ -862,7 +863,7 @@ TYPE[] IDENTIFIER = new TYPE[] { element1, element2, ..., elementN };
 TYPE[] IDENTIFIER = { element1, element2, ..., elementN };
 \end{minted}
 Note that when using the first method, the number of elements \(N\)
-must be equal to the specified \mintinline{csharp}{SIZE}. % chktex 13
+must be equal to the specified \mintinline{csharp}{SIZE}.
 \subsection{Array Representation in Memory}
 To be able to access an array by index, the elements must be stored
 contiguously in memory, that is, stored one after the other. This means
@@ -941,7 +942,7 @@ TYPE[,,...] IDENTIFIER = new TYPE[SIZEX, SIZEY, ...];
 When declaring the type, it is important to specify the correct number
 of commas (\mintinline{csharp}{,}). The number of commas is equal to
 the number of dimensions minus 1. When instantiating the array on the
-right hand side of the assignment, the length of each dimension is
+right-hand side of the assignment, the length of each dimension is
 specified as a comma-separated integer. Similar to single-dimensional
 arrays, we can set the values when we declare the array.
 \begin{minted}[escapeinside=||]{csharp}
@@ -1087,10 +1088,10 @@ by reference or by value. There are 4 modifiers to choose from
     \item \mintinline{csharp}{out} --- Arguments are passed by reference but must be initialised inside the method.
     \item \mintinline{csharp}{params} --- A variable number of arguments are passed by value.
 \end{itemize}
-By default, if a modifier is not specified, the argument is generally passed by value.
-The parameter type specifies what type of argument is to be passed. The parameter identifier
-gives the argument an alias within the method's scope, and
-default values can be assigned to parameters if they are optional.
+By default, if a modifier is not specified, an argument is passed by value.
+The parameter type specifies what type of argument is to be passed, and
+it gives the argument an alias within the method's scope. Default values
+can be assigned to parameters if they are optional.
 Note that parameters do not need to be re-declared inside the method.
 \subsubsection{Statements}
 The statements inside a method can consist of sequences of statements
@@ -1128,7 +1129,7 @@ This allows us to provide arguments in an arbitrary order.
 \subsubsection{Control Return}
 When control is returned to the method caller, the method may provide
 an output if its return type is non-void. In this event, the method
-call can be treated as an expression and it can be assigned to a
+call can be treated as an expression, and it can be assigned to a
 variable.
 \begin{minted}{csharp}
 RETURN_TYPE IDENTIFIER = METHOD_IDENTIFIER(ARGUMENT_LIST)
@@ -1160,11 +1161,11 @@ In Visual Studio, we can supply command line arguments through the
     ensure that all commands are entered correctly before proceeding.}
 
 If we wish to use a command line interface, such as the Windows DOS
-Command Prompt or Powershell, or the UNIX terminals provided in macOS
+Command Prompt or Powershell, or the UNIX terminals provided on macOS
 and Linux distributions, we must ensure that we are working in the
 correct directory.
 \subsubsection{Windows DOS}
-In Windows, launching a terminal will take us to either the user
+On Windows, launching a terminal will take us to either the user
 directory,
 \begin{minted}[escapeinside=||]{csharp}
 C:|\textbackslash|Users|\textbackslash|username>
@@ -1231,7 +1232,7 @@ To pause the program during execution, we must enter step mode by
 placing a breakpoint anywhere in the program's control. This will pause
 the program before the breakpoint and allow us to view and modify
 values currently on the stack. This debugging window is very similar to
-the C\# interactive CLI. % chktex 13
+the C\# interactive CLI.
 \section{The File System}
 \subsection{Directories}
 Using the \mintinline{csharp}{System.IO} class, we can view information
@@ -1246,7 +1247,7 @@ the environment directory.
 \begin{minted}{csharp}
 string pwd = Environment.CurrentDirectory;
 \end{minted}
-we can then use the \mintinline{csharp}{DirectoryInfo} class to access
+We can then use the \mintinline{csharp}{DirectoryInfo} class to access
 metadata about a directory,
 \begin{minted}{csharp}
 DirectoryInfo directoryInfo = new DirectoryInfo("PATH\TO\DIRECTORY");
@@ -1369,7 +1370,7 @@ scope of the class they belong to.
 The static modifier can be used to declare a member which belongs to
 the type itself, rather than to a specific object. A class can be
 static so that all its members are also static. This class cannot be
-instantiated so its members must be referenced from the class.
+instantiated, so its members must be referenced from the class.
 \begin{minted}{csharp}
 static class Class
 {
@@ -1390,8 +1391,8 @@ Methods can also be static when they do not depend on any non-static
 fields.
 \subsubsection{Instance Members}
 Instance members are non-static members that belong to each instance of
-a class. Instance fields are unique to each object, and instance
-methods can access the non-static fields for each object.
+a class and can access the non-static fields for each object. On the
+other hand, instance fields are unique to each object.
 \subsection{Methods}
 As mentioned in
 \hyperref[section:methods]{Section~\ref{section:methods}}, methods are
@@ -1829,7 +1830,7 @@ Namespaces are used to declare scopes containing a set of related
 objects. We can also nest namespaces using a nested directory structure
 for large projects. Multiple files can declare the same namespace with
 different classes to separate functionality.
-\section{Object Oriented Design}
+\section{Object-Oriented Design}
 \subsection{Multiple Classes}
 As the complexity of a program increases, we can create additional
 classes to maintain the structure of the program. To do so, we can
@@ -1844,12 +1845,12 @@ and cohesion.
     \item Coupling --- The interaction between code from different
           modules is minimal
 \end{itemize}
-In an object oriented model, the methods required to validate fields or perform other
+In an object-oriented model, the methods required to validate fields or perform other
 unassociated tasks should limit access to other classes.
 Access to relevant fields and methods from other classes should be
 limited to avoid unnecessary complexity.
 \subsection{Functional Decomposition}
-Prior to object oriented design, functionality was divided into several
+Prior to object-oriented design, functionality was divided into several
 smaller functions. Modules were then derived by grouping related
 functions. However, as a program evolves, existing modules will need to
 be adapted as new functionality is added, or if existing functionality
@@ -1870,7 +1871,7 @@ user. They consist of:
 \begin{itemize}
     \item the type of user --- a particular persona
     \item action --- what they want to achieve
-    \item benefit/value --- why it's important
+    \item benefit/value --- why its important
 \end{itemize}
 User stories keep the focus on the use, enable collaboration, drive
 creative solutions, and create momentum. When writing user stories,
@@ -1897,7 +1898,7 @@ The waterfall model can be described by the following steps:
     \item Testing
     \item Deployment
 \end{enumerate}
-This model provides clearly defined stages with well understood milestones and
+This model provides clearly defined stages with well understood milestones, and
 it is easy to manage due to the rigidity of the model.
 Phases are processed and completed one at a time, and results are well documented.
 This model is well suited for smaller projects where requirements are well understood.
@@ -1912,7 +1913,7 @@ This makes handling complex problems easier and allows for changes to
 the requirements through refactoring. Refactoring is the process of
 modifying existing code to facilitate newly required functionality. It
 is important to refactor code before adding additional functionality.
-\subsection{Object Oriented Design}
+\subsection{Object-Oriented Design}
 In the initial stages of a project, candidate classes should be
 identified such that they are tangible entities and abstract concepts.
 A technique for identifying classes is by looking for nouns. When
@@ -1932,14 +1933,14 @@ operations, and relationships with other objects. A class with
 implementation level details is represented as a table with three rows:
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|} % chktex 44
-        \hline % chktex 44
+    \begin{tabular}{|l|}
+        \hline
         \textbf{Object name} \\
-        \hline % chktex 44
+        \hline
         Fields               \\
-        \hline % chktex 44
+        \hline
         Methods              \\
-        \hline % chktex 44
+        \hline
     \end{tabular}
     % \caption{} % \label{}
 \end{table}
@@ -1952,10 +1953,10 @@ The name of a class is placed in the first row and is styled
 \end{itemize}
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|} % chktex 44
-        \hline % chktex 44
+    \begin{tabular}{|c|}
+        \hline
         \textbf{Class} \\
-        \hline % chktex 44
+        \hline
     \end{tabular}
     % \caption{} % \label{}
 \end{table}
@@ -1964,11 +1965,11 @@ Interfaces have the same rules as classes, but are preceded by
 ``<<Interface>>'':
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|} % chktex 44
-        \hline % chktex 44
+    \begin{tabular}{|c|}
+        \hline
         \textbf{<<Interface>>} \\
         \textbf{Interface}     \\
-        \hline % chktex 44
+        \hline
     \end{tabular}
     % \caption{} % \label{}
 \end{table}
@@ -2034,7 +2035,7 @@ A property modifier can be one of the following:
 \end{table}
 These property modifiers are placed between braces \mintinline{csharp}!{}! and separated by commas.
 \subsection{Operation Signatures}
-An operations signature takes the following syntax:
+An operation's signature takes the following syntax:
 \begin{minted}{csharp}
 operation-name'('[parameter-list]')' [':' return-type ['['multiplicity']']]
 \end{minted}
@@ -2050,7 +2051,7 @@ An operation property can be one of the following:
         \midrule
         redefines O            & The operation redefines an inherited operation named O     \\
         query                  & The operation does not change the state of the system      \\
-        ordered                & The valued of the return parameter are ordered             \\
+        ordered                & The values of the return parameter are ordered             \\
         unique                 & The values of the return parameter are unique              \\
         <operation-constraint> & A constraint that applies to the operation (i.e., \(O>0\)) \\
         \bottomrule
@@ -2113,7 +2114,7 @@ The following arrows are used to show relationships between classes:
     % \caption{} % \label{}
 \end{table}
 \section{Inheritance}
-Inheritance is an object oriented principle that allows us to create
+Inheritance is an object-oriented principle that allows us to create
 new classes that reuse, extend, and modify the behaviour defined in
 another class. The class whose members are inherited is called the base
 class, and the class that inherits those members is called the derived
@@ -2129,7 +2130,7 @@ the generalisation of a derived class.
 If a method is implemented in a base class, it can be accessed by a
 derived object, even if the derived class does not implement the
 method. For example, B\@ has access to the
-\mintinline{csharp}{PrintHello} method although it does not define it.
+\mintinline{csharp}{PrintHello} method, although it does not define it.
 \begin{minted}{csharp}
 class A
 {
@@ -2172,7 +2173,7 @@ static void Main()
 \end{minted}
 Note that the signature and modifiers must match the base class
 implementation. Although B reimplements this method, it can still call
-the base classes implementation using the \mintinline{csharp}{base}
+the base class's implementation using the \mintinline{csharp}{base}
 keyword.
 \begin{minted}{csharp}
 class A
@@ -2202,8 +2203,8 @@ In C\# all classes are implicitly derived from the
 \mintinline{csharp}{Object} class. This class contains built-in methods
 such as \mintinline{csharp}{Equals()},
 \mintinline{csharp}{GetHashCode()}, and
-\mintinline{csharp}{ToString()}. These are all virtual methods that are
-also able to be reimplemented in user defined classes.
+\mintinline{csharp}{ToString()}. These are all virtual methods that can
+be reimplemented in user defined classes.
 \begin{description}
     \item[Equals] Determines whether the specified object is equal to
           the current object.
@@ -2337,7 +2338,7 @@ static void Main()
     d.Hello(); // prints: "Bonjour"
 }
 \end{minted}
-The program attempts to use the current classes implementation of
+The program attempts to use the current class's implementation of
 \mintinline{csharp}{Hello}, and if no override exists, the base class
 implementation is used.
 \subsection{Interfaces}
